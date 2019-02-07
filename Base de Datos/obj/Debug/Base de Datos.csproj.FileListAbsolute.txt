@@ -1,0 +1,9 @@
+C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\bin\Debug\Base de Datos.exe.config
+C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\bin\Debug\Base de Datos.exe
+C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\bin\Debug\Base de Datos.pdb
+C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\obj\Debug\Base de Datos.csprojResolveAssemblyReference.cache
+C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\obj\Debug\Base_de_Datos.Principal.resources
+C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\obj\Debug\Base_de_Datos.Properties.Resources.resources
+C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\obj\Debug\Base de Datos.csproj.GenerateResource.Cache
+C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\obj\Debug\Base de Datos.exe
+C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\obj\Debug\Base de Datos.pdb
