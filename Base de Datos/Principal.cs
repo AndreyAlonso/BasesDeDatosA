@@ -21,6 +21,7 @@ namespace Base_de_Datos
             posx = 0;
             posy = 0;
             eliminaBD.Enabled = false;
+            modificaBD.Enabled = false;
             deshabilitaTablas();
         }
         #region PROPIEDADES VENTANA
@@ -44,11 +45,15 @@ namespace Base_de_Datos
             {
                 case "nueva":
                     creaBD();
-                    eliminaBD.Enabled = true;
+                    
                 break;
                 case "abrir":
                     abreBD();
                     eliminaBD.Enabled = true;
+                    modificaBD.Enabled = true;
+                break;
+                case "modificaBD":
+                    MessageBox.Show("Renombrar Base de Datos");
                 break;
             }
         }
@@ -82,22 +87,33 @@ namespace Base_de_Datos
             if (ventana.ShowDialog() == DialogResult.OK)
             {
                 nombreBD = ventana.nombreBD;
-                if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 {
                     Directory.CreateDirectory(folderBrowserDialog1.SelectedPath + "\\" + nombreBD);
                     nBD.Text += nombreBD;
-                    
+                    creaTabla.Enabled = true;
+                    listBox1.Items.Clear();
+                    eliminaBD.Enabled = true;
+                    modificaBD.Enabled = true;
+
                 }
 
+            }
+            else 
+            {
+                eliminaBD.Enabled = false;
+                modificaBD.Enabled = false;
             }
         }
         public void abreBD()
         {
             nBD.Text = "BD :";
-            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 List<string> tablas = new List<string>();
                 string aux;
+                listBox1.Items.Clear();
                 tablas = Directory.GetFiles(folderBrowserDialog1.SelectedPath).ToList();
                 nBD.Text += folderBrowserDialog1.SelectedPath.Split('\\').Last().ToString();
                 if (tablas.Count == 0)
@@ -124,6 +140,13 @@ namespace Base_de_Datos
             modificaTabla.Enabled = false;
             eliminaTabla.Enabled = false;
         }
+
+        private void Principal_Resize(object sender, EventArgs e)
+        {
+            pictureBox1.Width = ClientSize.Width;
+            pictureBox3.Location = new Point(ClientSize.Width-50, pictureBox3.Location.Y);
+        }
+
         public void habilitaTablas()
         {
             creaTabla.Enabled = true;
