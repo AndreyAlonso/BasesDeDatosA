@@ -13,7 +13,7 @@ namespace Base_de_Datos
 {
     public partial class Principal : Form
     {
-        
+        private bool max;
         int posx, posy;
         public Principal()
         {
@@ -22,6 +22,7 @@ namespace Base_de_Datos
             posy = 0;
             eliminaBD.Enabled = false;
             modificaBD.Enabled = false;
+            max = false;
             deshabilitaTablas();
         }
         #region PROPIEDADES VENTANA
@@ -143,8 +144,32 @@ namespace Base_de_Datos
 
         private void Principal_Resize(object sender, EventArgs e)
         {
-            pictureBox1.Width = ClientSize.Width;
+            pictureBox1.Width = ClientSize.Width+10;
             pictureBox3.Location = new Point(ClientSize.Width-50, pictureBox3.Location.Y);
+            pictureBox4.Location = new Point(ClientSize.Width - pictureBox4.Width, pictureBox4.Location.Y);
+            pictureBox4.Height = ClientSize.Height;
+            pictureBox6.Height = ClientSize.Height;
+            pictureBox5.Location = new Point(0, ClientSize.Height - pictureBox5.Height);
+            pictureBox5.Width = ClientSize.Width;
+            maximiza.Location = new Point(pictureBox3.Location.X - 47, maximiza.Location.Y);
+            
+        }
+
+        private void maximizar(object sender, EventArgs e)
+        {
+            if(max == false)
+            {
+                WindowState = FormWindowState.Maximized;
+                maximiza.Image = System.Drawing.Image.FromFile("maximizar2.png");
+                max = true;
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal;
+                maximiza.Image = System.Drawing.Image.FromFile("maximizar.png");
+                max = false;
+            }
+            
         }
 
         public void habilitaTablas()
