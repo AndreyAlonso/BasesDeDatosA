@@ -98,7 +98,7 @@
             this.eliminaBD});
             this.toolStrip1.Location = new System.Drawing.Point(9, 21);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(211, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(180, 39);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -162,9 +162,10 @@
             this.eliminaTabla});
             this.toolStrip2.Location = new System.Drawing.Point(3, 21);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(132, 39);
+            this.toolStrip2.Size = new System.Drawing.Size(163, 39);
             this.toolStrip2.TabIndex = 6;
             this.toolStrip2.Text = "toolStrip2";
+            this.toolStrip2.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.opcionTabla);
             // 
             // toolStripSeparator4
             // 

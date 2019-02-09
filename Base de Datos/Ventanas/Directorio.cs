@@ -29,6 +29,10 @@ namespace Base_de_Datos.Ventanas
             {
                 label1.Text = "Escribe el nuevo nombre de la base de datos";
             }
+            else
+            {
+                label1.Text = "Escribe el nombre de la nueva tabla";
+            }
         }
         public Directorio(int n)
         {

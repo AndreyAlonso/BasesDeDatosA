@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Base_de_Datos.Ventanas;
+using Base_de_Datos.Clases;
 namespace Base_de_Datos
 {
     public partial class Principal : Form
@@ -120,6 +121,7 @@ namespace Base_de_Datos
 
                 cargaTablas(folderBrowserDialog1.SelectedPath);
                 directorioBD = folderBrowserDialog1.SelectedPath;
+                
             }
             
         }
@@ -167,7 +169,10 @@ namespace Base_de_Datos
             nBD.Text = "BD : " + ubicacion.Split('\\').Last().ToString();
             directorioBD = ubicacion;
             if (tablas.Count == 0)
+            {
                 deshabilitaTablas();
+                creaTabla.Enabled = true;
+            }
             else
             {
                 habilitaTablas();
@@ -216,6 +221,32 @@ namespace Base_de_Datos
             eliminaTabla.Enabled = true;
         }
         #endregion
+        private void opcionTabla(object sender, ToolStripItemClickedEventArgs e)
+        {
+            switch(e.ClickedItem.AccessibleName)
+            {
+                case "creaTabla":
+                    creaTablas();
+                break;
+                case "modificaTabla":
+                break;
+                case "eliminaTabla":
+                break;
+            }
+        }
+
+        public void creaTablas()
+        {
+            Directorio d = new Directorio(false);
+            Tabla tabla;
+            if(d.ShowDialog() == DialogResult.OK)
+            {
+                tabla = new Tabla(d.nombreBD);
+                tabla.agregaTabla(directorioBD);
+                cargaTablas(directorioBD);
+            }
+
+        }
         public void nuevoProyecto()
         {
             deshabilitaTablas();
