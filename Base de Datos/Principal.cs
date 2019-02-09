@@ -14,7 +14,8 @@ namespace Base_de_Datos
     public partial class Principal : Form
     {
         private bool max;
-        int posx, posy;
+        private int posx, posy;
+        private string directorioBD;
         public Principal()
         {
             InitializeComponent();
@@ -23,6 +24,7 @@ namespace Base_de_Datos
             eliminaBD.Enabled = false;
             modificaBD.Enabled = false;
             max = false;
+            directorioBD = "";
             deshabilitaTablas();
         }
         #region PROPIEDADES VENTANA
@@ -46,7 +48,6 @@ namespace Base_de_Datos
             {
                 case "nueva":
                     creaBD();
-                    
                 break;
                 case "abrir":
                     abreBD();
@@ -54,7 +55,7 @@ namespace Base_de_Datos
                     modificaBD.Enabled = true;
                 break;
                 case "modificaBD":
-                    MessageBox.Show("Renombrar Base de Datos");
+                    renombraBD();
                 break;
             }
         }
@@ -91,14 +92,13 @@ namespace Base_de_Datos
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 {
                     Directory.CreateDirectory(folderBrowserDialog1.SelectedPath + "\\" + nombreBD);
+                    directorioBD = folderBrowserDialog1.SelectedPath + "\\" + nombreBD;
                     nBD.Text += nombreBD;
                     creaTabla.Enabled = true;
                     listBox1.Items.Clear();
                     eliminaBD.Enabled = true;
                     modificaBD.Enabled = true;
-
                 }
-
             }
             else 
             {
@@ -112,26 +112,29 @@ namespace Base_de_Datos
             
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                List<string> tablas = new List<string>();
-                string aux;
                 listBox1.Items.Clear();
-                tablas = Directory.GetFiles(folderBrowserDialog1.SelectedPath).ToList();
-                nBD.Text += folderBrowserDialog1.SelectedPath.Split('\\').Last().ToString();
-                if (tablas.Count == 0)
-                    deshabilitaTablas();
-                else
-                {
-                    habilitaTablas();
-                    foreach (string t in tablas)
-                    {
-                        aux = t.Split(Convert.ToChar('\\')).Last();
-                        listBox1.Items.Add(aux.Split('.').First());
-                    }
-                }
-                
-                    
+
+                cargaTablas(folderBrowserDialog1.SelectedPath);
+                directorioBD = folderBrowserDialog1.SelectedPath;
             }
             
+        }
+        public void renombraBD()
+        {
+            string nuevo;
+            string n;
+            string dirActual;
+            Directorio directorio = new Directorio(true);
+            if(directorio.ShowDialog() == DialogResult.OK)
+            {
+                nuevo = directorio.nombreBD;
+                n = directorioBD.Split('\\').Last().ToString();
+                dirActual = directorioBD.Replace(label1.Text, "");
+                dirActual = directorioBD.Replace(n, "");
+                Directory.Move(directorioBD, dirActual + nuevo);
+                nBD.Text = "BD : " + nuevo;
+                cargaTablas(dirActual + nuevo);
+            }
         }
         #endregion
         #region TABLAS
@@ -142,6 +145,26 @@ namespace Base_de_Datos
             eliminaTabla.Enabled = false;
         }
 
+        public void cargaTablas(string ubicacion)
+        {
+            listBox1.Items.Clear();
+            List<string> tablas = new List<string>();
+            string aux;
+            tablas = Directory.GetFiles(ubicacion).ToList();
+            nBD.Text = "BD : " + ubicacion.Split('\\').Last().ToString();
+            directorioBD = ubicacion;
+            if (tablas.Count == 0)
+                deshabilitaTablas();
+            else
+            {
+                habilitaTablas();
+                foreach (string t in tablas)
+                {
+                    aux = t.Split(Convert.ToChar('\\')).Last();
+                    listBox1.Items.Add(aux.Split('.').First());
+                }
+            }
+        }
         private void Principal_Resize(object sender, EventArgs e)
         {
             pictureBox1.Width = ClientSize.Width+10;
@@ -166,7 +189,8 @@ namespace Base_de_Datos
             else
             {
                 WindowState = FormWindowState.Normal;
-                maximiza.Image = System.Drawing.Image.FromFile("maximizar.png");
+                maximiza.Image = Image.FromFile("maximizar.png");
+                StartPosition = FormStartPosition.CenterScreen;
                 max = false;
             }
             

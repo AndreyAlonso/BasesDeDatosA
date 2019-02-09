@@ -22,6 +22,14 @@ namespace Base_de_Datos.Ventanas
             posx = 0;
             posy = 0;
         }
+        public Directorio(bool b)
+        {
+            InitializeComponent();
+            if (b == true)
+            {
+                label1.Text = "Escribe el nuevo nombre de la base de datos";
+            }
+        }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
