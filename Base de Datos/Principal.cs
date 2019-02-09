@@ -57,6 +57,9 @@ namespace Base_de_Datos
                 case "modificaBD":
                     renombraBD();
                 break;
+                case "eliminaBD":
+                    eliminarBD();
+                break;
             }
         }
 
@@ -77,6 +80,7 @@ namespace Base_de_Datos
 
         private void salir(object sender, EventArgs e)
         {
+            Dispose();
             Close();
         }
         #endregion
@@ -135,6 +139,15 @@ namespace Base_de_Datos
                 nBD.Text = "BD : " + nuevo;
                 cargaTablas(dirActual + nuevo);
             }
+        }
+        public void eliminarBD()
+        {
+            Directorio mensaje = new Directorio(1);
+            if(mensaje.ShowDialog() == DialogResult.OK)
+            {
+                Directory.Delete(directorioBD,true);
+                nuevoProyecto();
+            } 
         }
         #endregion
         #region TABLAS
@@ -203,5 +216,13 @@ namespace Base_de_Datos
             eliminaTabla.Enabled = true;
         }
         #endregion
+        public void nuevoProyecto()
+        {
+            deshabilitaTablas();
+            eliminaBD.Enabled = false;
+            modificaBD.Enabled = false;
+            listBox1.Items.Clear();
+            nBD.Text = "BD : ";
+        }
     }
 }

@@ -98,7 +98,7 @@
             this.eliminaBD});
             this.toolStrip1.Location = new System.Drawing.Point(9, 21);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(180, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(211, 39);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -322,6 +322,7 @@
             // 
             // eliminaBD
             // 
+            this.eliminaBD.AccessibleName = "eliminaBD";
             this.eliminaBD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.eliminaBD.Image = ((System.Drawing.Image)(resources.GetObject("eliminaBD.Image")));
             this.eliminaBD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;

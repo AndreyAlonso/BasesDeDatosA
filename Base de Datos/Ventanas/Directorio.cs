@@ -30,6 +30,17 @@ namespace Base_de_Datos.Ventanas
                 label1.Text = "Escribe el nuevo nombre de la base de datos";
             }
         }
+        public Directorio(int n)
+        {
+            InitializeComponent();
+            if(n == 1)
+            {
+                textBox1.Visible = false;
+                label1.Text = "Esta seguro que desea eliminar la Base de Datos? \r\n----------------------- \r\nTODOS los datos se borraran";
+                label1.Location = new Point(label1.Location.X-50, ClientSize.Height / 2 - 5);
+                button1.Text = "Eliminar";
+            }
+        }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
