@@ -252,7 +252,14 @@ namespace Base_de_Datos
         public void modificaTablas()
         {
             Tabla t = new Tabla(listBox1.Text);
-            t.modificaNombre(directorioBD);
+            Directorio d = new Directorio(false);
+            if (d.ShowDialog() == DialogResult.OK)
+            {
+                t = new Tabla(listBox1.Text);
+                t.modificaNombre(directorioBD, d.nombreBD);
+                cargaTablas(directorioBD);
+            }
+
             
         }
         public void eliminaTablas()

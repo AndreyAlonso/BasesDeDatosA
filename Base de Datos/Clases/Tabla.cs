@@ -28,9 +28,9 @@ namespace Base_de_Datos.Clases
             archivo = new FileStream(directorio + "\\" + nombre + extension,FileMode.Append);
             archivo.Close();                 
         }
-        public void modificaNombre(string directorio)
+        public void modificaNombre(string directorio, string nuevo)
         {
-            //archivo = new FileStream(directorio + "\\" + nombre + extension, FileMode);
+            File.Move(directorio + "\\" + nombre + extension, directorio + "\\" + nuevo + extension);
         }
         public void eliminaTabla(string directorio)
         {
