@@ -229,8 +229,10 @@ namespace Base_de_Datos
                     creaTablas();
                 break;
                 case "modificaTabla":
+                    modificaTablas();
                 break;
                 case "eliminaTabla":
+                    eliminaTablas();
                 break;
             }
         }
@@ -247,6 +249,24 @@ namespace Base_de_Datos
             }
 
         }
+        public void modificaTablas()
+        {
+            Tabla t = new Tabla(listBox1.Text);
+            t.modificaNombre(directorioBD);
+            
+        }
+        public void eliminaTablas()
+        {
+            Tabla t = new Tabla(listBox1.Text);
+            t.eliminaTabla(directorioBD);
+            cargaTablas(directorioBD);
+        }
+
+        private void seleccionaTabla(object sender, EventArgs e)
+        {
+            
+        }
+
         public void nuevoProyecto()
         {
             deshabilitaTablas();

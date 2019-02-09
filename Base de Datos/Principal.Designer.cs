@@ -139,6 +139,7 @@
             this.listBox1.ScrollAlwaysVisible = true;
             this.listBox1.Size = new System.Drawing.Size(130, 208);
             this.listBox1.TabIndex = 6;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.seleccionaTabla);
             // 
             // groupBox3
             // 
@@ -162,7 +163,7 @@
             this.eliminaTabla});
             this.toolStrip2.Location = new System.Drawing.Point(3, 21);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(163, 39);
+            this.toolStrip2.Size = new System.Drawing.Size(132, 39);
             this.toolStrip2.TabIndex = 6;
             this.toolStrip2.Text = "toolStrip2";
             this.toolStrip2.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.opcionTabla);
