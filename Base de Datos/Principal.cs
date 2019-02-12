@@ -52,8 +52,6 @@ namespace Base_de_Datos
                 break;
                 case "abrir":
                     abreBD();
-                    eliminaBD.Enabled = true;
-                    modificaBD.Enabled = true;
                 break;
                 case "modificaBD":
                     renombraBD();
@@ -121,7 +119,13 @@ namespace Base_de_Datos
 
                 cargaTablas(folderBrowserDialog1.SelectedPath);
                 directorioBD = folderBrowserDialog1.SelectedPath;
-                
+                modificaBD.Enabled = true;
+                eliminaBD.Enabled = true;
+            }
+            else
+            {
+                modificaBD.Enabled = false;
+                eliminaBD.Enabled = false;
             }
             
         }
@@ -255,9 +259,13 @@ namespace Base_de_Datos
             Directorio d = new Directorio(false);
             if (d.ShowDialog() == DialogResult.OK)
             {
-                t = new Tabla(listBox1.Text);
-                t.modificaNombre(directorioBD, d.nombreBD);
-                cargaTablas(directorioBD);
+                if(listBox1.Text != "" && d.nombreBD != null)
+                {
+                    t = new Tabla(listBox1.Text);
+                    t.modificaNombre(directorioBD, d.nombreBD);
+                    cargaTablas(directorioBD);
+                }
+               
             }
 
             
