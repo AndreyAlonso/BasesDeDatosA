@@ -27,6 +27,7 @@ namespace Base_de_Datos
             max = false;
             directorioBD = "";
             deshabilitaTablas();
+            deshabilitaAtributos();
         }
         #region PROPIEDADES VENTANA
         private void label1_MouseMove(object sender, MouseEventArgs e)
@@ -176,10 +177,12 @@ namespace Base_de_Datos
             {
                 deshabilitaTablas();
                 creaTabla.Enabled = true;
+                deshabilitaAtributos();
             }
             else
             {
                 habilitaTablas();
+                creaAtributo.Enabled = true;
                 foreach (string t in tablas)
                 {
                     aux = t.Split(Convert.ToChar('\\')).Last();
@@ -250,6 +253,7 @@ namespace Base_de_Datos
                 tabla = new Tabla(d.nombreBD);
                 tabla.agregaTabla(directorioBD);
                 cargaTablas(directorioBD);
+                creaAtributo.Enabled = true;
             }
 
         }
@@ -290,5 +294,14 @@ namespace Base_de_Datos
             listBox1.Items.Clear();
             nBD.Text = "BD : ";
         }
+        #region  ATRIBUTOS
+        public void deshabilitaAtributos()
+        {
+            creaAtributo.Enabled = false;
+            modificaAtributo.Enabled = false;
+            eliminaAtributo.Enabled = false;
+        }
+        #endregion
+
     }
 }

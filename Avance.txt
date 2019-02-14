@@ -1,0 +1,12 @@
+Alumno: Héctor Andrey Hernández Alonso
+Materia: Bases de Datos A
+
+Primer avance:
+-- Crear, abrir,  modificar y eliminar Base de Datos
+-- Crear, modificar y eliminar Tablas
+--------------------------------------------------------------------
+Fecha: 12 - Febrero - 2019
+
+-- No permitir que se pueda crear/modificar una base de datos si el nombre ya existe y están en la misma dirección
+-- Atributos: (crear, modificar, eliminar)
+-- Campos Atributo ()

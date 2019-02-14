@@ -32,36 +32,44 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.abrir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.modificaBD = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.eliminaBD = new System.Windows.Forms.ToolStripButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.creaTabla = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.modificaTabla = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.eliminaTabla = new System.Windows.Forms.ToolStripButton();
             this.nBD = new System.Windows.Forms.Label();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.maximiza = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.creaTabla = new System.Windows.Forms.ToolStripButton();
-            this.modificaTabla = new System.Windows.Forms.ToolStripButton();
-            this.eliminaTabla = new System.Windows.Forms.ToolStripButton();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.abrir = new System.Windows.Forms.ToolStripButton();
-            this.modificaBD = new System.Windows.Forms.ToolStripButton();
-            this.eliminaBD = new System.Windows.Forms.ToolStripButton();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.creaAtributo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.modificaAtributo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.eliminaAtributo = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maximiza)).BeginInit();
@@ -69,8 +77,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -103,6 +112,17 @@
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.AccessibleName = "nueva";
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton1.Text = "Nueva Base de Datos";
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -113,10 +133,48 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
             // 
+            // abrir
+            // 
+            this.abrir.AccessibleName = "abrir";
+            this.abrir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.abrir.Image = global::Base_de_Datos.Properties.Resources.abrir__1_;
+            this.abrir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.abrir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.abrir.Name = "abrir";
+            this.abrir.Size = new System.Drawing.Size(36, 36);
+            this.abrir.Text = "Abrir Base de Datos";
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
+            // 
+            // modificaBD
+            // 
+            this.modificaBD.AccessibleName = "modificaBD";
+            this.modificaBD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.modificaBD.Image = ((System.Drawing.Image)(resources.GetObject("modificaBD.Image")));
+            this.modificaBD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.modificaBD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.modificaBD.Name = "modificaBD";
+            this.modificaBD.Size = new System.Drawing.Size(36, 36);
+            this.modificaBD.Text = "Renombrar Base de Datos";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 39);
+            // 
+            // eliminaBD
+            // 
+            this.eliminaBD.AccessibleName = "eliminaBD";
+            this.eliminaBD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.eliminaBD.Image = ((System.Drawing.Image)(resources.GetObject("eliminaBD.Image")));
+            this.eliminaBD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.eliminaBD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.eliminaBD.Name = "eliminaBD";
+            this.eliminaBD.Size = new System.Drawing.Size(36, 36);
+            this.eliminaBD.Text = "Eliminar Base de Datos";
             // 
             // groupBox2
             // 
@@ -140,6 +198,16 @@
             this.listBox1.Size = new System.Drawing.Size(130, 208);
             this.listBox1.TabIndex = 6;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.seleccionaTabla);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Base_de_Datos.Properties.Resources.azul_medio1497605622;
+            this.pictureBox2.Location = new System.Drawing.Point(6, 36);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(139, 208);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
             // 
             // groupBox3
             // 
@@ -168,15 +236,48 @@
             this.toolStrip2.Text = "toolStrip2";
             this.toolStrip2.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.opcionTabla);
             // 
+            // creaTabla
+            // 
+            this.creaTabla.AccessibleName = "creaTabla";
+            this.creaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.creaTabla.Image = ((System.Drawing.Image)(resources.GetObject("creaTabla.Image")));
+            this.creaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.creaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.creaTabla.Name = "creaTabla";
+            this.creaTabla.Size = new System.Drawing.Size(36, 36);
+            this.creaTabla.Text = "Crea Tabla";
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
             // 
+            // modificaTabla
+            // 
+            this.modificaTabla.AccessibleName = "modificaTabla";
+            this.modificaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.modificaTabla.Image = ((System.Drawing.Image)(resources.GetObject("modificaTabla.Image")));
+            this.modificaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.modificaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.modificaTabla.Name = "modificaTabla";
+            this.modificaTabla.Size = new System.Drawing.Size(36, 36);
+            this.modificaTabla.Text = "Modifica Tabla";
+            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 39);
+            // 
+            // eliminaTabla
+            // 
+            this.eliminaTabla.AccessibleName = "eliminaTabla";
+            this.eliminaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.eliminaTabla.Image = ((System.Drawing.Image)(resources.GetObject("eliminaTabla.Image")));
+            this.eliminaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.eliminaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.eliminaTabla.Name = "eliminaTabla";
+            this.eliminaTabla.Size = new System.Drawing.Size(36, 36);
+            this.eliminaTabla.Text = "Elimina Tabla";
             // 
             // nBD
             // 
@@ -188,11 +289,6 @@
             this.nBD.Size = new System.Drawing.Size(37, 17);
             this.nBD.TabIndex = 6;
             this.nBD.Text = "BD :";
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 39);
             // 
             // maximiza
             // 
@@ -235,39 +331,6 @@
             this.pictureBox4.TabIndex = 7;
             this.pictureBox4.TabStop = false;
             // 
-            // creaTabla
-            // 
-            this.creaTabla.AccessibleName = "creaTabla";
-            this.creaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.creaTabla.Image = ((System.Drawing.Image)(resources.GetObject("creaTabla.Image")));
-            this.creaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.creaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.creaTabla.Name = "creaTabla";
-            this.creaTabla.Size = new System.Drawing.Size(36, 36);
-            this.creaTabla.Text = "Crea Tabla";
-            // 
-            // modificaTabla
-            // 
-            this.modificaTabla.AccessibleName = "modificaTabla";
-            this.modificaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.modificaTabla.Image = ((System.Drawing.Image)(resources.GetObject("modificaTabla.Image")));
-            this.modificaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.modificaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.modificaTabla.Name = "modificaTabla";
-            this.modificaTabla.Size = new System.Drawing.Size(36, 36);
-            this.modificaTabla.Text = "Modifica Tabla";
-            // 
-            // eliminaTabla
-            // 
-            this.eliminaTabla.AccessibleName = "eliminaTabla";
-            this.eliminaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.eliminaTabla.Image = ((System.Drawing.Image)(resources.GetObject("eliminaTabla.Image")));
-            this.eliminaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.eliminaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.eliminaTabla.Name = "eliminaTabla";
-            this.eliminaTabla.Size = new System.Drawing.Size(36, 36);
-            this.eliminaTabla.Text = "Elimina Tabla";
-            // 
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
@@ -279,60 +342,6 @@
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.salir);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::Base_de_Datos.Properties.Resources.azul_medio1497605622;
-            this.pictureBox2.Location = new System.Drawing.Point(6, 36);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(139, 208);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.AccessibleName = "nueva";
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton1.Text = "Nueva Base de Datos";
-            // 
-            // abrir
-            // 
-            this.abrir.AccessibleName = "abrir";
-            this.abrir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.abrir.Image = global::Base_de_Datos.Properties.Resources.abrir__1_;
-            this.abrir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.abrir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.abrir.Name = "abrir";
-            this.abrir.Size = new System.Drawing.Size(36, 36);
-            this.abrir.Text = "Abrir Base de Datos";
-            // 
-            // modificaBD
-            // 
-            this.modificaBD.AccessibleName = "modificaBD";
-            this.modificaBD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.modificaBD.Image = ((System.Drawing.Image)(resources.GetObject("modificaBD.Image")));
-            this.modificaBD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.modificaBD.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.modificaBD.Name = "modificaBD";
-            this.modificaBD.Size = new System.Drawing.Size(36, 36);
-            this.modificaBD.Text = "Renombrar Base de Datos";
-            // 
-            // eliminaBD
-            // 
-            this.eliminaBD.AccessibleName = "eliminaBD";
-            this.eliminaBD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.eliminaBD.Image = ((System.Drawing.Image)(resources.GetObject("eliminaBD.Image")));
-            this.eliminaBD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.eliminaBD.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.eliminaBD.Name = "eliminaBD";
-            this.eliminaBD.Size = new System.Drawing.Size(36, 36);
-            this.eliminaBD.Text = "Eliminar Base de Datos";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -341,9 +350,9 @@
             this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
             this.label1.Location = new System.Drawing.Point(449, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 47);
+            this.label1.Size = new System.Drawing.Size(94, 47);
             this.label1.TabIndex = 1;
-            this.label1.Text = "DaberanBD";
+            this.label1.Text = "SMBD";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove);
             // 
             // pictureBox1
@@ -357,11 +366,81 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mueveVentana);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.toolStrip3);
+            this.groupBox4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(398, 58);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(145, 81);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Menu Atributos";
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.creaAtributo,
+            this.toolStripSeparator7,
+            this.modificaAtributo,
+            this.toolStripSeparator8,
+            this.eliminaAtributo});
+            this.toolStrip3.Location = new System.Drawing.Point(3, 21);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(132, 39);
+            this.toolStrip3.TabIndex = 6;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // creaAtributo
+            // 
+            this.creaAtributo.AccessibleName = "creaAtributo";
+            this.creaAtributo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.creaAtributo.Image = ((System.Drawing.Image)(resources.GetObject("creaAtributo.Image")));
+            this.creaAtributo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.creaAtributo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.creaAtributo.Name = "creaAtributo";
+            this.creaAtributo.Size = new System.Drawing.Size(36, 36);
+            this.creaAtributo.Text = "Crea Atributo";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 39);
+            // 
+            // modificaAtributo
+            // 
+            this.modificaAtributo.AccessibleName = "modificaAtributo";
+            this.modificaAtributo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.modificaAtributo.Image = ((System.Drawing.Image)(resources.GetObject("modificaAtributo.Image")));
+            this.modificaAtributo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.modificaAtributo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.modificaAtributo.Name = "modificaAtributo";
+            this.modificaAtributo.Size = new System.Drawing.Size(36, 36);
+            this.modificaAtributo.Text = "Modifica Atributo";
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 39);
+            // 
+            // eliminaAtributo
+            // 
+            this.eliminaAtributo.AccessibleName = "eliminaAtributo";
+            this.eliminaAtributo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.eliminaAtributo.Image = ((System.Drawing.Image)(resources.GetObject("eliminaAtributo.Image")));
+            this.eliminaAtributo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.eliminaAtributo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.eliminaAtributo.Name = "eliminaAtributo";
+            this.eliminaAtributo.Size = new System.Drawing.Size(36, 36);
+            this.eliminaAtributo.Text = "Elimina Atributo";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 600);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.maximiza);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox5);
@@ -378,13 +457,14 @@
             this.MinimizeBox = false;
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Principal";
+            this.Text = "DaberanBD";
             this.Resize += new System.EventHandler(this.Principal_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
@@ -394,8 +474,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -433,6 +516,13 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox maximiza;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStripButton creaAtributo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripButton modificaAtributo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton eliminaAtributo;
     }
 }
 
