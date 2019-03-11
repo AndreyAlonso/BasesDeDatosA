@@ -388,9 +388,10 @@
             this.eliminaAtributo});
             this.toolStrip3.Location = new System.Drawing.Point(3, 21);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(132, 39);
+            this.toolStrip3.Size = new System.Drawing.Size(163, 39);
             this.toolStrip3.TabIndex = 6;
             this.toolStrip3.Text = "toolStrip3";
+            this.toolStrip3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip3_ItemClicked);
             // 
             // creaAtributo
             // 

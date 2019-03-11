@@ -294,12 +294,40 @@ namespace Base_de_Datos
             listBox1.Items.Clear();
             nBD.Text = "BD : ";
         }
+
+        private void toolStrip3_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            switch(e.ClickedItem.AccessibleName)
+            {
+                case "creaAtributo":
+                    creaAtributos();
+                break;
+            }
+        }
+
+
         #region  ATRIBUTOS
         public void deshabilitaAtributos()
         {
             creaAtributo.Enabled = false;
             modificaAtributo.Enabled = false;
             eliminaAtributo.Enabled = false;
+        }
+        public void creaAtributos()
+        {
+            VentanaAtributo ventanaA = new VentanaAtributo();
+            if(listBox1.Text != "")
+            {
+                if (ventanaA.ShowDialog() == DialogResult.OK)
+                {
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una Tabla");
+            }
+           
         }
         #endregion
 

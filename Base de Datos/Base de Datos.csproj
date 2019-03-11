@@ -62,6 +62,12 @@
     <Compile Include="Ventanas\Directorio.Designer.cs">
       <DependentUpon>Directorio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ventanas\VentanaAtributo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventanas\VentanaAtributo.Designer.cs">
+      <DependentUpon>VentanaAtributo.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
     </EmbeddedResource>
@@ -77,6 +83,9 @@
     </Compile>
     <EmbeddedResource Include="Ventanas\Directorio.resx">
       <DependentUpon>Directorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventanas\VentanaAtributo.resx">
+      <DependentUpon>VentanaAtributo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
