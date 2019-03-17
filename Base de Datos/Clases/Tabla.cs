@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Base_de_Datos.Clases
 {
+    [Serializable]
     public class Tabla
     {
-        FileStream archivo;
+        [NonSerialized]FileStream archivo;
         public string nombre { get; set; }
-        private string extension;
+        public string extension;
         public List<Atributo> atributos { get; set; }
 
         public Tabla(string n)

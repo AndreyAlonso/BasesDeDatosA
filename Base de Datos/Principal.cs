@@ -6,7 +6,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
+
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+
 using System.Windows.Forms;
 using Base_de_Datos.Ventanas;
 using Base_de_Datos.Clases;
@@ -17,6 +22,7 @@ namespace Base_de_Datos
         private bool max;
         private int posx, posy;
         private string directorioBD;
+        private List<Tabla> tablas;
         public Principal()
         {
             InitializeComponent();
@@ -28,6 +34,7 @@ namespace Base_de_Datos
             directorioBD = "";
             deshabilitaTablas();
             deshabilitaAtributos();
+            tablas = new List<Tabla>();
         }
         #region PROPIEDADES VENTANA
         private void label1_MouseMove(object sender, MouseEventArgs e)
@@ -102,6 +109,7 @@ namespace Base_de_Datos
                     listBox1.Items.Clear();
                     eliminaBD.Enabled = true;
                     modificaBD.Enabled = true;
+                    tablas = new List<Tabla>();
                 }
             }
             else 
@@ -122,6 +130,7 @@ namespace Base_de_Datos
                 directorioBD = folderBrowserDialog1.SelectedPath;
                 modificaBD.Enabled = true;
                 eliminaBD.Enabled = true;
+                
             }
             else
             {
@@ -168,12 +177,13 @@ namespace Base_de_Datos
         public void cargaTablas(string ubicacion)
         {
             listBox1.Items.Clear();
-            List<string> tablas = new List<string>();
+            tablas = new List<Tabla>();
+            List<string> tabla = new List<string>();
             string aux;
-            tablas = Directory.GetFiles(ubicacion).ToList();
+            tabla = Directory.GetFiles(ubicacion).ToList();
             nBD.Text = "BD : " + ubicacion.Split('\\').Last().ToString();
             directorioBD = ubicacion;
-            if (tablas.Count == 0)
+            if (tabla.Count == 0)
             {
                 deshabilitaTablas();
                 creaTabla.Enabled = true;
@@ -183,10 +193,11 @@ namespace Base_de_Datos
             {
                 habilitaTablas();
                 creaAtributo.Enabled = true;
-                foreach (string t in tablas)
+                foreach (string t in tabla)
                 {
                     aux = t.Split(Convert.ToChar('\\')).Last();
                     listBox1.Items.Add(aux.Split('.').First());
+                    tablas.Add(new Tabla(aux.Split('.').First()));
                 }
             }
         }
@@ -285,6 +296,9 @@ namespace Base_de_Datos
         {
             grid.Rows.Clear();
             grid.Columns.Clear();
+            Tabla aux = buscaTabla();
+            aux = abreTabla(aux);
+            cargaTabla(aux);
         }
 
         public void nuevoProyecto()
@@ -304,6 +318,9 @@ namespace Base_de_Datos
                     creaAtributos();
                 break;
             }
+            Tabla aux = buscaTabla();
+            aux = abreTabla(aux);
+            cargaTabla(aux);
         }
 
 
@@ -314,14 +331,25 @@ namespace Base_de_Datos
             modificaAtributo.Enabled = false;
             eliminaAtributo.Enabled = false;
         }
+        public Tabla buscaTabla()
+        {
+            foreach(Tabla t in tablas)
+            {
+                if (t.nombre == listBox1.Text)
+                    return t;
+            }
+            return null;
+        }
         public void creaAtributos()
         {
-            VentanaAtributo ventanaA = new VentanaAtributo(directorioBD,listBox1.Text);
+            Tabla aux = buscaTabla();
+            aux = abreTabla(aux);
+            VentanaAtributo ventanaA = new VentanaAtributo(directorioBD, aux);
             if(listBox1.Text != "")
             {
                 if (ventanaA.ShowDialog() == DialogResult.OK)
                 {
-                   
+                    guardaTabla(aux);  
                 }
             }
             else
@@ -329,6 +357,54 @@ namespace Base_de_Datos
                 MessageBox.Show("Seleccione una Tabla");
             }
            
+        }
+        /// <summary>
+        /// Guarda en el arhivo los datos de la tabla con sus atributos
+        /// </summary>
+        /// <param name="t"> Tabla actual</param>
+        public void guardaTabla(Tabla t)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream;
+            using ( stream = new FileStream(directorioBD + "\\" + t.nombre + t.extension, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                
+                formatter.Serialize(stream, (Tabla)t);
+                stream.Close();
+            }
+                
+           
+            
+            
+        }
+        public Tabla abreTabla(Tabla t)
+        {
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream;
+                using (stream = new FileStream(directorioBD + "\\" + t.nombre + t.extension, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    t = (Tabla)formatter.Deserialize(stream);
+                    stream.Close();
+                }
+                  
+            }
+            catch
+            {
+
+            }
+            return t;
+            
+        }
+        public void cargaTabla(Tabla t)
+        {
+            grid.Rows.Clear();
+            grid.Columns.Clear();
+            foreach(Atributo atributo in t.atributos)
+            {
+                grid.Columns.Add(atributo.nombre, atributo.nombre);
+            }
         }
         #endregion
 
