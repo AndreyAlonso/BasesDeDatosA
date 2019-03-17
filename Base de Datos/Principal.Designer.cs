@@ -66,6 +66,8 @@
             this.modificaAtributo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.eliminaAtributo = new System.Windows.Forms.ToolStripButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.grid = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -80,6 +82,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.toolStrip3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -388,7 +392,7 @@
             this.eliminaAtributo});
             this.toolStrip3.Location = new System.Drawing.Point(3, 21);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(163, 39);
+            this.toolStrip3.Size = new System.Drawing.Size(132, 39);
             this.toolStrip3.TabIndex = 6;
             this.toolStrip3.Text = "toolStrip3";
             this.toolStrip3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip3_ItemClicked);
@@ -436,11 +440,33 @@
             this.eliminaAtributo.Size = new System.Drawing.Size(36, 36);
             this.eliminaAtributo.Text = "Elimina Atributo";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.grid);
+            this.groupBox5.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(186, 184);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(819, 403);
+            this.groupBox5.TabIndex = 12;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Tuplas";
+            // 
+            // grid
+            // 
+            this.grid.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.grid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid.Location = new System.Drawing.Point(22, 36);
+            this.grid.Name = "grid";
+            this.grid.Size = new System.Drawing.Size(774, 338);
+            this.grid.TabIndex = 12;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 600);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.maximiza);
             this.Controls.Add(this.pictureBox6);
@@ -480,6 +506,8 @@
             this.groupBox4.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -524,6 +552,8 @@
         private System.Windows.Forms.ToolStripButton modificaAtributo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripButton eliminaAtributo;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.DataGridView grid;
     }
 }
 

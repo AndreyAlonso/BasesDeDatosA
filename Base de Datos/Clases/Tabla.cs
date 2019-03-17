@@ -12,11 +12,13 @@ namespace Base_de_Datos.Clases
         FileStream archivo;
         public string nombre { get; set; }
         private string extension;
+        public List<Atributo> atributos { get; set; }
 
         public Tabla(string n)
         {
             nombre = n;
             extension = ".txt";
+            atributos = new List<Atributo>();
         }
         /// <summary>
         /// AGREGAR TABLA A BASE DE DATOS

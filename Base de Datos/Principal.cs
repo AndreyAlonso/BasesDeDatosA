@@ -283,7 +283,8 @@ namespace Base_de_Datos
 
         private void seleccionaTabla(object sender, EventArgs e)
         {
-            
+            grid.Rows.Clear();
+            grid.Columns.Clear();
         }
 
         public void nuevoProyecto()
@@ -315,12 +316,12 @@ namespace Base_de_Datos
         }
         public void creaAtributos()
         {
-            VentanaAtributo ventanaA = new VentanaAtributo();
+            VentanaAtributo ventanaA = new VentanaAtributo(directorioBD,listBox1.Text);
             if(listBox1.Text != "")
             {
                 if (ventanaA.ShowDialog() == DialogResult.OK)
                 {
-
+                   
                 }
             }
             else

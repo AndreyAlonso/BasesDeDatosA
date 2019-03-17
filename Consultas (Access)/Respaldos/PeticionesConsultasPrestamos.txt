@@ -1,0 +1,25 @@
+1)--Agregar un Cliente de Nombre Luis Castillo con Domicilio en: 
+Niño Artillero 5000, Teléfono 4441999999 y con Email:
+ luis.castillo@uaslp.mx
+
+2)--Actualizar el Email del Cliente Tom Perez a hotmail.com
+(mismo nombre)
+
+3)--Eliminar al Cliente Juan López
+
+4)--Nombre, Email de los Clientes con Emails en gmail.com
+
+5)--Fecha de los Préstamos del Año 2017
+
+6)--Nombre Completo de los Clientes con Préstamos y su Adeudo
+
+7)--Nombre Completo de los Clientes con Cuentas y su Saldo a Favor
+
+8)--El Saldo Total por Cliente (Nombre Completo, SaldoTotal)
+
+9)--Números de los Préstamos y Montos que sean Inferiores 
+o iguales a 1000
+
+10)--Nombre del Cliente y Correo electrónico
+cuyo saldo (sólo en cuentas) sea superior a $4000 y 
+cuyo correo electrónico sea de gmail

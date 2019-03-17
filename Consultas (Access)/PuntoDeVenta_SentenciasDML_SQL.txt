@@ -1,84 +1,154 @@
+/*SENTENCIAS DML*/
+INSERT INTO Empleados (Nombre, Apellido_Paterno, Apellido_Materno, FechaIngreso, Suldo) 
+VALUES ('Gerardo','Muñiz', 'Pedroza','06/03/2019', 7800)
 
-	INSERT INTO Empleados (Nombre, Apellido_Paterno, Apellido_Materno, FechaIngreso, Suldo) VALUES ('Gerardo','Muñiz', 'Pedroza','06/03/2019', 7800)
+INSERT INTO Productos (Nombre, CostoProveedor, CostoVenta, Existencias) VALUES ('Carne', 120, 189, 25)
 
-	INSERT INTO Productos (Nombre, CostoProveedor, CostoVenta, Existencias) VALUES ('Carne', 120, 189, 25)
+DELETE FROM Productos WHERE IdProducto = 11
 
-	DELETE FROM Productos WHERE IdProducto = 11
+UPDATE Empleados SET Sueldo = 500 WHERE IdEmpleado = 2
 
-	UPDATE Empleados SET Sueldo = 500 WHERE IdEmpleado = 2
-
-	SELECT * FROM Productos
+SELECT * FROM Productos
 
 
-	SELECT Nombre, Existencias FROM Productos
+SELECT Nombre, Existencias FROM Productos
 
-		SELECT * FROM  Tabla WHERE (Condición)
+SELECT * FROM  Tabla WHERE (Condición)
 
-	SELECT * FROM Empleados WHERE FechaIngreso >=  '01/01/2000 '
+SELECT * FROM Empleados WHERE FechaIngreso >=  '01/01/2000 '
 
-	SELECT Nombre, Existencias FROM Productos WHERE Existencias > 160
+SELECT Nombre, Existencias FROM Productos WHERE Existencias > 160
 
-	SELECT Nombre, Existencias FROM Productos WHERE CostoVenta = 9.50
+SELECT Nombre, Existencias FROM Productos WHERE CostoVenta = 9.50
 
 
 Imprimir el nombre completo de aquellos empleados que hayan ingresado en la década de los 90
 
-	SELECT Nombre, Apellido_Paterno, Apellido_Materno FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
+SELECT Nombre, Apellido_Paterno, Apellido_Materno FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
 
 
 Imprimir el nombre completo y la fecha de ingreso  de aquellos empleados que hayan ingresado en la década de los 90
 
-	SELECT Nombre, Apellido_Paterno, Apellido_Materno,FechaIngreso FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
+SELECT Nombre, Apellido_Paterno, Apellido_Materno,FechaIngreso FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
 
 
 Imprimir el nombre completo  concatenado y la fecha de ingreso  de aquellos empleados que hayan ingresado en la década de los 90
 
-	SELECT Nombre &" "&  Apellido_Paterno & " "& Apellido_Materno,FechaIngreso FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
-	SELECT Nombre +  Apellido_Paterno + Apellido_Materno,FechaIngreso FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
+SELECT Nombre &" "&  Apellido_Paterno & " "& Apellido_Materno,FechaIngreso FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
+SELECT Nombre +  Apellido_Paterno + Apellido_Materno,FechaIngreso FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
 
 Imprimir el nombre completo  concatenado con un alias y la fecha de ingreso  de aquellos empleados que hayan ingresado en la década de los 90
 
 SELECT (Nombre &" "&  Apellido_Paterno & " "& Apellido_Materno) AS NombreCompleto,FechaIngreso FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
-	SELECT Nombre +  Apellido_Paterno + Apellido_Materno,FechaIngreso FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
+SELECT Nombre +  Apellido_Paterno + Apellido_Materno,FechaIngreso FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
 
 
-/* Operador SQL Likes */
-Imprimir el Apellido_Paterno de todos los empleados donde termina con la letra z
-SELECT Apellido_Paterno FROM Empleados WHERE Apellido_Paterno LIKE "*z"
+/*********************************************************** L I K E *****************************************************/
+1) Imprimir el Apellido_Paterno de todos los empleados donde termina con la letra z
+    SELECT Apellido_Paterno FROM Empleados WHERE Apellido_Paterno LIKE "*z"
 
-Imprimir el sueldo total de la tabla empleados
-SELECT SUM (Sueldo) AS SueldoTotal FROM Empleados	
+2)Imprimir el sueldo total de la tabla empleados
+    SELECT SUM (Sueldo) AS SueldoTotal FROM Empleados   
+/*********************************************************** A V G *******************************************************/
+1) Imprimir el promedio total de existencias de la tabla productos.
 
-Imprimir el promedio total de existencias de la tabla productos.
+    SELECT AVG(Existencias) AS PromedioExistencia FROM Productos
 
-SELECT AVG(Existencias) AS PromedioExistencia FROM Productos
+/*********************************************************** M A X *******************************************************/
+1)Imprimir el Sueldo del Empleado mas alto
 
+    SELECT MAX(Sueldo) FROM Empleados
+/*********************************************************** M I N *******************************************************/
+1)Imprimir el Sueldo del Empleado mas bajo
 
-Imprimir el Sueldo del Empleado mas alto
+    SELECT Nombre, MIN(Sueldo) AS Sueldo_Minimo FROM Empleados
 
-SELECT MAX(Sueldo) FROM Empleados
+/*********************************************************** C O U N T ***************************************************/
+1) Imprimir el numero de tuplas de la tabla Productos (con un alias) que tenga como existencia igual a 88
 
-Imprimir el Sueldo del Empleado mas bajo
-
-SELECT Nombre, MIN(Sueldo) AS Sueldo_Minimo FROM Empleados
-
-Imprimir el numero de tuplas de la tabla Productos (con un alias) que tenga como existencia igual a 88
-
-SELECT COUNT(*) AS Conteo FROM Productos WHERE Existencias=88 
+    SELECT COUNT(*) AS Conteo FROM Productos WHERE Existencias=88 
 
 
 Imprimir el identificador de los productos que se han vendido
-SLECT IdProducto FROM DetalleVenta GROUP BY IdProducto
+    SELECT IdProducto FROM DetalleVenta GROUP BY IdProducto
 
 Imprimir el identificador de los productos que se han vendido en 10 o mas unidades
-SELECT IdProducto FROM DetalleVenta WHERE Cantidad >= 10 GROUP BY IdProducto
+    SELECT IdProducto FROM DetalleVenta WHERE Cantidad >= 10 GROUP BY IdProducto
 
 
 Imprimir cuantas veces se ha vendido cada producto
 
 SELECT IdProducto, COUNT(1) AS cantidadVentas FROM DetalleVenta GROUP BY IdProducto
 
-
+/*********************************************************** INNER JOIN ************************************************/
 Imprimir el nombre del producto que se vendio:
 
 SELECT p.Nombre, v.IdProducto FROM Productos p INNER JOIN DetalleVenta v ON p.IdProducto = v.IdProducto
+
+/*--------------------------------------------------------------------ORDER BY ------------------------------*/
+1) Imprimir el nombre, CostoVenta y existencias de los productos ordenados por existencias de manera ascendente
+
+    SELECT Nombre, CostoVenta, Existencias FROM Productos ORDER BY Existencias 
+
+2) Imprimir el nombre, CostoVenta y existencias de los productos ordenados por nombre de manera descendente
+
+    SELECT Nombre, CostoVenta, Existencias FROM Productos ORDER BY Nombre DESC 
+
+3) Imprimir el nombre y costo de venta de los productos con costo mayor o igual a 10 ordenados por costo de manera ascendente
+
+    SELECT Nombre,CostoVenta FROM Productos WHERE CostoVenta >= 10 GROUP BY Nombre, CostoVenta ORDER BY CostoVenta ASC 
+
+4) Imprimir el nombre y costo de venta de los productos con costo mayor o igual a 10 ordenados por nombre de manera descendente
+
+    SELECT Nombre, CostoVenta FROM Productos WHERE CostoVenta >= 10 GROUP BY Nombre, CostoVenta ORDER BY Nombre DESC
+
+/* ------------------------------------------------------------------ LEFT JOIN -----------------------------*/
+
+1) Imprimir el nombre del empleado y el total de todas sus posibles cantidadVentas
+    SELECT Empleados.Nombre, Ventas.Total FROM Empleados LEFT JOIN Ventas ON Empleados.IdEmpleado = Ventas.IdEmpleado 
+
+/* ------------------------------------------------------------------ RIGHT JOIN --------------------------------*/
+1) Imprimir el nombre del empleado y el total de todas sus posibles cantidadVentas
+    SELECT Empleados.Nombre, Ventas.Total FROM Empleados RIGHT JOIN Ventas ON Empleados.IdEmpleado = Ventas.IdEmpleado 
+
+
+
+/*********************************************************** TRIPLE INNER JOIN *******************************************/
+
+1) Imprimir nombre del producto, la cantidad y la fecha de venta 
+
+    SELECT Productos.Nombre, DetalleVenta.Cantidad, Ventas.FechaVenta 
+    FROM (
+        (DetalleVenta 
+        INNER JOIN Productos ON Productos.IdProducto = DetalleVenta.IdProducto)
+        INNER JOIN Ventas ON Ventas.IdVenta = DetalleVenta.IdVenta)
+
+/*********************************************************** TOP  ********************************************************/
+
+1) Imprimir nombre del producto, la cantidad y la fecha de venta de las primeras 5 tuplas
+
+    SELECT TOP 5 Productos.Nombre, DetalleVenta.Cantidad, Ventas.FechaVenta 
+    FROM (
+        (DetalleVenta 
+        INNER JOIN Productos ON Productos.IdProducto = DetalleVenta.IdProducto)
+        INNER JOIN Ventas ON Ventas.IdVenta = DetalleVenta.IdVenta)
+/*********************************************************** F I R S T ***************************************************/
+1) Imprime el nombre del primer Empleado de la tabla Empleados
+
+	SELECT FIRST(Nombre) AS PrimerNombre FROM Empleados
+
+/*********************************************************** L A S T *****************************************************/
+1) Imprime el nombre del ultimo empleado de la tabla Empleados
+	SELECT LAST(Nombre) AS UltimpNombre FROM Empleados
+
+/********************************************************* D A T E P A R T ***********************************************/
+1) Imprimir el Nombre, Sueldo y FechaIngreso de los empleados
+	SELECT Nombre, Sueldo, DATEPART("yyyy",FechaIngreso) AS Año FROM Empleados
+
+/********************************************************* B E T W E E N *************************************************/
+1) Imprimir el nombre y sueldo de los empleados que ganan entre 500 y 2500
+	SELECT Nombre, Sueldo FROM Empleados WHERE Sueldo BETWEEN 500 AND 2500
+
+2) Imprimir el Nombre y FechaIngreso de los empleados que estan entre 01/01/2000 y 31/12/2019
+	SELECT Nombre, FechaIngreso FROM Empleados WHERE FechaIngreso BETWEEN '01/01/2000' AND '21/12/2019' -->SQL
+	SELECT Nombre, FechaIngreso FROM Empleados WHERE FechaIngreso BETWEEN #01/01/2000# AND #21/12/2019# -->Access

@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace Base_de_Datos.Clases
 {
-    class Atributo
+    public class Atributo
     {
         public int id { get; set; }
         public string nombre { get; set; }
-        public char indice { get; set; }
+        public int tipo { get; set; }
+        public int tam { get; set; }
+        public string indice { get; set; }
         
         public Atributo()
         {
 
-        } 
+        }
     }
 }

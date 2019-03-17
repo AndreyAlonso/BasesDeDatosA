@@ -1,0 +1,47 @@
+1)--Agregar un Cliente de Nombre Luis Castillo con Domicilio en
+  --Niño Artillero 5000, Teléfono 4441999999 y con Email: luis.castillo@uaslp.mx
+	INSERT INTO Cliente (Nombre, Domicilio, Telefono, Email) 
+	VALUES('Luis Castillo','Niño Artillero 5000',4441999999,'luis.castillo@uaslp.mx')
+
+2)--Actualizar el Email del Cliente Tom Perez a hotmail.com (mismo nombre)
+	UPDATE Cliente SET Email ='tom_p@hotmail.com' WHERE Nombre = 'Tom Perez'
+
+3)--Eliminar al Cliente Juan López
+	DELETE FROM Cliente WHERE IdCliente = 7
+
+4)--Nombre, Email de los Clientes con Emails en gmail.com
+	SELECT Nombre, Email FROM Cliente WHERE Email LIKE "*@gmail.com"
+
+5)--Fecha de los Préstamos del Año 2017
+	SELECT FechaPrestamo FROM Prestamo WHERE FechaPrestamo >= #01/01/2017# AND FechaPrestamo <=#31/12/2017#
+
+6)--Nombre Completo de los Clientes con Préstamos y su Adeudo
+	SELECT Nombre, Monto AS Adeudo FROM Cliente cl INNER JOIN Prestamo pr ON cl.IdCliente = pr.IdPrestamo
+
+7)--Nombre Completo de los Clientes con Cuentas y su Saldo a Favor
+	SELECT  Nombre, SUM(Saldo) AS Saldo_a_Favor 
+	FROM  Cliente RIGHT JOIN Cuenta 
+	ON Cliente.IdCliente = Cuenta.IdCliente 
+	GROUP BY Cliente.IdCliente, Cliente.Nombre
+
+8)--El Saldo Total por Cliente (Nombre Completo, SaldoTotal)
+	SELECT  Nombre, SUM(Cuenta.Saldo - Prestamo.Monto) AS Saldo_a_Favor 
+	FROM  Cliente RIGHT JOIN Cuenta
+	ON Cliente.IdCliente = Cuenta.IdCliente   
+	GROUP BY Cliente.IdCliente, Cliente.Nombre, Prestamo.IdCliente HAVING Prestamo.IdCliente = Cliente.IdCliente 
+
+	SELECT SUM(Cuenta.Saldo - Prestamo.Monto) AS Saldo_a_Favor
+	FROM(
+		(Cliente INNER JOIN Cuenta ON Cliente.IdCliente = Cuenta.IdCliente	)
+				INNER JOIN Prestamo ON Prestamo.IdCliente = Cliente.IdCliente)
+
+9)--Números de los Préstamos y Montos que sean Inferiores o iguales a 1000
+	SELECT TOP 1 
+	( SELECT COUNT(*) FROM Cuenta WHERE Saldo<=1000) AS nSaldo, 
+    ( SELECT COUNT(*) FROM Prestamo WHERE Monto<=1000) AS nMonto 
+	FROM Cuenta,Prestamo
+
+10)--Nombre del Cliente y Correo electrónico cuyo saldo (sólo en cuentas) sea superior a $4000 y
+   --cuyo correo electrónico sea de gmail
+	SELECT cl.Nombre, cl.Email FROM Cliente cl,Cuenta c 
+	WHERE cl.Email LIKE "*@gmail.com" AND cl.IdCliente=c.IdCliente AND c.Saldo > 4000
