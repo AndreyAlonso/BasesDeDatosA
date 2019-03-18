@@ -9,3 +9,4 @@ C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de D
 C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\obj\Debug\Base de Datos.pdb
 C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\obj\Debug\Base_de_Datos.Ventanas.Directorio.resources
 C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\obj\Debug\Base_de_Datos.Ventanas.VentanaAtributo.resources
+C:\Users\andreyhz\Documents\1. Ingenieria en Informatica\BasesDeDatosA\Base de Datos\obj\Debug\Base_de_Datos.Ventanas.EliminarAtributo.resources

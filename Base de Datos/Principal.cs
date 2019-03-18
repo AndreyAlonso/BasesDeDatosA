@@ -317,6 +317,9 @@ namespace Base_de_Datos
                 case "creaAtributo":
                     creaAtributos();
                 break;
+                case "eliminaAtributo":
+                    eliminarAtributos();
+                break;
             }
             Tabla aux = buscaTabla();
             aux = abreTabla(aux);
@@ -357,6 +360,18 @@ namespace Base_de_Datos
                 MessageBox.Show("Seleccione una Tabla");
             }
            
+        }
+        public void eliminarAtributos()
+        {
+            Tabla aux = buscaTabla();
+            aux = abreTabla(aux);
+            EliminarAtributo elimina = new EliminarAtributo(aux);
+            if(elimina.ShowDialog() == DialogResult.OK)
+            {
+                aux = elimina.tabla;
+                guardaTabla(aux);
+                cargaTabla(aux);
+            }
         }
         /// <summary>
         /// Guarda en el arhivo los datos de la tabla con sus atributos
@@ -404,6 +419,16 @@ namespace Base_de_Datos
             foreach(Atributo atributo in t.atributos)
             {
                 grid.Columns.Add(atributo.nombre, atributo.nombre);
+            }
+            if(t.atributos.Count > 0)
+            {
+                modificaAtributo.Enabled = true;
+                eliminaAtributo.Enabled = true;
+            }
+            else
+            {
+                modificaAtributo.Enabled = false;
+                eliminaAtributo.Enabled = false;
             }
         }
         #endregion
