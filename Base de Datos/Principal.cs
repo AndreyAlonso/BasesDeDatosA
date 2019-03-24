@@ -35,6 +35,7 @@ namespace Base_de_Datos
             deshabilitaTablas();
             deshabilitaAtributos();
             tablas = new List<Tabla>();
+            grid.ForeColor = Color.Black;
         }
         #region PROPIEDADES VENTANA
         private void label1_MouseMove(object sender, MouseEventArgs e)
@@ -423,6 +424,15 @@ namespace Base_de_Datos
 
             tablas = aux;
         }
+
+        private void grid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (e.RowIndex % 2 == 0)
+                grid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(204, 204, 255);//153,204,244);
+            else
+                grid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+        }
+
         public void cargaTabla(Tabla t)
         {
             grid.Rows.Clear();
