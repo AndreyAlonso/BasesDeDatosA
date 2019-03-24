@@ -13,10 +13,12 @@
 	SELECT Nombre, Email FROM Cliente WHERE Email LIKE "*@gmail.com"
 
 5)--Fecha de los Préstamos del Año 2017
-	SELECT FechaPrestamo FROM Prestamo WHERE FechaPrestamo >= #01/01/2017# AND FechaPrestamo <=#31/12/2017#
+	SELECT FechaPrestamo FROM Prestamo WHERE FechaPrestamo >= #01/01/2017# AND FechaPrestamo <= #31/12/2017#
 
 6)--Nombre Completo de los Clientes con Préstamos y su Adeudo
-	SELECT Nombre, Monto AS Adeudo FROM Cliente cl INNER JOIN Prestamo pr ON cl.IdCliente = pr.IdPrestamo
+	SELECT Nombre, SUM(Monto) AS Adeudo FROM Cliente cl INNER JOIN Prestamo pr ON cl.IdCliente = pr.IdCliente
+	WHERE Monto > 0
+	GROUP BY Nombre 
 
 7)--Nombre Completo de los Clientes con Cuentas y su Saldo a Favor
 	SELECT  Nombre, SUM(Saldo) AS Saldo_a_Favor 
@@ -25,22 +27,21 @@
 	GROUP BY Cliente.IdCliente, Cliente.Nombre
 
 8)--El Saldo Total por Cliente (Nombre Completo, SaldoTotal)
-	SELECT  Nombre, SUM(Cuenta.Saldo - Prestamo.Monto) AS Saldo_a_Favor 
-	FROM  Cliente RIGHT JOIN Cuenta
-	ON Cliente.IdCliente = Cuenta.IdCliente   
-	GROUP BY Cliente.IdCliente, Cliente.Nombre, Prestamo.IdCliente HAVING Prestamo.IdCliente = Cliente.IdCliente 
-
-	SELECT SUM(Cuenta.Saldo - Prestamo.Monto) AS Saldo_a_Favor
-	FROM(
-		(Cliente INNER JOIN Cuenta ON Cliente.IdCliente = Cuenta.IdCliente	)
-				INNER JOIN Prestamo ON Prestamo.IdCliente = Cliente.IdCliente)
-
+ 	SELECT Nombre, SUM(c.Saldo) AS Saldo_a_Favor, (SUM(p.Monto)/COUNT(1)) AS Monto_Cliente,
+	(Saldo_a_Favor - Monto_Cliente) AS SaldoTotal 
+	FROM  
+	(
+		(Cliente 
+		INNER JOIN Cuenta c ON Cliente.IdCliente = c.IdCliente)
+		INNER JOIN Prestamo p ON c.IdCliente = p.IdCliente)
+	GROUP BY  Cliente.Nombre
+			
+	
 9)--Números de los Préstamos y Montos que sean Inferiores o iguales a 1000
-	SELECT TOP 1 
+	SELECT  TOP 1
 	( SELECT COUNT(*) FROM Cuenta WHERE Saldo<=1000) AS nSaldo, 
     ( SELECT COUNT(*) FROM Prestamo WHERE Monto<=1000) AS nMonto 
-	FROM Cuenta,Prestamo
-
+	FROM Cuenta,Prestamo 
 10)--Nombre del Cliente y Correo electrónico cuyo saldo (sólo en cuentas) sea superior a $4000 y
    --cuyo correo electrónico sea de gmail
 	SELECT cl.Nombre, cl.Email FROM Cliente cl,Cuenta c 

@@ -346,13 +346,15 @@ namespace Base_de_Datos
         public void creaAtributos()
         {
             Tabla aux = buscaTabla();
+            cargaTabla(aux);
             aux = abreTabla(aux);
-            VentanaAtributo ventanaA = new VentanaAtributo(directorioBD, aux);
+            cargaBD();
+            VentanaAtributo ventanaA = new VentanaAtributo(directorioBD, aux, tablas);
             if(listBox1.Text != "")
             {
                 if (ventanaA.ShowDialog() == DialogResult.OK)
                 {
-                    guardaTabla(aux);  
+                    guardaTabla(ventanaA.dameTabla());  
                 }
             }
             else
@@ -411,6 +413,15 @@ namespace Base_de_Datos
             }
             return t;
             
+        }
+
+        public void cargaBD()
+        {
+            List<Tabla> aux = new List<Tabla>() ;
+            foreach (Tabla t in tablas)
+                aux.Add(abreTabla(t));
+
+            tablas = aux;
         }
         public void cargaTabla(Tabla t)
         {

@@ -13,6 +13,7 @@ namespace Base_de_Datos.Clases
         public char tipo { get; set; }
         public int tam { get; set; }
         public string indice { get; set; }
+        public string foranea { get; set; }
         
         public Atributo()
         {

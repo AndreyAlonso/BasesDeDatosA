@@ -19,7 +19,8 @@ namespace Base_de_Datos.Ventanas
         private FileStream archivo;
         private string directorio;
         private Atributo atributo;
-        public VentanaAtributo(string bd,Tabla tab)
+        private List<Tabla> tablas;
+        public VentanaAtributo(string bd,Tabla tab, List<Tabla> tablas)
         {
             
             InitializeComponent();
@@ -31,6 +32,8 @@ namespace Base_de_Datos.Ventanas
             comboClave.Items.Add("Clave Foranea");
             tabla = tab;
             directorio = bd;
+            comboPrimarias.Enabled = false;
+            this.tablas = tablas;
         }
 
         private void mueveVentana(object sender, MouseEventArgs e)
@@ -55,10 +58,67 @@ namespace Base_de_Datos.Ventanas
             atributo.tipo = Convert.ToChar(comboTipo.Text);
             atributo.tam = Convert.ToInt32(textBox2.Text);
             atributo.indice = comboClave.Text;
+            if (comboPrimarias.Enabled == true)
+                atributo.foranea = comboPrimarias.Text;
+            else
+                atributo.foranea = "";
             tabla.atributos.Add(atributo);
             textBox1.Clear();
             textBox2.Clear();
         }
+
+        /// <summary>
+        /// Al seleccionar como clave "Clave Foranea" entonces se habilita 
+        /// el combobox que muestra las claves primaras de la Base de Datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboClave_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(comboClave.Text == "Clave Foranea")
+            {
+                comboPrimarias.Enabled = true;
+                cargaClavesPrimarias();
+            }
+            else
+            {
+                comboPrimarias.Enabled = false;
+            }
+        }
+        public void cargaClavesPrimarias()
+        {
+            comboPrimarias.Items.Clear();
+            foreach(Tabla t in tablas)
+            {
+                foreach(Atributo a in t.atributos)
+                {
+                    if(a.indice == "Clave Primaria")
+                    {
+                        comboPrimarias.Items.Add(a.nombre);
+                    }
+                }
+            }
+        }
+        public Tabla dameTabla()
+        {
+            return tabla;
+        }
+
+        private void comboTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboTipo.Text == "E" || comboTipo.Text == "F")
+            {
+                textBox2.Text = 4.ToString();
+                textBox2.Enabled = false;
+            }
+            else
+            {
+                textBox2.Clear();
+                textBox2.Enabled = true;
+            }
+                
+        }
+
         /// <summary>
         /// Busca en la carpeta de la Base de Datos 
         /// el archivo donde se insertara el atributo

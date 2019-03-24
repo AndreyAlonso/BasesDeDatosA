@@ -41,6 +41,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboPrimarias = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +51,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(415, 38);
+            this.pictureBox1.Size = new System.Drawing.Size(598, 38);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -91,6 +93,7 @@
             this.comboTipo.Name = "comboTipo";
             this.comboTipo.Size = new System.Drawing.Size(48, 25);
             this.comboTipo.TabIndex = 6;
+            this.comboTipo.SelectedIndexChanged += new System.EventHandler(this.comboTipo_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -128,6 +131,7 @@
             this.comboClave.Name = "comboClave";
             this.comboClave.Size = new System.Drawing.Size(122, 25);
             this.comboClave.TabIndex = 10;
+            this.comboClave.SelectedIndexChanged += new System.EventHandler(this.comboClave_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -136,7 +140,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(313, 166);
+            this.button1.Location = new System.Drawing.Point(380, 166);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(81, 30);
             this.button1.TabIndex = 11;
@@ -149,7 +153,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(166, 166);
+            this.button2.Location = new System.Drawing.Point(268, 166);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(81, 30);
             this.button2.TabIndex = 12;
@@ -164,19 +168,40 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(12, 166);
+            this.button3.Location = new System.Drawing.Point(151, 166);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(81, 30);
             this.button3.TabIndex = 13;
             this.button3.Text = "Cancelar";
             this.button3.UseVisualStyleBackColor = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(419, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(120, 17);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Claves Primarias";
+            // 
+            // comboPrimarias
+            // 
+            this.comboPrimarias.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboPrimarias.FormattingEnabled = true;
+            this.comboPrimarias.Location = new System.Drawing.Point(422, 106);
+            this.comboPrimarias.Name = "comboPrimarias";
+            this.comboPrimarias.Size = new System.Drawing.Size(122, 25);
+            this.comboPrimarias.TabIndex = 15;
+            // 
             // VentanaAtributo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(415, 208);
+            this.ClientSize = new System.Drawing.Size(599, 208);
+            this.Controls.Add(this.comboPrimarias);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -213,5 +238,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboPrimarias;
     }
 }
