@@ -41,6 +41,7 @@ namespace Base_de_Datos
             creaTupla.Enabled = false;
             modificaTupla.Enabled = false;
             eliminaTupla.Enabled = false;
+            integridadReferencial.Enabled = false;
            
         }
         #region PROPIEDADES VENTANA
@@ -341,6 +342,10 @@ namespace Base_de_Datos
             modificaAtributo.Enabled = false;
             eliminaAtributo.Enabled = false;
         }
+        /// <summary>
+        /// Devuelve la tabla seleccionada por el listbox
+        /// </summary>
+        /// <returns></returns>
         public Tabla buscaTabla()
         {
             foreach(Tabla t in tablas)
@@ -442,6 +447,7 @@ namespace Base_de_Datos
                 grid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(204, 204, 255);//153,204,244);
             else
                 grid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+            
         }
 
 
@@ -506,7 +512,11 @@ namespace Base_de_Datos
                 case "eliminaTupla":
                     eliminarTupla();
                 break;
+                
+                   
+                
             }
+            guardaTupla();
         }
         /// <summary>
         /// Se inserta la tupla escrita en el datagrid de nombre registro en
@@ -546,6 +556,82 @@ namespace Base_de_Datos
             }
             
         }
+        /// <summary>
+        /// Cuando se selecciona una celda del datagrid "registro"
+        /// entonces se detecta si la columna pertenece a una clave foranea (FK)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void registro_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            Tabla t = tablas.Find(x => x.nombre.Equals(listBox1.SelectedItem));
+            Atributo relacion;
+            t = abreTabla(t);
+            cargaBD();
+            foreach (Atributo a in t.atributos)
+            {
+                if(a.foranea != "NULL")
+                {
+                    relacion = encuentraRelacion(a);
+                    if (relacion != null && relacion.nombre == registro.Columns[e.ColumnIndex].HeaderText)
+                    {
+                        integridadReferencial.Enabled = true;
+                        //aquí se agregan las claves primarias al combobox
+                    }
+                    else
+                        integridadReferencial.Enabled = false;
+                }
+                else
+                {
+                    integridadReferencial.Enabled = false;
+                }
+              
+            }
+        }
+        /// <summary>
+        /// Agrega todos los registros de la Entidad que se hace relación
+        /// en el combobox
+        /// </summary>
+        public void cargaPrimarias()
+        {
+            
+        }
+        public Atributo encuentraRelacion(Atributo iR)
+        {
+            foreach(Tabla aux in tablas)
+            {
+                foreach(Atributo aux2 in aux.atributos)
+                {
+                    if (iR.foranea == aux2.nombre)
+                        return aux2;
+                }
+            }
+            return null;
+        }
+
+        public void guardaTupla()
+        {
+            Tabla actual = abreTabla(buscaTabla());
+            actual.tuplas = new List<string>();
+            string row;
+            for (int i = 0; i < grid.Rows.Count-1; i++)
+            {
+                row = "";
+                for(int j = 0; j < grid.Columns.Count; j++)
+                {
+                    row += grid.Rows[i].Cells[j].EditedFormattedValue + ",";
+                }
+                row = row.Remove(row.Length - 1);
+                actual.tuplas.Add(row);
+            }
+            guardaTabla(actual);
+             
+            
+        }
+        /// <summary>
+        /// Carga los datos de la tabla en el datagrid
+        /// </summary>
+        /// <param name="t"></param>
         public void cargaTabla(Tabla t)
         {
             grid.Rows.Clear();
@@ -556,6 +642,12 @@ namespace Base_de_Datos
             {
                 grid.Columns.Add(atributo.nombre, atributo.nombre);
                 registro.Columns.Add(atributo.nombre, atributo.nombre);
+               
+            }
+            foreach(string tupla in t.tuplas)
+            {
+              
+                grid.Rows.Add(tupla.Split(','));
             }
             if(t.atributos.Count > 0)
             {

@@ -80,6 +80,7 @@
             this.modificaTupla = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.eliminaTupla = new System.Windows.Forms.ToolStripButton();
+            this.integridadReferencial = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -523,9 +524,11 @@
             this.registro.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.registro.Size = new System.Drawing.Size(774, 51);
             this.registro.TabIndex = 13;
+            this.registro.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.registro_CellEnter);
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.integridadReferencial);
             this.groupBox7.Controls.Add(this.registro);
             this.groupBox7.Controls.Add(this.toolStrip4);
             this.groupBox7.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -594,6 +597,14 @@
             this.eliminaTupla.Name = "eliminaTupla";
             this.eliminaTupla.Size = new System.Drawing.Size(36, 36);
             this.eliminaTupla.Text = "Elimina Tupla";
+            // 
+            // integridadReferencial
+            // 
+            this.integridadReferencial.FormattingEnabled = true;
+            this.integridadReferencial.Location = new System.Drawing.Point(158, 92);
+            this.integridadReferencial.Name = "integridadReferencial";
+            this.integridadReferencial.Size = new System.Drawing.Size(265, 25);
+            this.integridadReferencial.TabIndex = 14;
             // 
             // Principal
             // 
@@ -702,6 +713,7 @@
         private System.Windows.Forms.ToolStripButton modificaTupla;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton eliminaTupla;
+        private System.Windows.Forms.ComboBox integridadReferencial;
     }
 }
 

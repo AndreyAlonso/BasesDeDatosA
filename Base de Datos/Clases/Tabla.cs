@@ -14,12 +14,13 @@ namespace Base_de_Datos.Clases
         public string nombre { get; set; }
         public string extension;
         public List<Atributo> atributos { get; set; }
-
+        public List<string> tuplas { get; set; }
         public Tabla(string n)
         {
             nombre = n;
             extension = ".txt";
             atributos = new List<Atributo>();
+            tuplas = new List<string>();
         }
         /// <summary>
         /// AGREGAR TABLA A BASE DE DATOS

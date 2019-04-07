@@ -61,7 +61,7 @@ namespace Base_de_Datos.Ventanas
             if (comboPrimarias.Enabled == true)
                 atributo.foranea = comboPrimarias.Text;
             else
-                atributo.foranea = "";
+                atributo.foranea = "NULL";
             tabla.atributos.Add(atributo);
             textBox1.Clear();
             textBox2.Clear();
