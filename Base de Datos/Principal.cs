@@ -23,6 +23,7 @@ namespace Base_de_Datos
         private int posx, posy;
         private string directorioBD;
         private List<Tabla> tablas;
+        DataTable dt;
         public Principal()
         {
             InitializeComponent();
@@ -36,6 +37,11 @@ namespace Base_de_Datos
             deshabilitaAtributos();
             tablas = new List<Tabla>();
             grid.ForeColor = Color.Black;
+            registro.ForeColor = Color.Black;
+            creaTupla.Enabled = false;
+            modificaTupla.Enabled = false;
+            eliminaTupla.Enabled = false;
+           
         }
         #region PROPIEDADES VENTANA
         private void label1_MouseMove(object sender, MouseEventArgs e)
@@ -424,7 +430,12 @@ namespace Base_de_Datos
 
             tablas = aux;
         }
-
+        /// <summary>
+        /// Interfaz en el datagrid "grid"
+        /// se intercalan los colores de los renglones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void grid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             if (e.RowIndex % 2 == 0)
@@ -433,21 +444,132 @@ namespace Base_de_Datos
                 grid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
         }
 
+
+        /// <summary>
+        /// Verifica que los datos escritos en la tabla "registro"
+        /// coincidan con el tipo de dato en la tabla
+        /// </summary>
+        /// <returns>Regresa TRUE si todo coincide y FALSE si encontro una inconsistencia</returns>
+        public bool validaTupla()
+        {
+            Tabla aux = buscaTabla();
+            aux = abreTabla(aux);
+            for(int i = 0; i < registro.Columns.Count; i++)
+            {
+                if(registro.Columns[i].Name == aux.atributos[i].nombre)// valida si la columna pertenece al atributo
+                {
+                    if (aux.atributos[i].tipo == 'E' || aux.atributos[i].tipo == 'F')
+                    {
+                        int ejem;
+                        if (!int.TryParse(registro.Rows[0].Cells[i].EditedFormattedValue.ToString(), out ejem))
+                        {
+                            MessageBox.Show(aux.atributos[i].nombre + " debe contener un valor numerico ");
+                            return false;
+                        }
+                    }
+                    else if(aux.atributos[i].tipo == 'C' && registro.Rows[0].Cells[i].EditedFormattedValue.ToString() == string.Empty)
+                    {
+                        MessageBox.Show(aux.atributos[i].nombre + " no debe ser una cadena vacia");
+                        return false;
+                    }
+
+                }
+            }
+            return true;
+        }
+
+        public bool tuplaVacia()
+        {
+            int i;
+            
+            for(i = 0; i < registro.Columns.Count; i++)
+            {
+                if(registro.Rows[0].Cells[i].EditedFormattedValue == null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        private void menuTupla(object sender, ToolStripItemClickedEventArgs e)
+        {
+            switch(e.ClickedItem.AccessibleName)
+            {
+                case "creaTupla":
+                    insertaTupla();
+                break;
+                case "modificaTupla":
+                    MessageBox.Show("Modifica Tupla");
+                break;
+                case "eliminaTupla":
+                    eliminarTupla();
+                break;
+            }
+        }
+        /// <summary>
+        /// Se inserta la tupla escrita en el datagrid de nombre registro en
+        /// el datagrid de nombre grid
+        /// </summary>
+        public void insertaTupla()
+        {
+            //1) Validar que todos los campos esten correctos
+            if(tuplaVacia())
+                MessageBox.Show("Complete todos los campos de la tupla");
+            else
+            { 
+                if (validaTupla() == true)
+                {
+                   dt = new DataTable();
+                   for (int i = 0; i < registro.Columns.Count; i++)
+                        dt.Columns.Add(registro.Columns[i].HeaderText,typeof(string));
+                    DataRow row = dt.NewRow();
+                    for (int i = 0; i < registro.Columns.Count; i++)
+                        row[i] = registro.Rows[0].Cells[i].EditedFormattedValue;
+                    grid.Rows.Add(row.ItemArray);
+                    registro.Rows.Clear();
+                }
+            }
+            
+   
+        }
+        public void eliminarTupla()
+        {
+            try
+            {
+                grid.Rows.Remove(grid.CurrentRow);
+            }
+            catch
+            {
+                MessageBox.Show("La tupla seleccionada no se puede eliminar");
+            }
+            
+        }
         public void cargaTabla(Tabla t)
         {
             grid.Rows.Clear();
             grid.Columns.Clear();
+            registro.Rows.Clear();
+            registro.Columns.Clear();
             foreach(Atributo atributo in t.atributos)
             {
                 grid.Columns.Add(atributo.nombre, atributo.nombre);
+                registro.Columns.Add(atributo.nombre, atributo.nombre);
             }
             if(t.atributos.Count > 0)
             {
                 modificaAtributo.Enabled = true;
                 eliminaAtributo.Enabled = true;
+                creaTupla.Enabled = true;
+                eliminaTupla.Enabled = true;
+                modificaTupla.Enabled = true;
             }
             else
             {
+                eliminaTupla.Enabled = false;
+                modificaTupla.Enabled = false;
+
                 modificaAtributo.Enabled = false;
                 eliminaAtributo.Enabled = false;
             }

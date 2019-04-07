@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -70,6 +72,14 @@
             this.eliminaAtributo = new System.Windows.Forms.ToolStripButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.grid = new System.Windows.Forms.DataGridView();
+            this.registro = new System.Windows.Forms.DataGridView();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.creaTupla = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.modificaTupla = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.eliminaTupla = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -86,6 +96,9 @@
             this.toolStrip3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.registro)).BeginInit();
+            this.groupBox7.SuspendLayout();
+            this.toolStrip4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -312,7 +325,7 @@
             this.pictureBox6.Image = global::Base_de_Datos.Properties.Resources.azul_medio1497605622;
             this.pictureBox6.Location = new System.Drawing.Point(-1, 49);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(10, 579);
+            this.pictureBox6.Size = new System.Drawing.Size(10, 618);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox6.TabIndex = 9;
             this.pictureBox6.TabStop = false;
@@ -320,7 +333,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::Base_de_Datos.Properties.Resources.azul_medio1497605622;
-            this.pictureBox5.Location = new System.Drawing.Point(-10, 593);
+            this.pictureBox5.Location = new System.Drawing.Point(-1, 661);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(1040, 10);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -332,7 +345,7 @@
             this.pictureBox4.Image = global::Base_de_Datos.Properties.Resources.azul_medio1497605622;
             this.pictureBox4.Location = new System.Drawing.Point(1011, 49);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(10, 579);
+            this.pictureBox4.Size = new System.Drawing.Size(10, 617);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 7;
             this.pictureBox4.TabStop = false;
@@ -446,15 +459,16 @@
             // 
             this.groupBox5.Controls.Add(this.grid);
             this.groupBox5.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(186, 184);
+            this.groupBox5.Location = new System.Drawing.Point(209, 285);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(819, 403);
+            this.groupBox5.Size = new System.Drawing.Size(790, 370);
             this.groupBox5.TabIndex = 12;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Tuplas";
             // 
             // grid
             // 
+            this.grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.grid.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.grid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -475,17 +489,118 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Desktop;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.grid.Location = new System.Drawing.Point(22, 36);
+            this.grid.Location = new System.Drawing.Point(6, 24);
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(774, 338);
             this.grid.TabIndex = 12;
             this.grid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.grid_RowsAdded);
             // 
+            // registro
+            // 
+            this.registro.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.registro.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.registro.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.registro.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.registro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.registro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.registro.DefaultCellStyle = dataGridViewCellStyle4;
+            this.registro.Location = new System.Drawing.Point(6, 24);
+            this.registro.Name = "registro";
+            this.registro.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.registro.Size = new System.Drawing.Size(774, 51);
+            this.registro.TabIndex = 13;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.registro);
+            this.groupBox7.Controls.Add(this.toolStrip4);
+            this.groupBox7.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox7.Location = new System.Drawing.Point(209, 151);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(790, 128);
+            this.groupBox7.TabIndex = 8;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Configuración Tupla";
+            // 
+            // toolStrip4
+            // 
+            this.toolStrip4.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.creaTupla,
+            this.toolStripSeparator9,
+            this.modificaTupla,
+            this.toolStripSeparator10,
+            this.eliminaTupla});
+            this.toolStrip4.Location = new System.Drawing.Point(8, 78);
+            this.toolStrip4.Name = "toolStrip4";
+            this.toolStrip4.Size = new System.Drawing.Size(132, 39);
+            this.toolStrip4.TabIndex = 6;
+            this.toolStrip4.Text = "toolStrip4";
+            this.toolStrip4.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuTupla);
+            // 
+            // creaTupla
+            // 
+            this.creaTupla.AccessibleName = "creaTupla";
+            this.creaTupla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.creaTupla.Image = ((System.Drawing.Image)(resources.GetObject("creaTupla.Image")));
+            this.creaTupla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.creaTupla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.creaTupla.Name = "creaTupla";
+            this.creaTupla.Size = new System.Drawing.Size(36, 36);
+            this.creaTupla.Text = "Crea Tupla";
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 39);
+            // 
+            // modificaTupla
+            // 
+            this.modificaTupla.AccessibleName = "modificaTupla";
+            this.modificaTupla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.modificaTupla.Image = ((System.Drawing.Image)(resources.GetObject("modificaTupla.Image")));
+            this.modificaTupla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.modificaTupla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.modificaTupla.Name = "modificaTupla";
+            this.modificaTupla.Size = new System.Drawing.Size(36, 36);
+            this.modificaTupla.Text = "Modifica Tupla";
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 39);
+            // 
+            // eliminaTupla
+            // 
+            this.eliminaTupla.AccessibleName = "eliminaTupla";
+            this.eliminaTupla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.eliminaTupla.Image = ((System.Drawing.Image)(resources.GetObject("eliminaTupla.Image")));
+            this.eliminaTupla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.eliminaTupla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.eliminaTupla.Name = "eliminaTupla";
+            this.eliminaTupla.Size = new System.Drawing.Size(36, 36);
+            this.eliminaTupla.Text = "Elimina Tupla";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 600);
+            this.ClientSize = new System.Drawing.Size(1024, 683);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.maximiza);
@@ -528,6 +643,11 @@
             this.toolStrip3.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.registro)).EndInit();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.toolStrip4.ResumeLayout(false);
+            this.toolStrip4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -574,6 +694,14 @@
         private System.Windows.Forms.ToolStripButton eliminaAtributo;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView grid;
+        private System.Windows.Forms.DataGridView registro;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.ToolStrip toolStrip4;
+        private System.Windows.Forms.ToolStripButton creaTupla;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton modificaTupla;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripButton eliminaTupla;
     }
 }
 
