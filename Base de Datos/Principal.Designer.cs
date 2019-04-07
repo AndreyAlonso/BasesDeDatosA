@@ -74,13 +74,13 @@
             this.grid = new System.Windows.Forms.DataGridView();
             this.registro = new System.Windows.Forms.DataGridView();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.integridadReferencial = new System.Windows.Forms.ComboBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.creaTupla = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.modificaTupla = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.eliminaTupla = new System.Windows.Forms.ToolStripButton();
-            this.integridadReferencial = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -539,6 +539,15 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Configuración Tupla";
             // 
+            // integridadReferencial
+            // 
+            this.integridadReferencial.FormattingEnabled = true;
+            this.integridadReferencial.Location = new System.Drawing.Point(158, 92);
+            this.integridadReferencial.Name = "integridadReferencial";
+            this.integridadReferencial.Size = new System.Drawing.Size(265, 25);
+            this.integridadReferencial.TabIndex = 14;
+            this.integridadReferencial.SelectedIndexChanged += new System.EventHandler(this.integridadReferencial_SelectedIndexChanged);
+            // 
             // toolStrip4
             // 
             this.toolStrip4.Dock = System.Windows.Forms.DockStyle.None;
@@ -597,14 +606,6 @@
             this.eliminaTupla.Name = "eliminaTupla";
             this.eliminaTupla.Size = new System.Drawing.Size(36, 36);
             this.eliminaTupla.Text = "Elimina Tupla";
-            // 
-            // integridadReferencial
-            // 
-            this.integridadReferencial.FormattingEnabled = true;
-            this.integridadReferencial.Location = new System.Drawing.Point(158, 92);
-            this.integridadReferencial.Name = "integridadReferencial";
-            this.integridadReferencial.Size = new System.Drawing.Size(265, 25);
-            this.integridadReferencial.TabIndex = 14;
             // 
             // Principal
             // 

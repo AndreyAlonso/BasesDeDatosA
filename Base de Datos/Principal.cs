@@ -307,6 +307,7 @@ namespace Base_de_Datos
             Tabla aux = buscaTabla();
             aux = abreTabla(aux);
             cargaTabla(aux);
+            integridadReferencial.Items.Clear();
         }
 
         public void nuevoProyecto()
@@ -556,6 +557,7 @@ namespace Base_de_Datos
             }
             
         }
+        int celda;
         /// <summary>
         /// Cuando se selecciona una celda del datagrid "registro"
         /// entonces se detecta si la columna pertenece a una clave foranea (FK)
@@ -566,35 +568,105 @@ namespace Base_de_Datos
         {
             Tabla t = tablas.Find(x => x.nombre.Equals(listBox1.SelectedItem));
             Atributo relacion;
-            t = abreTabla(t);
+            Tabla referencial ;
+            t = abreTabla(t); // Se obtiene la tabla a la que se estará agregando registros
             cargaBD();
             foreach (Atributo a in t.atributos)
             {
-                if(a.foranea != "NULL")
+                if(a.nombre == registro.Columns[e.ColumnIndex].HeaderText) //verificar si es el atributo de la columna actual
                 {
-                    relacion = encuentraRelacion(a);
-                    if (relacion != null && relacion.nombre == registro.Columns[e.ColumnIndex].HeaderText)
+                    if(a.foranea != "NULL") //Si existe clave foranea
                     {
-                        integridadReferencial.Enabled = true;
-                        //aquí se agregan las claves primarias al combobox
+                        //buscar la tabla que tenga como atributo.nombre la a.foranea
+                        referencial = buscaEnRelacion(a);
+                        if(referencial != null)
+                        {
+                            integridadReferencial.Enabled = true;
+                            cargaPrimarias(referencial);
+                            celda = e.ColumnIndex;
+                            registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = true;
+                            break;
+                        }
+                        else
+                        {
+                            integridadReferencial.Enabled = false;
+                            registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
+                        }
                     }
-                    else
-                        integridadReferencial.Enabled = false;
                 }
                 else
                 {
                     integridadReferencial.Enabled = false;
+                    registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
                 }
+
+                /*
+
+                if(a.foranea != "NULL")
+                {
+                    relacion = encuentraRelacion(a);
+                    referencial = buscaEnRelacion(relacion);
+                    
+                    if (relacion != null && relacion.nombre == registro.Columns[e.ColumnIndex].HeaderText)
+                    {
+                        integridadReferencial.Enabled = true;
+                        cargaPrimarias(referencial);
+                        celda = e.ColumnIndex;
+                        registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = true;
+                        break;
+                    }
+                    else
+                    {
+                        integridadReferencial.Enabled = false;
+                        registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
+                    }
+                        
+                    
+                }
+                else
+                {
+                    integridadReferencial.Enabled = false;
+                    registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
+                }*/
               
             }
+        }
+        /// <summary>
+        /// Busca una tabla en base a un atributo
+        /// si la tabla tiene el atributo que buscamos
+        /// devuelve esta tabla
+        /// si no, regresa NULL
+        /// </summary>
+        /// <param name="relacion"></param>
+        /// <returns></returns>
+        public Tabla buscaEnRelacion(Atributo relacion)
+        {
+            if(relacion != null)
+            foreach (Tabla aux in tablas)
+            {
+                foreach (Atributo aux2 in aux.atributos)
+                {
+                    if (relacion.foranea == aux2.nombre)
+                    {
+                        return aux;
+                    }
+                }
+            }
+            return null;
         }
         /// <summary>
         /// Agrega todos los registros de la Entidad que se hace relación
         /// en el combobox
         /// </summary>
-        public void cargaPrimarias()
+        public void cargaPrimarias(Tabla t)
         {
+            t = abreTabla(t);
             
+            integridadReferencial.Items.Clear();
+            foreach(string aux in t.tuplas)
+            {
+                integridadReferencial.Items.Add(aux);
+            }
         }
         public Atributo encuentraRelacion(Atributo iR)
         {
@@ -628,6 +700,12 @@ namespace Base_de_Datos
              
             
         }
+
+        private void integridadReferencial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            registro.Rows[0].Cells[celda].Value = integridadReferencial.Text.Split(',').First();
+        }
+
         /// <summary>
         /// Carga los datos de la tabla en el datagrid
         /// </summary>
@@ -638,27 +716,39 @@ namespace Base_de_Datos
             grid.Columns.Clear();
             registro.Rows.Clear();
             registro.Columns.Clear();
+            if(t != null)
             foreach(Atributo atributo in t.atributos)
             {
                 grid.Columns.Add(atributo.nombre, atributo.nombre);
                 registro.Columns.Add(atributo.nombre, atributo.nombre);
                
             }
+            if(t.tuplas.Count == 0)
+            {
+                eliminaTupla.Enabled = false;
+                modificaTupla.Enabled = false;
+            }
+            else
+            {
+                eliminaTupla.Enabled = true;
+                modificaTupla.Enabled = true;
+            }
             foreach(string tupla in t.tuplas)
             {
               
                 grid.Rows.Add(tupla.Split(','));
+                
             }
             if(t.atributos.Count > 0)
             {
                 modificaAtributo.Enabled = true;
                 eliminaAtributo.Enabled = true;
                 creaTupla.Enabled = true;
-                eliminaTupla.Enabled = true;
-                modificaTupla.Enabled = true;
+                
             }
             else
             {
+                creaTupla.Enabled = false;
                 eliminaTupla.Enabled = false;
                 modificaTupla.Enabled = false;
 
