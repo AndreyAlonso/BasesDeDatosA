@@ -38,11 +38,20 @@ namespace Base_de_Datos.Ventanas
 
         private void eliminarAtributo(object sender, EventArgs e)
         {
-            if(listBox1.Text != "")
+            Atributo atributo = tabla.atributos.Find(x => x.nombre.Equals(listBox1.Text));
+            if (listBox1.Text != "")
             {
                 //Busca en la lista de atributos y elimina el atributo seleccionado en el listbox
-                tabla.atributos.Remove(tabla.atributos.Find(x=>x.nombre.Equals(listBox1.Text)));
-                cargaAtributos();
+                if(atributo.indice == "Clave Primaria" && tabla.tuplas.Count > 0)
+                {
+                    MessageBox.Show("No se puede eliminar el atributo " + atributo.nombre + "\nporque es clave primaria y tiene registros");
+                }
+                else
+                {
+                    tabla.atributos.Remove(tabla.atributos.Find(x => x.nombre.Equals(listBox1.Text)));
+                    cargaAtributos();
+                }
+               
             }
         }
         public void cargaAtributos()

@@ -559,7 +559,7 @@
             this.eliminaTupla});
             this.toolStrip4.Location = new System.Drawing.Point(8, 78);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(132, 39);
+            this.toolStrip4.Size = new System.Drawing.Size(163, 39);
             this.toolStrip4.TabIndex = 6;
             this.toolStrip4.Text = "toolStrip4";
             this.toolStrip4.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuTupla);

@@ -308,6 +308,16 @@ namespace Base_de_Datos
             aux = abreTabla(aux);
             cargaTabla(aux);
             integridadReferencial.Items.Clear();
+            if(aux.tuplas.Count > 0)
+            {
+                modificaAtributo.Enabled = false;
+                creaAtributo.Enabled = false;
+            }
+            else
+            {
+                modificaAtributo.Enabled = true;
+                creaAtributo.Enabled = true;
+            }
         }
 
         public void nuevoProyecto()
@@ -550,6 +560,17 @@ namespace Base_de_Datos
             try
             {
                 grid.Rows.Remove(grid.CurrentRow);
+                if(grid.Rows.Count > 0)
+                {
+                    modificaAtributo.Enabled = false;
+                    creaAtributo.Enabled = false;
+                }
+                else
+                {
+                    modificaAtributo.Enabled = true;
+                    creaAtributo.Enabled = true;
+                }
+                
             }
             catch
             {
@@ -660,8 +681,6 @@ namespace Base_de_Datos
         /// </summary>
         public void cargaPrimarias(Tabla t)
         {
-            t = abreTabla(t);
-            
             integridadReferencial.Items.Clear();
             foreach(string aux in t.tuplas)
             {
