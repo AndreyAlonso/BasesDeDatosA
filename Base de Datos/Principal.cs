@@ -310,7 +310,7 @@ namespace Base_de_Datos
             aux = abreTabla(aux);
             cargaTabla(aux);
             integridadReferencial.Items.Clear();
-            if(aux.tuplas.Count > 0)
+            if(aux != null && aux.tuplas.Count > 0)
             {
                 modificaAtributo.Enabled = false;
                 creaAtributo.Enabled = false;
@@ -338,6 +338,9 @@ namespace Base_de_Datos
                 case "creaAtributo":
                     creaAtributos();
                 break;
+                case "modificaAtributo":
+                    modificaAtributos();
+                break;
                 case "eliminaAtributo":
                     eliminarAtributos();
                 break;
@@ -347,7 +350,26 @@ namespace Base_de_Datos
             cargaTabla(aux);
         }
 
-
+        public void modificaAtributos()
+        {
+            Tabla aux = buscaTabla();
+            cargaTabla(aux);
+            aux = abreTabla(aux);
+            cargaBD();
+            VentanaAtributo ventanaA = new VentanaAtributo(directorioBD, aux, tablas,"modifica");
+            if (listBox1.Text != "")
+            {
+                if (ventanaA.ShowDialog() == DialogResult.OK)
+                {
+                    aux.atributos[ventanaA.pos] = ventanaA.aModificado;
+                    guardaTabla(ventanaA.dameTabla());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una Tabla");
+            }
+        }
         #region  ATRIBUTOS
         public void deshabilitaAtributos()
         {
@@ -620,6 +642,11 @@ namespace Base_de_Datos
         }
         public void eliminarTupla()
         {
+            //buscar si la alguien esta usando su PK
+          //  for (int i = 0; i < tablas.Count; i++)
+            //    tablas[i] = abreTabla(tablas[i]);
+
+          
             try
             {
                 grid.Rows.Remove(grid.CurrentRow);
@@ -650,8 +677,7 @@ namespace Base_de_Datos
         private void registro_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             Tabla t = tablas.Find(x => x.nombre.Equals(listBox1.SelectedItem));
-            Atributo relacion;
-            Tabla referencial ;
+            Tabla referencial;
             t = abreTabla(t); // Se obtiene la tabla a la que se estará agregando registros
             cargaBD();
             foreach (Atributo a in t.atributos)
@@ -687,36 +713,6 @@ namespace Base_de_Datos
                     integridadReferencial.Enabled = false;
                     registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
                 }
-
-                /*
-
-                if(a.foranea != "NULL")
-                {
-                    relacion = encuentraRelacion(a);
-                    referencial = buscaEnRelacion(relacion);
-                    
-                    if (relacion != null && relacion.nombre == registro.Columns[e.ColumnIndex].HeaderText)
-                    {
-                        integridadReferencial.Enabled = true;
-                        cargaPrimarias(referencial);
-                        celda = e.ColumnIndex;
-                        registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = true;
-                        break;
-                    }
-                    else
-                    {
-                        integridadReferencial.Enabled = false;
-                        registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
-                    }
-                        
-                    
-                }
-                else
-                {
-                    integridadReferencial.Enabled = false;
-                    registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
-                }*/
-              
             }
         }
         /// <summary>
@@ -814,7 +810,7 @@ namespace Base_de_Datos
                 registro.Columns.Add(atributo.nombre, atributo.nombre);
                
             }
-            if(t.tuplas.Count == 0)
+            if (t != null && t.tuplas.Count == 0)
             {
                 eliminaTupla.Enabled = false;
                 modificaTupla.Enabled = false;
@@ -824,18 +820,15 @@ namespace Base_de_Datos
                 eliminaTupla.Enabled = true;
                 modificaTupla.Enabled = true;
             }
-            foreach(string tupla in t.tuplas)
-            {
-              
-                grid.Rows.Add(tupla.Split(','));
+            if(t != null)
+                foreach (string tupla in t.tuplas)
+                    grid.Rows.Add(tupla.Split(','));
                 
-            }
-            if(t.atributos.Count > 0)
+            if(t!= null && t.atributos.Count > 0)
             {
                 modificaAtributo.Enabled = true;
                 eliminaAtributo.Enabled = true;
-                creaTupla.Enabled = true;
-                
+                creaTupla.Enabled = true;    
             }
             else
             {

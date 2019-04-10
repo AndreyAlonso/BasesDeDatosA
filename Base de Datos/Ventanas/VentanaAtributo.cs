@@ -20,6 +20,8 @@ namespace Base_de_Datos.Ventanas
         private string directorio;
         private Atributo atributo;
         private List<Tabla> tablas;
+        public Atributo aModificado { get; set; }
+        public int pos { get; set; }
         public VentanaAtributo(string bd,Tabla tab, List<Tabla> tablas)
         {
             
@@ -34,6 +36,26 @@ namespace Base_de_Datos.Ventanas
             directorio = bd;
             comboPrimarias.Enabled = false;
             this.tablas = tablas;
+            comboBox1.Visible = false;
+        }
+        public VentanaAtributo(string bd, Tabla tab, List<Tabla> tablas, string s)
+        {
+
+            InitializeComponent();
+            comboTipo.Items.Add("E");
+            comboTipo.Items.Add("F");
+            comboTipo.Items.Add("C");
+            comboClave.Items.Add("Sin clave");
+            comboClave.Items.Add("Clave Primaria");
+            comboClave.Items.Add("Clave Foranea");
+            tabla = tab;
+            directorio = bd;
+            comboPrimarias.Enabled = false;
+            this.tablas = tablas;
+            button2.Visible = false;
+            comboBox1.Visible = true;
+            foreach (Atributo a in tab.atributos)
+                comboBox1.Items.Add(a.nombre);
         }
 
         private void mueveVentana(object sender, MouseEventArgs e)
@@ -52,19 +74,26 @@ namespace Base_de_Datos.Ventanas
 
         private void agregaAtributo(object sender, EventArgs e)
         {
-            //archivo = new FileStream(directorio + "\\" + tabla.nombre + tabla.extension, FileMode.Open);
-            atributo = new Atributo();
-            atributo.nombre = textBox1.Text;
-            atributo.tipo = Convert.ToChar(comboTipo.Text);
-            atributo.tam = Convert.ToInt32(textBox2.Text);
-            atributo.indice = comboClave.Text;
-            if (comboPrimarias.Enabled == true)
-                atributo.foranea = comboPrimarias.Text;
+            if (textBox1.Text == string.Empty || textBox2.Text == string.Empty)
+                MessageBox.Show("Complete todos los campos");
             else
-                atributo.foranea = "NULL";
-            tabla.atributos.Add(atributo);
-            textBox1.Clear();
-            textBox2.Clear();
+            {
+                //archivo = new FileStream(directorio + "\\" + tabla.nombre + tabla.extension, FileMode.Open);
+                atributo = new Atributo();
+                atributo.nombre = textBox1.Text;
+                atributo.tipo = Convert.ToChar(comboTipo.Text);
+                atributo.tam = Convert.ToInt32(textBox2.Text);
+                atributo.indice = comboClave.Text;
+                if (comboPrimarias.Enabled == true)
+                    atributo.foranea = comboPrimarias.Text;
+                else
+                    atributo.foranea = "NULL";
+           
+                    tabla.atributos.Add(atributo);
+                    textBox1.Clear();
+                    textBox2.Clear();
+            }
+            
         }
 
         /// <summary>
@@ -117,6 +146,46 @@ namespace Base_de_Datos.Ventanas
                 textBox2.Enabled = true;
             }
                 
+        }
+
+        private void VentanaAtributo_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach(Atributo a in tabla.atributos)
+            {
+                if(comboBox1.Text == a.nombre)
+                {
+                    pos = comboBox1.SelectedIndex;
+                    textBox1.Text = a.nombre;
+                    comboTipo.Text = a.tipo.ToString();
+                    textBox2.Text = a.tam.ToString();
+                    comboClave.Text = a.indice;
+                    comboPrimarias.Text = a.foranea;
+
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            if(button2.Enabled == false)
+            {
+                aModificado = new Atributo();
+                aModificado.nombre = textBox1.Text;
+                aModificado.tipo = Convert.ToChar(comboTipo.Text);
+                aModificado.tam = Convert.ToInt32(textBox2.Text);
+                aModificado.indice = comboClave.Text;
+                if (comboPrimarias.Enabled == true)
+                    aModificado.foranea = comboPrimarias.Text;
+                else
+                    aModificado.foranea = "NULL";
+            }
+            
         }
 
         /// <summary>

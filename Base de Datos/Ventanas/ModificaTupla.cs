@@ -22,7 +22,7 @@ namespace Base_de_Datos.Ventanas
         }
         public void cargaGrid(DataGridView r,string row)
         {
-            int i, j;
+            int j;
             for(j = 0; j < r.Columns.Count; j++)
             {
                 registro.Columns.Add(r.Columns[j].HeaderText, r.Columns[j].HeaderText);
