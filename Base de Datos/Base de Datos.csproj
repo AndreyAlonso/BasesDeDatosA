@@ -68,6 +68,12 @@
     <Compile Include="Ventanas\EliminarAtributo.Designer.cs">
       <DependentUpon>EliminarAtributo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ventanas\ModificaTupla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventanas\ModificaTupla.Designer.cs">
+      <DependentUpon>ModificaTupla.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventanas\VentanaAtributo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\EliminarAtributo.resx">
       <DependentUpon>EliminarAtributo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventanas\ModificaTupla.resx">
+      <DependentUpon>ModificaTupla.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\VentanaAtributo.resx">
       <DependentUpon>VentanaAtributo.cs</DependentUpon>

@@ -24,6 +24,7 @@ namespace Base_de_Datos
         private string directorioBD;
         private List<Tabla> tablas;
         DataTable dt;
+        int row;
         public Principal()
         {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace Base_de_Datos
             modificaTupla.Enabled = false;
             eliminaTupla.Enabled = false;
             integridadReferencial.Enabled = false;
+            aplicaMod.Enabled = false;
            
         }
         #region PROPIEDADES VENTANA
@@ -475,6 +477,24 @@ namespace Base_de_Datos
             {
                 if(registro.Columns[i].Name == aux.atributos[i].nombre)// valida si la columna pertenece al atributo
                 {
+                    if(aux.atributos[i].indice == "Clave Primaria")
+                    {
+                        for(int j = 0; j < grid.Rows.Count-1; j++)
+                        {
+                            if(registro.Rows[0].Cells[i].EditedFormattedValue.ToString() == grid.Rows[j].Cells[i].Value.ToString())
+                            {
+                                if (j != row)
+                                {
+                                    MessageBox.Show("La clave primaria ya existe");
+                                    return false;
+                                }
+                               // else
+                                   // registro.Rows[0].Cells[j].ReadOnly = true;
+                                   
+                            }
+                        }
+                      
+                    }
                     if (aux.atributos[i].tipo == 'E' || aux.atributos[i].tipo == 'F')
                     {
                         int ejem;
@@ -518,16 +538,59 @@ namespace Base_de_Datos
                     insertaTupla();
                 break;
                 case "modificaTupla":
-                    MessageBox.Show("Modifica Tupla");
+                    modificarTupla();
                 break;
                 case "eliminaTupla":
                     eliminarTupla();
+                break;
+                case "aplicaMod":
+                    aplicarModificacion();
                 break;
                 
                    
                 
             }
             guardaTupla();
+        }
+        public void aplicarModificacion()
+        {
+            if (tuplaVacia())
+                MessageBox.Show("Complete todos los campos de la tupla");
+            else if (validaTupla() == true)
+            {
+                for (int i = 0; i < registro.Columns.Count; i++)
+                    grid.Rows[row].Cells[i].Value = registro.Rows[0].Cells[i].EditedFormattedValue;
+                aplicaMod.Enabled = false;
+                creaTupla.Enabled = true;
+                eliminaTupla.Enabled = true;
+                modificaTupla.Enabled = true;
+                registro.Rows.Clear();
+            }
+            
+        }
+        /// <summary>
+        /// Metodo para realizar modificaciones en una tupla 
+        /// </summary>
+        public void modificarTupla()
+        {
+            Tabla t = buscaTabla();
+            t = abreTabla(t);   
+            if(row < t.tuplas.Count)
+            {
+                string reg = t.tuplas[row];
+                registro.Rows.Add(reg.Split(','));
+                aplicaMod.Enabled = true;
+                creaTupla.Enabled = false;
+                eliminaTupla.Enabled = false;
+                modificaTupla.Enabled = false;
+              //  ModificaTupla mt = new ModificaTupla(registro, reg);
+              //  if (mt.ShowDialog() == DialogResult.OK)
+              //  {
+
+              //  }
+            }
+            
+
         }
         /// <summary>
         /// Se inserta la tupla escrita en el datagrid de nombre registro en
@@ -570,7 +633,6 @@ namespace Base_de_Datos
                     modificaAtributo.Enabled = true;
                     creaAtributo.Enabled = true;
                 }
-                
             }
             catch
             {
@@ -613,6 +675,11 @@ namespace Base_de_Datos
                             integridadReferencial.Enabled = false;
                             registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
                         }
+                    }
+                    if(a.indice == "Clave Primaria" && aplicaMod.Enabled == true)
+                    {
+                        registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = true;
+                        break;
                     }
                 }
                 else
@@ -723,6 +790,11 @@ namespace Base_de_Datos
         private void integridadReferencial_SelectedIndexChanged(object sender, EventArgs e)
         {
             registro.Rows[0].Cells[celda].Value = integridadReferencial.Text.Split(',').First();
+        }
+
+        private void grid_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            row = e.RowIndex;
         }
 
         /// <summary>

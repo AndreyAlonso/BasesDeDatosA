@@ -28,71 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.abrir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.modificaBD = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.eliminaBD = new System.Windows.Forms.ToolStripButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.creaTabla = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.modificaTabla = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.eliminaTabla = new System.Windows.Forms.ToolStripButton();
             this.nBD = new System.Windows.Forms.Label();
-            this.maximiza = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.creaAtributo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.modificaAtributo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.eliminaAtributo = new System.Windows.Forms.ToolStripButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.grid = new System.Windows.Forms.DataGridView();
             this.registro = new System.Windows.Forms.DataGridView();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.integridadReferencial = new System.Windows.Forms.ComboBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
-            this.creaTupla = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.modificaTupla = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.creaTupla = new System.Windows.Forms.ToolStripButton();
+            this.modificaTupla = new System.Windows.Forms.ToolStripButton();
             this.eliminaTupla = new System.Windows.Forms.ToolStripButton();
+            this.creaAtributo = new System.Windows.Forms.ToolStripButton();
+            this.modificaAtributo = new System.Windows.Forms.ToolStripButton();
+            this.eliminaAtributo = new System.Windows.Forms.ToolStripButton();
+            this.maximiza = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.creaTabla = new System.Windows.Forms.ToolStripButton();
+            this.modificaTabla = new System.Windows.Forms.ToolStripButton();
+            this.eliminaTabla = new System.Windows.Forms.ToolStripButton();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.abrir = new System.Windows.Forms.ToolStripButton();
+            this.modificaBD = new System.Windows.Forms.ToolStripButton();
+            this.eliminaBD = new System.Windows.Forms.ToolStripButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.aplicaMod = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.toolStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.maximiza)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -100,6 +95,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.registro)).BeginInit();
             this.groupBox7.SuspendLayout();
             this.toolStrip4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maximiza)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -132,17 +134,6 @@
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.AccessibleName = "nueva";
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton1.Text = "Nueva Base de Datos";
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -153,48 +144,15 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
             // 
-            // abrir
-            // 
-            this.abrir.AccessibleName = "abrir";
-            this.abrir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.abrir.Image = global::Base_de_Datos.Properties.Resources.abrir__1_;
-            this.abrir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.abrir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.abrir.Name = "abrir";
-            this.abrir.Size = new System.Drawing.Size(36, 36);
-            this.abrir.Text = "Abrir Base de Datos";
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
-            // modificaBD
-            // 
-            this.modificaBD.AccessibleName = "modificaBD";
-            this.modificaBD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.modificaBD.Image = ((System.Drawing.Image)(resources.GetObject("modificaBD.Image")));
-            this.modificaBD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.modificaBD.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.modificaBD.Name = "modificaBD";
-            this.modificaBD.Size = new System.Drawing.Size(36, 36);
-            this.modificaBD.Text = "Renombrar Base de Datos";
-            // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 39);
-            // 
-            // eliminaBD
-            // 
-            this.eliminaBD.AccessibleName = "eliminaBD";
-            this.eliminaBD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.eliminaBD.Image = ((System.Drawing.Image)(resources.GetObject("eliminaBD.Image")));
-            this.eliminaBD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.eliminaBD.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.eliminaBD.Name = "eliminaBD";
-            this.eliminaBD.Size = new System.Drawing.Size(36, 36);
-            this.eliminaBD.Text = "Eliminar Base de Datos";
             // 
             // groupBox2
             // 
@@ -218,16 +176,6 @@
             this.listBox1.Size = new System.Drawing.Size(130, 208);
             this.listBox1.TabIndex = 6;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.seleccionaTabla);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::Base_de_Datos.Properties.Resources.azul_medio1497605622;
-            this.pictureBox2.Location = new System.Drawing.Point(6, 36);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(139, 208);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
             // 
             // groupBox3
             // 
@@ -256,48 +204,15 @@
             this.toolStrip2.Text = "toolStrip2";
             this.toolStrip2.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.opcionTabla);
             // 
-            // creaTabla
-            // 
-            this.creaTabla.AccessibleName = "creaTabla";
-            this.creaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.creaTabla.Image = ((System.Drawing.Image)(resources.GetObject("creaTabla.Image")));
-            this.creaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.creaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.creaTabla.Name = "creaTabla";
-            this.creaTabla.Size = new System.Drawing.Size(36, 36);
-            this.creaTabla.Text = "Crea Tabla";
-            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
             // 
-            // modificaTabla
-            // 
-            this.modificaTabla.AccessibleName = "modificaTabla";
-            this.modificaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.modificaTabla.Image = ((System.Drawing.Image)(resources.GetObject("modificaTabla.Image")));
-            this.modificaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.modificaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.modificaTabla.Name = "modificaTabla";
-            this.modificaTabla.Size = new System.Drawing.Size(36, 36);
-            this.modificaTabla.Text = "Modifica Tabla";
-            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 39);
-            // 
-            // eliminaTabla
-            // 
-            this.eliminaTabla.AccessibleName = "eliminaTabla";
-            this.eliminaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.eliminaTabla.Image = ((System.Drawing.Image)(resources.GetObject("eliminaTabla.Image")));
-            this.eliminaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.eliminaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.eliminaTabla.Name = "eliminaTabla";
-            this.eliminaTabla.Size = new System.Drawing.Size(36, 36);
-            this.eliminaTabla.Text = "Elimina Tabla";
             // 
             // nBD
             // 
@@ -309,6 +224,230 @@
             this.nBD.Size = new System.Drawing.Size(37, 17);
             this.nBD.TabIndex = 6;
             this.nBD.Text = "BD :";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.toolStrip3);
+            this.groupBox4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(398, 58);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(145, 81);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Menu Atributos";
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.creaAtributo,
+            this.toolStripSeparator7,
+            this.modificaAtributo,
+            this.toolStripSeparator8,
+            this.eliminaAtributo});
+            this.toolStrip3.Location = new System.Drawing.Point(3, 21);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(132, 39);
+            this.toolStrip3.TabIndex = 6;
+            this.toolStrip3.Text = "toolStrip3";
+            this.toolStrip3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip3_ItemClicked);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 39);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.grid);
+            this.groupBox5.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(209, 285);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(790, 370);
+            this.groupBox5.TabIndex = 12;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Tuplas";
+            // 
+            // grid
+            // 
+            this.grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.grid.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.grid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid.DefaultCellStyle = dataGridViewCellStyle6;
+            this.grid.Location = new System.Drawing.Point(6, 24);
+            this.grid.Name = "grid";
+            this.grid.Size = new System.Drawing.Size(774, 338);
+            this.grid.TabIndex = 12;
+            this.grid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_RowEnter);
+            this.grid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.grid_RowsAdded);
+            // 
+            // registro
+            // 
+            this.registro.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.registro.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.registro.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.registro.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.registro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.registro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.registro.DefaultCellStyle = dataGridViewCellStyle8;
+            this.registro.Location = new System.Drawing.Point(6, 24);
+            this.registro.Name = "registro";
+            this.registro.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.registro.Size = new System.Drawing.Size(774, 51);
+            this.registro.TabIndex = 13;
+            this.registro.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.registro_CellEnter);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.integridadReferencial);
+            this.groupBox7.Controls.Add(this.registro);
+            this.groupBox7.Controls.Add(this.toolStrip4);
+            this.groupBox7.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox7.Location = new System.Drawing.Point(209, 151);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(790, 128);
+            this.groupBox7.TabIndex = 8;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Configuración Tupla";
+            // 
+            // integridadReferencial
+            // 
+            this.integridadReferencial.FormattingEnabled = true;
+            this.integridadReferencial.Location = new System.Drawing.Point(300, 92);
+            this.integridadReferencial.Name = "integridadReferencial";
+            this.integridadReferencial.Size = new System.Drawing.Size(265, 25);
+            this.integridadReferencial.TabIndex = 14;
+            this.integridadReferencial.SelectedIndexChanged += new System.EventHandler(this.integridadReferencial_SelectedIndexChanged);
+            // 
+            // toolStrip4
+            // 
+            this.toolStrip4.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.creaTupla,
+            this.toolStripSeparator9,
+            this.modificaTupla,
+            this.toolStripSeparator10,
+            this.eliminaTupla,
+            this.toolStripSeparator11,
+            this.aplicaMod});
+            this.toolStrip4.Location = new System.Drawing.Point(8, 78);
+            this.toolStrip4.Name = "toolStrip4";
+            this.toolStrip4.Size = new System.Drawing.Size(174, 39);
+            this.toolStrip4.TabIndex = 6;
+            this.toolStrip4.Text = "toolStrip4";
+            this.toolStrip4.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuTupla);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 39);
+            // 
+            // creaTupla
+            // 
+            this.creaTupla.AccessibleName = "creaTupla";
+            this.creaTupla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.creaTupla.Image = ((System.Drawing.Image)(resources.GetObject("creaTupla.Image")));
+            this.creaTupla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.creaTupla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.creaTupla.Name = "creaTupla";
+            this.creaTupla.Size = new System.Drawing.Size(36, 36);
+            this.creaTupla.Text = "Crea Tupla";
+            // 
+            // modificaTupla
+            // 
+            this.modificaTupla.AccessibleName = "modificaTupla";
+            this.modificaTupla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.modificaTupla.Image = ((System.Drawing.Image)(resources.GetObject("modificaTupla.Image")));
+            this.modificaTupla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.modificaTupla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.modificaTupla.Name = "modificaTupla";
+            this.modificaTupla.Size = new System.Drawing.Size(36, 36);
+            this.modificaTupla.Text = "Modifica Tupla";
+            // 
+            // eliminaTupla
+            // 
+            this.eliminaTupla.AccessibleName = "eliminaTupla";
+            this.eliminaTupla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.eliminaTupla.Image = ((System.Drawing.Image)(resources.GetObject("eliminaTupla.Image")));
+            this.eliminaTupla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.eliminaTupla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.eliminaTupla.Name = "eliminaTupla";
+            this.eliminaTupla.Size = new System.Drawing.Size(36, 36);
+            this.eliminaTupla.Text = "Elimina Tupla";
+            // 
+            // creaAtributo
+            // 
+            this.creaAtributo.AccessibleName = "creaAtributo";
+            this.creaAtributo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.creaAtributo.Image = ((System.Drawing.Image)(resources.GetObject("creaAtributo.Image")));
+            this.creaAtributo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.creaAtributo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.creaAtributo.Name = "creaAtributo";
+            this.creaAtributo.Size = new System.Drawing.Size(36, 36);
+            this.creaAtributo.Text = "Crea Atributo";
+            // 
+            // modificaAtributo
+            // 
+            this.modificaAtributo.AccessibleName = "modificaAtributo";
+            this.modificaAtributo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.modificaAtributo.Image = ((System.Drawing.Image)(resources.GetObject("modificaAtributo.Image")));
+            this.modificaAtributo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.modificaAtributo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.modificaAtributo.Name = "modificaAtributo";
+            this.modificaAtributo.Size = new System.Drawing.Size(36, 36);
+            this.modificaAtributo.Text = "Modifica Atributo";
+            // 
+            // eliminaAtributo
+            // 
+            this.eliminaAtributo.AccessibleName = "eliminaAtributo";
+            this.eliminaAtributo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.eliminaAtributo.Image = ((System.Drawing.Image)(resources.GetObject("eliminaAtributo.Image")));
+            this.eliminaAtributo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.eliminaAtributo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.eliminaAtributo.Name = "eliminaAtributo";
+            this.eliminaAtributo.Size = new System.Drawing.Size(36, 36);
+            this.eliminaAtributo.Text = "Elimina Atributo";
             // 
             // maximiza
             // 
@@ -351,6 +490,39 @@
             this.pictureBox4.TabIndex = 7;
             this.pictureBox4.TabStop = false;
             // 
+            // creaTabla
+            // 
+            this.creaTabla.AccessibleName = "creaTabla";
+            this.creaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.creaTabla.Image = ((System.Drawing.Image)(resources.GetObject("creaTabla.Image")));
+            this.creaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.creaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.creaTabla.Name = "creaTabla";
+            this.creaTabla.Size = new System.Drawing.Size(36, 36);
+            this.creaTabla.Text = "Crea Tabla";
+            // 
+            // modificaTabla
+            // 
+            this.modificaTabla.AccessibleName = "modificaTabla";
+            this.modificaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.modificaTabla.Image = ((System.Drawing.Image)(resources.GetObject("modificaTabla.Image")));
+            this.modificaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.modificaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.modificaTabla.Name = "modificaTabla";
+            this.modificaTabla.Size = new System.Drawing.Size(36, 36);
+            this.modificaTabla.Text = "Modifica Tabla";
+            // 
+            // eliminaTabla
+            // 
+            this.eliminaTabla.AccessibleName = "eliminaTabla";
+            this.eliminaTabla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.eliminaTabla.Image = ((System.Drawing.Image)(resources.GetObject("eliminaTabla.Image")));
+            this.eliminaTabla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.eliminaTabla.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.eliminaTabla.Name = "eliminaTabla";
+            this.eliminaTabla.Size = new System.Drawing.Size(36, 36);
+            this.eliminaTabla.Text = "Elimina Tabla";
+            // 
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
@@ -361,6 +533,60 @@
             this.pictureBox3.TabIndex = 5;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.salir);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Base_de_Datos.Properties.Resources.azul_medio1497605622;
+            this.pictureBox2.Location = new System.Drawing.Point(6, 36);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(139, 208);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.AccessibleName = "nueva";
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton1.Text = "Nueva Base de Datos";
+            // 
+            // abrir
+            // 
+            this.abrir.AccessibleName = "abrir";
+            this.abrir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.abrir.Image = global::Base_de_Datos.Properties.Resources.abrir__1_;
+            this.abrir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.abrir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.abrir.Name = "abrir";
+            this.abrir.Size = new System.Drawing.Size(36, 36);
+            this.abrir.Text = "Abrir Base de Datos";
+            // 
+            // modificaBD
+            // 
+            this.modificaBD.AccessibleName = "modificaBD";
+            this.modificaBD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.modificaBD.Image = ((System.Drawing.Image)(resources.GetObject("modificaBD.Image")));
+            this.modificaBD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.modificaBD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.modificaBD.Name = "modificaBD";
+            this.modificaBD.Size = new System.Drawing.Size(36, 36);
+            this.modificaBD.Text = "Renombrar Base de Datos";
+            // 
+            // eliminaBD
+            // 
+            this.eliminaBD.AccessibleName = "eliminaBD";
+            this.eliminaBD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.eliminaBD.Image = ((System.Drawing.Image)(resources.GetObject("eliminaBD.Image")));
+            this.eliminaBD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.eliminaBD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.eliminaBD.Name = "eliminaBD";
+            this.eliminaBD.Size = new System.Drawing.Size(36, 36);
+            this.eliminaBD.Text = "Eliminar Base de Datos";
             // 
             // label1
             // 
@@ -386,226 +612,21 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mueveVentana);
             // 
-            // groupBox4
+            // aplicaMod
             // 
-            this.groupBox4.Controls.Add(this.toolStrip3);
-            this.groupBox4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(398, 58);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(145, 81);
-            this.groupBox4.TabIndex = 7;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Menu Atributos";
+            this.aplicaMod.AccessibleName = "aplicaMod";
+            this.aplicaMod.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.aplicaMod.Image = ((System.Drawing.Image)(resources.GetObject("aplicaMod.Image")));
+            this.aplicaMod.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.aplicaMod.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aplicaMod.Name = "aplicaMod";
+            this.aplicaMod.Size = new System.Drawing.Size(36, 36);
+            this.aplicaMod.Text = "aplicar modificacion";
             // 
-            // toolStrip3
+            // toolStripSeparator11
             // 
-            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.creaAtributo,
-            this.toolStripSeparator7,
-            this.modificaAtributo,
-            this.toolStripSeparator8,
-            this.eliminaAtributo});
-            this.toolStrip3.Location = new System.Drawing.Point(3, 21);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(132, 39);
-            this.toolStrip3.TabIndex = 6;
-            this.toolStrip3.Text = "toolStrip3";
-            this.toolStrip3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip3_ItemClicked);
-            // 
-            // creaAtributo
-            // 
-            this.creaAtributo.AccessibleName = "creaAtributo";
-            this.creaAtributo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.creaAtributo.Image = ((System.Drawing.Image)(resources.GetObject("creaAtributo.Image")));
-            this.creaAtributo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.creaAtributo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.creaAtributo.Name = "creaAtributo";
-            this.creaAtributo.Size = new System.Drawing.Size(36, 36);
-            this.creaAtributo.Text = "Crea Atributo";
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 39);
-            // 
-            // modificaAtributo
-            // 
-            this.modificaAtributo.AccessibleName = "modificaAtributo";
-            this.modificaAtributo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.modificaAtributo.Image = ((System.Drawing.Image)(resources.GetObject("modificaAtributo.Image")));
-            this.modificaAtributo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.modificaAtributo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.modificaAtributo.Name = "modificaAtributo";
-            this.modificaAtributo.Size = new System.Drawing.Size(36, 36);
-            this.modificaAtributo.Text = "Modifica Atributo";
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 39);
-            // 
-            // eliminaAtributo
-            // 
-            this.eliminaAtributo.AccessibleName = "eliminaAtributo";
-            this.eliminaAtributo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.eliminaAtributo.Image = ((System.Drawing.Image)(resources.GetObject("eliminaAtributo.Image")));
-            this.eliminaAtributo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.eliminaAtributo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.eliminaAtributo.Name = "eliminaAtributo";
-            this.eliminaAtributo.Size = new System.Drawing.Size(36, 36);
-            this.eliminaAtributo.Text = "Elimina Atributo";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.grid);
-            this.groupBox5.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(209, 285);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(790, 370);
-            this.groupBox5.TabIndex = 12;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Tuplas";
-            // 
-            // grid
-            // 
-            this.grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.grid.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.grid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.grid.Location = new System.Drawing.Point(6, 24);
-            this.grid.Name = "grid";
-            this.grid.Size = new System.Drawing.Size(774, 338);
-            this.grid.TabIndex = 12;
-            this.grid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.grid_RowsAdded);
-            // 
-            // registro
-            // 
-            this.registro.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.registro.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.registro.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.registro.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.registro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.registro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.registro.DefaultCellStyle = dataGridViewCellStyle4;
-            this.registro.Location = new System.Drawing.Point(6, 24);
-            this.registro.Name = "registro";
-            this.registro.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.registro.Size = new System.Drawing.Size(774, 51);
-            this.registro.TabIndex = 13;
-            this.registro.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.registro_CellEnter);
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.integridadReferencial);
-            this.groupBox7.Controls.Add(this.registro);
-            this.groupBox7.Controls.Add(this.toolStrip4);
-            this.groupBox7.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox7.Location = new System.Drawing.Point(209, 151);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(790, 128);
-            this.groupBox7.TabIndex = 8;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Configuración Tupla";
-            // 
-            // integridadReferencial
-            // 
-            this.integridadReferencial.FormattingEnabled = true;
-            this.integridadReferencial.Location = new System.Drawing.Point(158, 92);
-            this.integridadReferencial.Name = "integridadReferencial";
-            this.integridadReferencial.Size = new System.Drawing.Size(265, 25);
-            this.integridadReferencial.TabIndex = 14;
-            this.integridadReferencial.SelectedIndexChanged += new System.EventHandler(this.integridadReferencial_SelectedIndexChanged);
-            // 
-            // toolStrip4
-            // 
-            this.toolStrip4.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.creaTupla,
-            this.toolStripSeparator9,
-            this.modificaTupla,
-            this.toolStripSeparator10,
-            this.eliminaTupla});
-            this.toolStrip4.Location = new System.Drawing.Point(8, 78);
-            this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(163, 39);
-            this.toolStrip4.TabIndex = 6;
-            this.toolStrip4.Text = "toolStrip4";
-            this.toolStrip4.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuTupla);
-            // 
-            // creaTupla
-            // 
-            this.creaTupla.AccessibleName = "creaTupla";
-            this.creaTupla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.creaTupla.Image = ((System.Drawing.Image)(resources.GetObject("creaTupla.Image")));
-            this.creaTupla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.creaTupla.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.creaTupla.Name = "creaTupla";
-            this.creaTupla.Size = new System.Drawing.Size(36, 36);
-            this.creaTupla.Text = "Crea Tupla";
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 39);
-            // 
-            // modificaTupla
-            // 
-            this.modificaTupla.AccessibleName = "modificaTupla";
-            this.modificaTupla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.modificaTupla.Image = ((System.Drawing.Image)(resources.GetObject("modificaTupla.Image")));
-            this.modificaTupla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.modificaTupla.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.modificaTupla.Name = "modificaTupla";
-            this.modificaTupla.Size = new System.Drawing.Size(36, 36);
-            this.modificaTupla.Text = "Modifica Tupla";
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 39);
-            // 
-            // eliminaTupla
-            // 
-            this.eliminaTupla.AccessibleName = "eliminaTupla";
-            this.eliminaTupla.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.eliminaTupla.Image = ((System.Drawing.Image)(resources.GetObject("eliminaTupla.Image")));
-            this.eliminaTupla.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.eliminaTupla.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.eliminaTupla.Name = "eliminaTupla";
-            this.eliminaTupla.Size = new System.Drawing.Size(36, 36);
-            this.eliminaTupla.Text = "Elimina Tupla";
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 39);
             // 
             // Principal
             // 
@@ -638,17 +659,10 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.maximiza)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
@@ -660,6 +674,13 @@
             this.groupBox7.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maximiza)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -715,6 +736,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton eliminaTupla;
         private System.Windows.Forms.ComboBox integridadReferencial;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripButton aplicaMod;
     }
 }
 
