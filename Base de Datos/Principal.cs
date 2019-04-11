@@ -361,6 +361,8 @@ namespace Base_de_Datos
             {
                 if (ventanaA.ShowDialog() == DialogResult.OK)
                 {
+                    //aux.atributos[ventanaA.pos] = ventanaA.aModificado;
+                    //aux = abreTabla(aux);
                     aux.atributos[ventanaA.pos] = ventanaA.aModificado;
                     guardaTabla(ventanaA.dameTabla());
                 }
@@ -510,9 +512,11 @@ namespace Base_de_Datos
                                     MessageBox.Show("La clave primaria ya existe");
                                     return false;
                                 }
-                               // else
-                                   // registro.Rows[0].Cells[j].ReadOnly = true;
-                                   
+                               // MessageBox.Show("La clave primaria ya existe");
+                               // return false;
+                                // else
+                                //   registro.Rows[0].Cells[j].ReadOnly = true;
+
                             }
                         }
                       
@@ -806,8 +810,12 @@ namespace Base_de_Datos
             if(t != null)
             foreach(Atributo atributo in t.atributos)
             {
-                grid.Columns.Add(atributo.nombre, atributo.nombre);
-                registro.Columns.Add(atributo.nombre, atributo.nombre);
+               if(atributo != null)
+               {
+                    grid.Columns.Add(atributo.nombre, atributo.nombre);
+                    registro.Columns.Add(atributo.nombre, atributo.nombre);
+               }
+                
                
             }
             if (t != null && t.tuplas.Count == 0)

@@ -37,6 +37,8 @@ namespace Base_de_Datos.Ventanas
             comboPrimarias.Enabled = false;
             this.tablas = tablas;
             comboBox1.Visible = false;
+            label6.Visible = false;
+            button2.Text = "Agregar";
         }
         public VentanaAtributo(string bd, Tabla tab, List<Tabla> tablas, string s)
         {
@@ -51,9 +53,15 @@ namespace Base_de_Datos.Ventanas
             tabla = tab;
             directorio = bd;
             comboPrimarias.Enabled = false;
+            textBox1.Enabled = false;
+            textBox2.Enabled = false;
+            comboClave.Enabled = false;
+            comboTipo.Enabled = false;
+            comboPrimarias.Enabled = false;
             this.tablas = tablas;
-            button2.Visible = false;
+            button2.Text = "MODIFICAR";
             comboBox1.Visible = true;
+            label6.Visible = true;
             foreach (Atributo a in tab.atributos)
                 comboBox1.Items.Add(a.nombre);
         }
@@ -72,28 +80,150 @@ namespace Base_de_Datos.Ventanas
             }
         }
 
+        /// <summary>
+        /// Boton AGREGAR
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void agregaAtributo(object sender, EventArgs e)
         {
-            if (textBox1.Text == string.Empty || textBox2.Text == string.Empty)
-                MessageBox.Show("Complete todos los campos");
-            else
+            int contador = 0;
+            if (button2.Text == "Agregar")
             {
-                //archivo = new FileStream(directorio + "\\" + tabla.nombre + tabla.extension, FileMode.Open);
-                atributo = new Atributo();
-                atributo.nombre = textBox1.Text;
-                atributo.tipo = Convert.ToChar(comboTipo.Text);
-                atributo.tam = Convert.ToInt32(textBox2.Text);
-                atributo.indice = comboClave.Text;
-                if (comboPrimarias.Enabled == true)
-                    atributo.foranea = comboPrimarias.Text;
-                else
-                    atributo.foranea = "NULL";
-           
-                    tabla.atributos.Add(atributo);
-                    textBox1.Clear();
-                    textBox2.Clear();
+                if (textBox1.Text == string.Empty || textBox2.Text == string.Empty) //Verificar si no se han completado los campos
+                    MessageBox.Show("Complete todos los campos");
+                else //Los campos están completos 
+                {
+                    foreach (Atributo t in tabla.atributos)
+                    {
+                        if (t.indice == "Clave Primaria" && t.nombre != textBox1.Text) //Verifica cuantas llaves primarias tiene la tabla
+                            contador++;
+                    }
+                    // Si no tiene clave Primaria
+                    if (contador == 0)
+                    {
+                        atributo = new Atributo();
+                        atributo.nombre = textBox1.Text;
+                        atributo.tipo = Convert.ToChar(comboTipo.Text);
+                        atributo.tam = Convert.ToInt32(textBox2.Text);
+                        atributo.indice = comboClave.Text;
+                        if (comboPrimarias.Enabled == true)
+                            atributo.foranea = comboPrimarias.Text;
+                        else
+                            atributo.foranea = "NULL";
+
+                        tabla.atributos.Add(atributo);
+                        textBox1.Clear();
+                        textBox2.Clear();
+                    }
+                    // Ya existe clave primaria y se piensa agregar otra
+                    else if (contador > 0 && comboClave.Text == "Clave Primaria" && label6.Visible == false)
+                    {
+                        MessageBox.Show("La tabla ya contiene una clave primaria");
+                    }
+                    // Ya existe PK y se va a modificar la misma
+                    else if (label6.Visible == true && contador > 0 && comboClave.Text == "Clave Primaria")
+                    {
+                        atributo = new Atributo();
+                        atributo.nombre = textBox1.Text;
+                        atributo.tipo = Convert.ToChar(comboTipo.Text);
+                        atributo.tam = Convert.ToInt32(textBox2.Text);
+                        atributo.indice = comboClave.Text;
+                        if (comboPrimarias.Enabled == true)
+                            atributo.foranea = comboPrimarias.Text;
+                        else
+                            atributo.foranea = "NULL";
+
+                        tabla.atributos.Add(atributo);
+                        textBox1.Clear();
+                        textBox2.Clear();
+                    }
+                    else
+                    {
+                        atributo = new Atributo();
+                        atributo.nombre = textBox1.Text;
+                        atributo.tipo = Convert.ToChar(comboTipo.Text);
+                        atributo.tam = Convert.ToInt32(textBox2.Text);
+                        atributo.indice = comboClave.Text;
+                        if (comboPrimarias.Enabled == true)
+                            atributo.foranea = comboPrimarias.Text;
+                        else
+                            atributo.foranea = "NULL";
+
+                        tabla.atributos.Add(atributo);
+                        textBox1.Clear();
+                        textBox2.Clear();
+                    }
+
+                }
             }
-            
+            else if (button2.Text == "MODIFICAR")
+            {
+                if (textBox1.Text == string.Empty || textBox2.Text == string.Empty) //Verificar si no se han completado los campos
+                    MessageBox.Show("Complete todos los campos");
+                else //Los campos están completos 
+                {
+                    foreach (Atributo t in tabla.atributos)
+                    {
+                        if (t.indice == "Clave Primaria" && t.nombre != textBox1.Text) //Verifica cuantas llaves primarias tiene la tabla
+                            contador++;
+                    }
+                    // Si no tiene clave Primaria
+                    if (contador == 0)
+                    {
+                        aModificado = new Atributo();
+                        aModificado.nombre = textBox1.Text;
+                        aModificado.tipo = Convert.ToChar(comboTipo.Text);
+                        aModificado.tam = Convert.ToInt32(textBox2.Text);
+                        aModificado.indice = comboClave.Text;
+                        if (comboPrimarias.Enabled == true)
+                            aModificado.foranea = comboPrimarias.Text;
+                        else
+                            aModificado.foranea = "NULL";
+
+                        textBox1.Clear();
+                        textBox2.Clear();
+                    }
+                    // Ya existe clave primaria y se piensa agregar otra
+                    else if (contador > 0 && comboClave.Text == "Clave Primaria" && label6.Visible == false)
+                    {
+                        MessageBox.Show("La tabla ya contiene una clave primaria");
+                    }
+                    // Ya existe PK y se va a modificar la misma
+                    else if (label6.Visible == true && contador > 0 && comboClave.Text == "Clave Primaria")
+                    {
+
+                        aModificado = new Atributo();
+                        aModificado.nombre = textBox1.Text;
+                        aModificado.tipo = Convert.ToChar(comboTipo.Text);
+                        aModificado.tam = Convert.ToInt32(textBox2.Text);
+                        aModificado.indice = comboClave.Text;
+                        if (comboPrimarias.Enabled == true)
+                            aModificado.foranea = comboPrimarias.Text;
+                        else
+                            aModificado.foranea = "NULL";
+
+                        textBox1.Clear();
+                        textBox2.Clear();
+                    }
+                    else
+                    {
+                        aModificado = new Atributo();
+                        aModificado.nombre = textBox1.Text;
+                        aModificado.tipo = Convert.ToChar(comboTipo.Text);
+                        aModificado.tam = Convert.ToInt32(textBox2.Text);
+                        aModificado.indice = comboClave.Text;
+                        if (comboPrimarias.Enabled == true)
+                            aModificado.foranea = comboPrimarias.Text;
+                        else
+                            aModificado.foranea = "NULL";
+                        textBox1.Clear();
+                        textBox2.Clear();
+                    }
+
+                }
+            }
         }
 
         /// <summary>
@@ -166,26 +296,51 @@ namespace Base_de_Datos.Ventanas
                     comboClave.Text = a.indice;
                     comboPrimarias.Text = a.foranea;
 
+                    textBox1.Enabled = true;
+                    comboClave.Enabled = true;
+                    comboTipo.Enabled = true;
+                    comboPrimarias.Enabled = true;
+
                 }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            if(button2.Enabled == false)
+
+
+            /*
+            int contador = 0;
+            if(tabla.atributos.Count == 0 )
             {
-                aModificado = new Atributo();
-                aModificado.nombre = textBox1.Text;
-                aModificado.tipo = Convert.ToChar(comboTipo.Text);
-                aModificado.tam = Convert.ToInt32(textBox2.Text);
-                aModificado.indice = comboClave.Text;
-                if (comboPrimarias.Enabled == true)
-                    aModificado.foranea = comboPrimarias.Text;
-                else
-                    aModificado.foranea = "NULL";
+                MessageBox.Show("Se necesita AGREGAR atributos "); 
             }
             
+            else if (button2.Visible == false)
+            {
+                foreach (Atributo t in tabla.atributos)
+                {
+                    if (t.indice == "Clave Primaria")
+                        contador++;
+
+                }
+                if (contador == 1 && comboClave.Text == "Clave Primaria")
+                    MessageBox.Show("La tabla ya contiene una clave primaria");
+                else
+                {
+                    aModificado = new Atributo();
+                    aModificado.nombre = textBox1.Text;
+                    aModificado.tipo = Convert.ToChar(comboTipo.Text);
+                    aModificado.tam = Convert.ToInt32(textBox2.Text);
+                    aModificado.indice = comboClave.Text;
+                    if (comboPrimarias.Enabled == true)
+                        aModificado.foranea = comboPrimarias.Text;
+                    else
+                        aModificado.foranea = "NULL";
+                }
+                
+            }
+            */
         }
 
         /// <summary>
