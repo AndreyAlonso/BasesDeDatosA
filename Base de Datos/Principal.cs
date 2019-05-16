@@ -300,6 +300,10 @@ namespace Base_de_Datos
             Tabla t = new Tabla(listBox1.Text);
             t.eliminaTabla(directorioBD);
             cargaTablas(directorioBD);
+            registro.Rows.Clear();
+            registro.Columns.Clear();
+            grid.Rows.Clear();
+            grid.Columns.Clear();
         }
 
         private void seleccionaTabla(object sender, EventArgs e)
@@ -680,6 +684,7 @@ namespace Base_de_Datos
         /// <param name="e"></param>
         private void registro_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
+            integridadReferencial.Items.Clear();
             Tabla t = tablas.Find(x => x.nombre.Equals(listBox1.SelectedItem));
             Tabla referencial;
             t = abreTabla(t); // Se obtiene la tabla a la que se estará agregando registros
@@ -718,6 +723,8 @@ namespace Base_de_Datos
                     registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
                 }
             }
+           
+            
         }
         /// <summary>
         /// Busca una tabla en base a un atributo
@@ -734,7 +741,7 @@ namespace Base_de_Datos
             {
                 foreach (Atributo aux2 in aux.atributos)
                 {
-                    if (relacion.foranea == aux2.nombre)
+                    if (relacion.foranea == aux2.nombre && aux2.indice == "Clave Primaria")
                     {
                         return aux;
                     }
@@ -795,6 +802,11 @@ namespace Base_de_Datos
         private void grid_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             row = e.RowIndex;
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
