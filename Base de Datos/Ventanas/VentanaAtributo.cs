@@ -181,12 +181,19 @@ namespace Base_de_Datos.Ventanas
                             aModificado.foranea = comboPrimarias.Text;
                         else
                             aModificado.foranea = "NULL";
-
+                        Atributo a = tabla.atributos.Find(x => x.nombre.Equals(aModificado.nombre));
+                        if (a != null)
+                        {
+                            tabla.atributos.Remove(a);
+                            tabla.atributos.Add(aModificado);
+                        }
+                            
+                        
                         textBox1.Clear();
                         textBox2.Clear();
                     }
                     // Ya existe clave primaria y se piensa agregar otra
-                    else if (contador > 0 && comboClave.Text == "Clave Primaria" && label6.Visible == false)
+                    else if (contador > 0 && comboClave.Text == "Clave Primaria" && label6.Visible == true)
                     {
                         MessageBox.Show("La tabla ya contiene una clave primaria");
                     }
