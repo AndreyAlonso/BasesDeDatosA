@@ -886,6 +886,11 @@ namespace Base_de_Datos
             }
             return "";
         }
+        /// <summary>
+        /// Se obtiene el nombre de la tabla en la consulta SQL
+        /// </summary>
+        /// <param name="consulta">Consulta SQL</param>
+        /// <returns></returns>
         public string obtenTabla(string consulta)
         {
             int i;
@@ -904,7 +909,7 @@ namespace Base_de_Datos
                 else
                     tabla += consulta[i];
             }
-            return "";   
+            return tabla;   
         }
         int posFROM = 0;
         int posWHERE = 0;
@@ -934,50 +939,48 @@ namespace Base_de_Datos
                     string col = obtenColumnas(compara);
                     
                     columnas = col.Split(',').ToList();
-                    if(compara.Contains("WHERE"))
+              
+                    string tabla = obtenTabla(compara);
+                    tabla = tabla.Replace(" ", "");
+                    if (listBox1.Items.Contains(tabla))
                     {
-                        string tabla = obtenTabla(compara);
-                        tabla = tabla.Replace(" ", "");
-                        if (listBox1.Items.Contains(tabla))
+                        if(col != string.Empty && col != " ")
                         {
-                            if(col != string.Empty && col != " ")
+                            cargaBD();
+                            // Se verifica que las columnas correspondan a la Tabla de la base de datos
+                            if(columnas[0].Contains("*") && columnas.Count == 1)
                             {
-                                cargaBD();
-                                // Se verifica que las columnas correspondan a la Tabla de la base de datos
-                                if(columnas[0].Contains("*") && columnas.Count == 1)
-                                {
-                                    MessageBox.Show("Se han seleccionado todos los atributos"); 
-                                }
-                                else
-                                {
-                                    if (verificaAtributos(tabla, columnas))
-                                    {
-
-                                        MessageBox.Show("Todas los atributos existen");
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Hay atributos que no pertenecen a la Tabla " + tabla);
-                                    }
-                                }
+                                //MessageBox.Show("Se han seleccionado todos los atributos");
+                                Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
                                 
-                                
-
+                                cargaTabla(t);
                             }
                             else
                             {
-                                MessageBox.Show("Complete las columnas en la consulta");
+                                if (verificaAtributos(tabla, columnas))
+                                {
+
+                                    MessageBox.Show("Todas los atributos existen");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Hay atributos que no pertenecen a la Tabla " + tabla);
+                                }
                             }
+                                
+                                
+
                         }
                         else
                         {
-                            MessageBox.Show("Error: La tabla " + tabla + " no existe en la Base de Datos");
+                            MessageBox.Show("Complete las columnas en la consulta");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Falta WHERE");
+                        MessageBox.Show("Error: La tabla " + tabla + " no existe en la Base de Datos");
                     }
+                    
                 }
                 else
                 {
