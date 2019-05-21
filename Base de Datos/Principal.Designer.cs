@@ -766,6 +766,7 @@
             this.txtConsulta.Size = new System.Drawing.Size(760, 33);
             this.txtConsulta.TabIndex = 0;
             this.txtConsulta.Text = "";
+            this.txtConsulta.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtConsulta_MouseClick);
             this.txtConsulta.TextChanged += new System.EventHandler(this.txtConsulta_TextChanged);
             // 
             // Principal

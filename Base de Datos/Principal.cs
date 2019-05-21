@@ -462,12 +462,14 @@ namespace Base_de_Datos
             }
             catch
             {
-
+                
             }
             return t;
             
         }
-
+        /// <summary>
+        /// Carga en lista Tabla toda la base de datos 
+        /// </summary>
         public void cargaBD()
         {
             List<Tabla> aux = new List<Tabla>() ;
@@ -821,6 +823,7 @@ namespace Base_de_Datos
         string[] palabrasReservadas = { "SELECT", "FROM", "WHERE", "INNER JOIN", "ON" };
         private void txtConsulta_TextChanged(object sender, EventArgs e)
         {
+            /*
             int i, inicio, final;
             for(i = 0; i < palabrasReservadas.Length; i++)
             {
@@ -848,9 +851,9 @@ namespace Base_de_Datos
                     }
                 }
                 txtConsulta.SelectionStart = txtConsulta.Text.Length;
-                txtConsulta.SelectionColor = Color.Black;
+               // txtConsulta.SelectionColor = Color.Black;
 
-            }
+            }*/
         }
 
         private void btnConsulta_Click(object sender, EventArgs e)
@@ -929,9 +932,52 @@ namespace Base_de_Datos
                 if(compara.Contains("FROM"))
                 {
                     string col = obtenColumnas(compara);
-                    columnas = col.Split(',').ToList();
-                    string tabla = obtenTabla(compara);
                     
+                    columnas = col.Split(',').ToList();
+                    if(compara.Contains("WHERE"))
+                    {
+                        string tabla = obtenTabla(compara);
+                        tabla = tabla.Replace(" ", "");
+                        if (listBox1.Items.Contains(tabla))
+                        {
+                            if(col != string.Empty && col != " ")
+                            {
+                                cargaBD();
+                                // Se verifica que las columnas correspondan a la Tabla de la base de datos
+                                if(columnas[0].Contains("*") && columnas.Count == 1)
+                                {
+                                    MessageBox.Show("Se han seleccionado todos los atributos"); 
+                                }
+                                else
+                                {
+                                    if (verificaAtributos(tabla, columnas))
+                                    {
+
+                                        MessageBox.Show("Todas los atributos existen");
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Hay atributos que no pertenecen a la Tabla " + tabla);
+                                    }
+                                }
+                                
+                                
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Complete las columnas en la consulta");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error: La tabla " + tabla + " no existe en la Base de Datos");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Falta WHERE");
+                    }
                 }
                 else
                 {
@@ -945,7 +991,41 @@ namespace Base_de_Datos
             }
 
         }
+        public int posM = 0;
+        private void txtConsulta_MouseClick(object sender, MouseEventArgs e)
+        {
 
+        }
+        /// <summary>
+        /// Verifica si los atributos dados en la consulta existen en la Tabla seleccionada
+        /// </summary>
+        /// <param name="tabla">Nombre de la Tabla solicitada en la consulta</param>
+        /// <param name="columnas">Atributos seleccionados en la consulta</param>
+        /// <returns>Regresa true si todos los atributos existen en la tabla</returns>
+        public bool verificaAtributos(string tabla, List<string> columnas)
+        {
+            int total = columnas.Count;
+            int i = 0;
+            foreach(Tabla t in  tablas)
+            {
+                if(t.nombre == tabla)
+                {
+                    foreach(Atributo a in t.atributos)
+                    {
+                        foreach(string s in columnas)
+                        {
+                            if (s.Contains( a.nombre))
+                                i++;
+                        }
+                    }
+                    if (i == total)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            return false;
+        }
         /// <summary>
         /// Carga los datos de la tabla en el datagrid
         /// </summary>
