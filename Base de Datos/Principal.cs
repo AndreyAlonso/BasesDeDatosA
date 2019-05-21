@@ -809,6 +809,143 @@ namespace Base_de_Datos
 
         }
 
+        private void btnSQL_Click(object sender, EventArgs e)
+        {
+            FormConsulta formconsulta = new FormConsulta();
+            if(formconsulta.ShowDialog() == DialogResult.OK)
+            {
+                //Aquí se genera la consulta 
+            }
+        }
+
+        string[] palabrasReservadas = { "SELECT", "FROM", "WHERE", "INNER JOIN", "ON" };
+        private void txtConsulta_TextChanged(object sender, EventArgs e)
+        {
+            int i, inicio, final;
+            for(i = 0; i < palabrasReservadas.Length; i++)
+            {
+                inicio = txtConsulta.Find(palabrasReservadas[i]);
+                final = txtConsulta.Text.LastIndexOf(palabrasReservadas[i]);
+                if( inicio >= 0 && final >= 0)
+                {
+                    txtConsulta.SelectionLength = palabrasReservadas[i].Length;
+                    txtConsulta.SelectionColor = Color.Blue;
+
+                }
+                else
+                {
+
+                    final = txtConsulta.Text.LastIndexOf("//");
+                    if(txtConsulta.Find("//") >= 0 && final >= 0)
+                    {
+                        txtConsulta.SelectionLength = palabrasReservadas[i].Length;
+                        txtConsulta.SelectionColor = Color.Black;
+                    }
+                    else
+                    {
+                        txtConsulta.SelectionLength = palabrasReservadas[i].Length;
+                        txtConsulta.SelectionColor = Color.Black;
+                    }
+                }
+                txtConsulta.SelectionStart = txtConsulta.Text.Length;
+                txtConsulta.SelectionColor = Color.Black;
+
+            }
+        }
+
+        private void btnConsulta_Click(object sender, EventArgs e)
+        {
+            verificaConsulta();
+        }
+        /// <summary>
+        /// Dada una consulta SQL, se obtiene las columnas definidas en la consulta
+        /// </summary>
+        /// <param name="consulta">Consulta SQL sin SELECT</param>
+        /// <returns></returns>
+        public string obtenColumnas(string consulta)
+        {
+            int i;
+            string cmp;
+            string col = "";
+            for(i =  0; i < consulta.Length; i++)
+            {
+                cmp = "";
+                if (i + 3 < consulta.Length)
+                    cmp = string.Concat(consulta[i], consulta[i + 1], consulta[i + 2] ,consulta[i + 3]);         
+                if (cmp == "FROM")
+                {
+                    posFROM = i + 3 + 1;
+                    return col;
+                }
+                else
+                    col += consulta[i];
+        
+            }
+            return "";
+        }
+        public string obtenTabla(string consulta)
+        {
+            int i;
+            string tabla ="";
+            string cmp;
+            for(i = posFROM; i < consulta.Length; i++)
+            {
+                cmp = "";
+                if (i + 4 < consulta.Length)
+                    cmp = string.Concat(consulta[i], consulta[i + 1], consulta[i + 2], consulta[i + 3], consulta[i + 4]);
+                if (cmp == "WHERE")
+                {
+                    posWHERE = i + 4;
+                    return tabla;
+                }
+                else
+                    tabla += consulta[i];
+            }
+            return "";   
+        }
+        int posFROM = 0;
+        int posWHERE = 0;
+        public void verificaConsulta()
+        {
+
+            //1) Verificar que cuenta con SELECT, FROM, WHERE
+      
+            string s = "SELECT";
+            string f = "FROM";
+            string w = "WHERE";
+            List<string> columnas;
+
+            string compara = "";
+
+            foreach(char c in txtConsulta.Text)
+            {
+                compara += c;
+                if (compara.Length == s.Length)
+                    break;
+            }
+            if(compara == s)
+            {
+                compara = txtConsulta.Text.Substring(compara.Length);
+                if(compara.Contains("FROM"))
+                {
+                    string col = obtenColumnas(compara);
+                    columnas = col.Split(',').ToList();
+                    string tabla = obtenTabla(compara);
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Falta FROM");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Falta SELECT"); 
+            }
+
+        }
+
         /// <summary>
         /// Carga los datos de la tabla en el datagrid
         /// </summary>
