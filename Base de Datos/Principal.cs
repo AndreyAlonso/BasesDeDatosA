@@ -886,6 +886,16 @@ namespace Base_de_Datos
             }
             return "";
         }
+        public List<string> limpiaColumnas(List<string> columnas)
+        {
+            List<string> lista = new List<string>();
+            foreach(string col in columnas)
+            {
+                lista.Add(col.Replace(" ", ""));
+            }
+            return lista;
+            
+        }
         /// <summary>
         /// Se obtiene el nombre de la tabla en la consulta SQL
         /// </summary>
@@ -939,7 +949,7 @@ namespace Base_de_Datos
                     string col = obtenColumnas(compara);
                     
                     columnas = col.Split(',').ToList();
-              
+                    columnas = limpiaColumnas(columnas);
                     string tabla = obtenTabla(compara);
                     tabla = tabla.Replace(" ", "");
                     if (listBox1.Items.Contains(tabla))
@@ -952,7 +962,6 @@ namespace Base_de_Datos
                             {
                                 //MessageBox.Show("Se han seleccionado todos los atributos");
                                 Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
-                                
                                 cargaTabla(t);
                             }
                             else
@@ -960,7 +969,9 @@ namespace Base_de_Datos
                                 if (verificaAtributos(tabla, columnas))
                                 {
 
-                                    MessageBox.Show("Todas los atributos existen");
+                                   // MessageBox.Show("Todas los atributos existen");
+                                    Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
+                                    cargaTabla(t,columnas);
                                 }
                                 else
                                 {
@@ -1028,6 +1039,29 @@ namespace Base_de_Datos
                 }
             }
             return false;
+        }
+        /// <summary>
+        /// Muestra La tabla en el datagrid pero solo con las columnas dadas por la consulta
+        /// </summary>
+        /// <param name="t"> Tabla seleccionada para consulta</param>
+        /// <param name="columnas">Lista de Columnas seleccionadas para mostrar en la consulta</param>
+        public void cargaTabla(Tabla t, List<string> columnas)
+        {
+            cargaTabla(t);
+            //Se eliminan las columnas que no estan  en las consultas
+            int i;
+            for(i = 0; i < grid.Columns.Count; i++ )
+            {
+                if(columnas.Contains(grid.Columns[i].HeaderText))
+                {
+                    grid.Columns[i].Visible = true;
+                }
+                else
+                {
+                    grid.Columns[i].Visible = false;
+                }
+            }
+            
         }
         /// <summary>
         /// Carga los datos de la tabla en el datagrid
