@@ -977,7 +977,7 @@ namespace Base_de_Datos
                                     {
                                         // MessageBox.Show("Todas los atributos existen");
                                         Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
-                                        cargaTabla(t, columnas);
+                                        cargaTabla(t, columnas, condicion);
                                     }
                                     else
                                     {
@@ -1101,6 +1101,57 @@ namespace Base_de_Datos
         }
 
         /// <summary>
+        /// Realiza la consulta con WHERE y con columnas seleccionadas
+        /// </summary>
+        /// <param name="t">Tabla a consultar</param>
+        /// <param name="columnas">Columnas Seleccionadas para consulta</param>
+        /// <param name="condicion">clave a comparar en WHERE</param>
+        public void cargaTabla(Tabla t, List<string> columnas, string condicion)
+        {
+            List<string> aux = condicion.Split(' ').ToList();
+            List<string> cond = new List<string>();
+            foreach (string a in aux)
+                if (a != string.Empty)
+                    cond.Add(a);
+            cargaTabla(t);
+            //Se eliminan las columnas que no estan  en las consultas
+            int i;
+            bool existe = false;
+            for (i = 0; i < grid.Columns.Count; i++)
+            {
+                if (columnas.Contains(grid.Columns[i].HeaderText))
+                {
+                    grid.Columns[i].Visible = true;
+                }
+                else
+                {
+                    grid.Columns[i].Visible = false;
+                }
+            }
+            //Se verifica que existe la clave de la condicion en los atributos
+            foreach (Atributo a in t.atributos)
+            {
+                if (cond[0] != string.Empty && a.nombre == cond[0])
+                {
+                    existe = true;
+                    break;
+                }
+            }
+            if (existe)
+            {
+                realizaCondicion(t, cond);
+            }
+            else
+            {
+                limpiaGrid();
+                MessageBox.Show("Error en WHERE");
+            }
+
+        }
+
+
+
+        /// <summary>
         /// Realiza la consulta en base al WHERE 
         /// </summary>
         /// <param name="t">Tabla a consultar</param>
@@ -1144,6 +1195,7 @@ namespace Base_de_Datos
         /// <param name="condicion">Condicion separa en una lista</param>
         public void realizaCondicion(Tabla t,List<string> condicion)
         {
+            int respuesta = 0;
             // verificar tipo de condicion
             if (condicion.Count < 3)
             {
@@ -1155,22 +1207,211 @@ namespace Base_de_Datos
             switch (condicion[1])
             {
                 case "=":
-                    buscaTupla(condicion);
+                    respuesta = buscaTupla(condicion);
                     break;
                 case ">":
+                     respuesta = buscaTuplaMayor(condicion);
                     break;
                 case "<":
+                     respuesta = buscaTuplaMenor(condicion);
                     break;
                 case ">=":
+                        respuesta = buscaTuplaMayorIgual(condicion);
                     break;
                 case "<=":
+                        respuesta = buscaTuplaMenorIgual(condicion);
                     break;
                 case "<>":
+                        respuesta = buscaTuplaDiferente(condicion);
                     break;
+                 
+            }
+            if(respuesta == 0)
+            {
+                limpiaGrid();
+                MessageBox.Show("El operador utilizado no es valido");
             }
         }
+        /// <summary>
+        /// Realiza la consulta mostrando solo las tuplas DIFERENTES al dato solicitado
+        /// </summary>
+        /// <param name="condicion">condicion WHERE guardado en lista</param>
+        public int buscaTuplaDiferente(List<string> condicion)
+        {
+            int i, j;
+            bool existe = false;
+            int clave = Convert.ToInt32(condicion[2]);
+            for (i = 0; i < grid.Columns.Count; i++)
+            {
+                if (grid.Columns[i].HeaderText.Contains(condicion[0]))
+                {
+                    for (j = 0; j < grid.Rows.Count - 1; j++)
+                    {
+                        if (Convert.ToInt32(grid.Rows[j].Cells[i].EditedFormattedValue) != clave)
+                        {
+                            grid.Rows[j].Visible = true;
+                            existe = true;
+                        }
+                        else
+                            grid.Rows[j].Visible = false;
+                    }
+                }
+            }
+            if (existe == false)
+            {
+                limpiaGrid();
+                MessageBox.Show("El valor buscado " + condicion[2] + " no existe en la tabla actual");
+                return 0;
 
-        public void buscaTupla(List<string> condicion )
+            }
+            else
+                return 1;
+            
+        }
+        /// <summary>
+        /// Realiza la consulta mostrando solo las tuplas MAYORES e IGUALES al dato solicitado
+        /// </summary>
+        /// <param name="condicion">condicion WHERE guardado en lista</param>
+        public int buscaTuplaMayorIgual(List<string> condicion)
+        {
+            int i, j;
+            bool existe = false;
+            int clave = Convert.ToInt32(condicion[2]);
+            for (i = 0; i < grid.Columns.Count; i++)
+            {
+                if (grid.Columns[i].HeaderText.Contains(condicion[0]))
+                {
+                    for (j = 0; j < grid.Rows.Count - 1; j++)
+                    {
+                        if (Convert.ToInt32(grid.Rows[j].Cells[i].EditedFormattedValue) >= clave)
+                        {
+                            grid.Rows[j].Visible = true;
+                            existe = true;
+                        }
+                        else
+                            grid.Rows[j].Visible = false;
+                    }
+                }
+            }
+            if (existe == false)
+            {
+                limpiaGrid();
+                MessageBox.Show("El valor buscado " + condicion[2] + " no existe en la tabla actual");
+                return 0;
+
+            }
+            return 1;
+        }
+        /// <summary>
+        /// Realiza la consulta mostrando solo las tuplas MENORES e IGUALES al dato solicitado
+        /// </summary>
+        /// <param name="condicion">condicion WHERE guardado en lista</param>
+        public int buscaTuplaMenorIgual(List<string> condicion)
+        {
+            int i, j;
+            bool existe = false;
+            int clave = Convert.ToInt32(condicion[2]);
+            for (i = 0; i < grid.Columns.Count; i++)
+            {
+                if (grid.Columns[i].HeaderText.Contains(condicion[0]))
+                {
+                    for (j = 0; j < grid.Rows.Count - 1; j++)
+                    {
+                        if (Convert.ToInt32(grid.Rows[j].Cells[i].EditedFormattedValue) <= clave)
+                        {
+                            grid.Rows[j].Visible = true;
+                            existe = true;
+                        }
+                        else
+                            grid.Rows[j].Visible = false;
+                    }
+                }
+            }
+            if (existe == false)
+            {
+                limpiaGrid();
+                MessageBox.Show("El valor buscado " + condicion[2] + " no existe en la tabla actual");
+                return 0;
+
+            }
+            else
+                return 1;
+        }
+        /// <summary>
+        /// Realiza la consulta mostrando solo las tuplas MENORES al dato solicitado
+        /// </summary>
+        /// <param name="condicion">condicion WHERE guardado en lista</param>
+        public int buscaTuplaMenor(List<string> condicion)
+        {
+            int i, j;
+            bool existe = false;
+            int clave = Convert.ToInt32(condicion[2]);
+            for (i = 0; i < grid.Columns.Count; i++)
+            {
+                if (grid.Columns[i].HeaderText.Contains(condicion[0]))
+                {
+                    for (j = 0; j < grid.Rows.Count - 1; j++)
+                    {
+                        if (Convert.ToInt32(grid.Rows[j].Cells[i].EditedFormattedValue) < clave)
+                        {
+                            grid.Rows[j].Visible = true;
+                            existe = true;
+                        }
+                        else
+                            grid.Rows[j].Visible = false;
+                    }
+                }
+            }
+            if (existe == false)
+            {
+                limpiaGrid();
+                MessageBox.Show("El valor buscado " + condicion[2] + " no existe en la tabla actual");
+                return 0;
+
+            }
+            else
+                return 1;
+        }
+        /// <summary>
+        /// Realiza la consulta mostrando solo las tuplas mayores al dato solicitado
+        /// </summary>
+        /// <param name="condicion">condicion WHERE guardado en lista</param>
+        public int buscaTuplaMayor(List<string> condicion)
+        {
+            int i, j;
+            bool existe = false;
+            int clave = Convert.ToInt32(condicion[2]);
+            for (i = 0; i < grid.Columns.Count; i++)
+            {
+                if (grid.Columns[i].HeaderText.Contains(condicion[0]))
+                {
+                    for (j = 0; j < grid.Rows.Count - 1; j++)
+                    {
+                        if (Convert.ToInt32(grid.Rows[j].Cells[i].EditedFormattedValue) > clave)
+                        {
+                            grid.Rows[j].Visible = true;
+                            existe = true;
+                        }
+                        else
+                            grid.Rows[j].Visible = false;
+                    }
+                }
+            }
+            if (existe == false)
+            {
+                limpiaGrid();
+                MessageBox.Show("El valor buscado " + condicion[2] + " no existe en la tabla actual");
+                return 0;
+
+            }
+            return 1;
+        }
+
+        /// <summary>
+        /// Consulta comparando = 
+        /// </summary>
+        /// <param name="condicion">=</param>
+        public int buscaTupla(List<string> condicion )
         {
             int i, j;
             bool existe = false;
@@ -1190,12 +1431,15 @@ namespace Base_de_Datos
                     }
                 }
             }
-            if(existe == false)
+            if (existe == false)
             {
                 limpiaGrid();
                 MessageBox.Show("El valor buscado " + condicion[2] + " no existe en la tabla actual");
+                return 0;
 
             }
+            else
+                return 1;
         }
         /// <summary>
         /// Se eliminan las columnas y los renglones del Componente grid
