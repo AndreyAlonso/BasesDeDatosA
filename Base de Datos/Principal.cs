@@ -858,7 +858,10 @@ namespace Base_de_Datos
 
         private void btnConsulta_Click(object sender, EventArgs e)
         {
-            verificaConsulta();
+            if (txtConsulta.Text == string.Empty)
+                MessageBox.Show("Se debe escribir una consulta SQL");
+            else
+                verificaConsulta();
         }
         /// <summary>
         /// Dada una consulta SQL, se obtiene las columnas definidas en la consulta
@@ -957,30 +960,58 @@ namespace Base_de_Datos
                         if(col != string.Empty && col != " ")
                         {
                             cargaBD();
-                            // Se verifica que las columnas correspondan a la Tabla de la base de datos
-                            if(columnas[0].Contains("*") && columnas.Count == 1)
+                            //1) Contiene WHERE
+                            if(compara.Contains("WHERE"))
                             {
-                                //MessageBox.Show("Se han seleccionado todos los atributos");
-                                Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
-                                cargaTabla(t);
-                            }
-                            else
-                            {
-                                if (verificaAtributos(tabla, columnas))
+                                string condicion = obtenCondicion(compara);
+                                // Se verifica que las columnas correspondan a la Tabla de la base de datos
+                                if (columnas[0].Contains("*") && columnas.Count == 1)
                                 {
-
-                                   // MessageBox.Show("Todas los atributos existen");
+                                    //MessageBox.Show("Se han seleccionado todos los atributos");
                                     Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
-                                    cargaTabla(t,columnas);
+                                    cargaTabla(t,condicion);
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Hay atributos que no pertenecen a la Tabla " + tabla);
+                                    if (verificaAtributos(tabla, columnas))
+                                    {
+                                        // MessageBox.Show("Todas los atributos existen");
+                                        Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
+                                        cargaTabla(t, columnas);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Hay atributos que no pertenecen a la Tabla " + tabla);
+                                    }
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                // Se verifica que las columnas correspondan a la Tabla de la base de datos
+                                if (columnas[0].Contains("*") && columnas.Count == 1)
+                                {
+                                    //MessageBox.Show("Se han seleccionado todos los atributos");
+                                    Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
+                                    cargaTabla(t);
+                                }
+                                else
+                                {
+                                    if (verificaAtributos(tabla, columnas))
+                                    {
+                                        // MessageBox.Show("Todas los atributos existen");
+                                        Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
+                                        cargaTabla(t, columnas);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Hay atributos que no pertenecen a la Tabla " + tabla);
+                                    }
                                 }
                             }
-                                
-                                
-
+                            
                         }
                         else
                         {
@@ -991,19 +1022,47 @@ namespace Base_de_Datos
                     {
                         MessageBox.Show("Error: La tabla " + tabla + " no existe en la Base de Datos");
                     }
-                    
                 }
                 else
                 {
                     MessageBox.Show("Falta FROM");
                 }
-
             }
             else
             {
                 MessageBox.Show("Falta SELECT"); 
             }
 
+        }
+        /// <summary>
+        /// Obtiene la condición en la consulta
+        /// </summary>
+        /// <param name="consulta">Consulta SQL</param>
+        /// <returns></returns>
+        public string obtenCondicion(string consulta)
+        {
+            int i, j = -1;
+
+            string condicion = "";
+            bool band = false;
+            for (i = 0; i < consulta.Length; i++)
+            {
+               
+                if (i + 4 < consulta.Length && (string.Concat(consulta[i], consulta[i + 1], consulta[i + 2], consulta[i + 3], consulta[i + 4]) == "WHERE"))
+                {
+                    //MessageBox.Show(string.Concat(consulta[i], consulta[i + 1], consulta[i + 2], consulta[i + 3], consulta[i + 4]));
+                    band = true;
+                    j = i + 5;
+                }
+                   
+                if (band = true && j == i)
+                {
+                    condicion += consulta[i];
+                    j++;
+                }
+                    
+            }
+            return condicion;
         }
         public int posM = 0;
         private void txtConsulta_MouseClick(object sender, MouseEventArgs e)
@@ -1039,6 +1098,112 @@ namespace Base_de_Datos
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// Realiza la consulta en base al WHERE 
+        /// </summary>
+        /// <param name="t">Tabla a consultar</param>
+        /// <param name="condicion">clave a comparar en WHERE</param>
+        public void cargaTabla(Tabla t, string condicion)
+        {
+            List<string> aux = condicion.Split(' ').ToList();
+            List<string> cond = new List<string>();
+            foreach (string a in aux)
+                if (a != string.Empty)
+                    cond.Add(a);
+            cargaTabla(t);
+            //Se eliminan las columnas que no estan  en las consultas
+            int i;
+            bool existe = false;
+   
+            //Se verifica que existe la clave de la condicion en los atributos
+            foreach(Atributo a in t.atributos)
+            {
+                if(cond[0] != string.Empty && a.nombre == cond[0])
+                {
+                    existe = true;
+                    break;
+                }
+            }
+            if(existe)
+            {
+                realizaCondicion(t,cond);
+            }
+            else
+            {
+                limpiaGrid();
+                MessageBox.Show("Error en WHERE");
+            }
+
+        }
+        /// <summary>
+        /// Se aplica la condición dada por WHERE
+        /// </summary>
+        /// <param name="t">Tabla a consultar</param>
+        /// <param name="condicion">Condicion separa en una lista</param>
+        public void realizaCondicion(Tabla t,List<string> condicion)
+        {
+            // verificar tipo de condicion
+            if (condicion.Count < 3)
+            {
+                limpiaGrid();
+                MessageBox.Show("ERROR: Condicional en WHERE incompleta");
+            }
+                
+            else
+            switch (condicion[1])
+            {
+                case "=":
+                    buscaTupla(condicion);
+                    break;
+                case ">":
+                    break;
+                case "<":
+                    break;
+                case ">=":
+                    break;
+                case "<=":
+                    break;
+                case "<>":
+                    break;
+            }
+        }
+
+        public void buscaTupla(List<string> condicion )
+        {
+            int i, j;
+            bool existe = false;
+            for(i = 0; i < grid.Columns.Count; i++ )
+            {
+                if(grid.Columns[i].HeaderText.Contains(condicion[0]))
+                {
+                    for(j = 0; j < grid.Rows.Count-1; j++)
+                    {
+                        if (grid.Rows[j].Cells[i].EditedFormattedValue.ToString() == condicion[2])
+                        {
+                            grid.Rows[j].Visible = true;
+                            existe = true;
+                        }
+                        else
+                            grid.Rows[j].Visible = false;
+                    }
+                }
+            }
+            if(existe == false)
+            {
+                limpiaGrid();
+                MessageBox.Show("El valor buscado " + condicion[2] + " no existe en la tabla actual");
+
+            }
+        }
+        /// <summary>
+        /// Se eliminan las columnas y los renglones del Componente grid
+        /// </summary>
+        public void limpiaGrid()
+        {
+            grid.Rows.Clear();
+            grid.Columns.Clear();
         }
         /// <summary>
         /// Muestra La tabla en el datagrid pero solo con las columnas dadas por la consulta
