@@ -256,13 +256,17 @@ namespace Base_de_Datos.Ventanas
             comboPrimarias.Items.Clear();
             foreach(Tabla t in tablas)
             {
-                foreach(Atributo a in t.atributos)
+                if(t.nombre != tabla.nombre)
                 {
-                    if(a.indice == "Clave Primaria")
+                    foreach (Atributo a in t.atributos)
                     {
-                        comboPrimarias.Items.Add(a.nombre);
+                        if (a.indice == "Clave Primaria")
+                        {
+                            comboPrimarias.Items.Add(a.nombre);
+                        }
                     }
                 }
+                
             }
         }
         public Tabla dameTabla()

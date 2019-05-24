@@ -93,6 +93,8 @@
             this.btnConsulta = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtConsulta = new System.Windows.Forms.RichTextBox();
+            this.izq = new System.Windows.Forms.DataGridView();
+            this.der = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -117,6 +119,8 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.izq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.der)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -593,6 +597,7 @@
             this.groupBox6.TabIndex = 8;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "SQL";
+            this.groupBox6.Visible = false;
             // 
             // toolStrip5
             // 
@@ -751,7 +756,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(188)))), ((int)(((byte)(156)))));
-            this.panel1.Location = new System.Drawing.Point(7, 23);
+            this.panel1.Location = new System.Drawing.Point(7, 13);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(760, 19);
             this.panel1.TabIndex = 3;
@@ -761,19 +766,39 @@
             this.txtConsulta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtConsulta.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtConsulta.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtConsulta.Location = new System.Drawing.Point(7, 59);
+            this.txtConsulta.Location = new System.Drawing.Point(7, 38);
             this.txtConsulta.Name = "txtConsulta";
-            this.txtConsulta.Size = new System.Drawing.Size(760, 33);
+            this.txtConsulta.Size = new System.Drawing.Size(760, 54);
             this.txtConsulta.TabIndex = 0;
             this.txtConsulta.Text = "";
             this.txtConsulta.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtConsulta_MouseClick);
             this.txtConsulta.TextChanged += new System.EventHandler(this.txtConsulta_TextChanged);
+            // 
+            // izq
+            // 
+            this.izq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.izq.Location = new System.Drawing.Point(15, 455);
+            this.izq.Name = "izq";
+            this.izq.Size = new System.Drawing.Size(165, 113);
+            this.izq.TabIndex = 14;
+            this.izq.Visible = false;
+            // 
+            // der
+            // 
+            this.der.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.der.Location = new System.Drawing.Point(15, 574);
+            this.der.Name = "der";
+            this.der.Size = new System.Drawing.Size(165, 73);
+            this.der.TabIndex = 15;
+            this.der.Visible = false;
             // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 683);
+            this.Controls.Add(this.der);
+            this.Controls.Add(this.izq);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
@@ -830,6 +855,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.izq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.der)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -897,6 +924,8 @@
         private System.Windows.Forms.RichTextBox txtConsulta;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnConsulta;
+        private System.Windows.Forms.DataGridView izq;
+        private System.Windows.Forms.DataGridView der;
     }
 }
 

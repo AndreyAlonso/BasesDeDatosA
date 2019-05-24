@@ -44,7 +44,7 @@ namespace Base_de_Datos
             eliminaTupla.Enabled = false;
             integridadReferencial.Enabled = false;
             aplicaMod.Enabled = false;
-           
+
         }
         #region PROPIEDADES VENTANA
         private void label1_MouseMove(object sender, MouseEventArgs e)
@@ -63,27 +63,27 @@ namespace Base_de_Datos
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            switch(e.ClickedItem.AccessibleName)
+            switch (e.ClickedItem.AccessibleName)
             {
                 case "nueva":
                     creaBD();
-                break;
+                    break;
                 case "abrir":
                     abreBD();
-                break;
+                    break;
                 case "modificaBD":
                     renombraBD();
-                break;
+                    break;
                 case "eliminaBD":
                     eliminarBD();
-                break;
+                    break;
             }
         }
 
 
         private void mueveVentana(object sender, MouseEventArgs e)
         {
-            if(e.Button != MouseButtons.Left)
+            if (e.Button != MouseButtons.Left)
             {
                 posx = e.X;
                 posy = e.Y;
@@ -122,7 +122,7 @@ namespace Base_de_Datos
                     tablas = new List<Tabla>();
                 }
             }
-            else 
+            else
             {
                 eliminaBD.Enabled = false;
                 modificaBD.Enabled = false;
@@ -131,7 +131,7 @@ namespace Base_de_Datos
         public void abreBD()
         {
             nBD.Text = "BD :";
-            
+
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 listBox1.Items.Clear();
@@ -140,14 +140,14 @@ namespace Base_de_Datos
                 directorioBD = folderBrowserDialog1.SelectedPath;
                 modificaBD.Enabled = true;
                 eliminaBD.Enabled = true;
-                
+
             }
             else
             {
                 modificaBD.Enabled = false;
                 eliminaBD.Enabled = false;
             }
-            
+
         }
         public void renombraBD()
         {
@@ -155,7 +155,7 @@ namespace Base_de_Datos
             string n;
             string dirActual;
             Directorio directorio = new Directorio(true);
-            if(directorio.ShowDialog() == DialogResult.OK)
+            if (directorio.ShowDialog() == DialogResult.OK)
             {
                 nuevo = directorio.nombreBD;
                 n = directorioBD.Split('\\').Last().ToString();
@@ -169,11 +169,11 @@ namespace Base_de_Datos
         public void eliminarBD()
         {
             Directorio mensaje = new Directorio(1);
-            if(mensaje.ShowDialog() == DialogResult.OK)
+            if (mensaje.ShowDialog() == DialogResult.OK)
             {
-                Directory.Delete(directorioBD,true);
+                Directory.Delete(directorioBD, true);
                 nuevoProyecto();
-            } 
+            }
         }
         #endregion
         #region TABLAS
@@ -213,20 +213,20 @@ namespace Base_de_Datos
         }
         private void Principal_Resize(object sender, EventArgs e)
         {
-            pictureBox1.Width = ClientSize.Width+10;
-            pictureBox3.Location = new Point(ClientSize.Width-50, pictureBox3.Location.Y);
+            pictureBox1.Width = ClientSize.Width + 10;
+            pictureBox3.Location = new Point(ClientSize.Width - 50, pictureBox3.Location.Y);
             pictureBox4.Location = new Point(ClientSize.Width - pictureBox4.Width, pictureBox4.Location.Y);
             pictureBox4.Height = ClientSize.Height;
             pictureBox6.Height = ClientSize.Height;
             pictureBox5.Location = new Point(0, ClientSize.Height - pictureBox5.Height);
             pictureBox5.Width = ClientSize.Width;
             maximiza.Location = new Point(pictureBox3.Location.X - 47, maximiza.Location.Y);
-            
+
         }
 
         private void maximizar(object sender, EventArgs e)
         {
-            if(max == false)
+            if (max == false)
             {
                 WindowState = FormWindowState.Maximized;
                 maximiza.Image = System.Drawing.Image.FromFile("maximizar2.png");
@@ -239,7 +239,7 @@ namespace Base_de_Datos
                 StartPosition = FormStartPosition.CenterScreen;
                 max = false;
             }
-            
+
         }
 
         public void habilitaTablas()
@@ -251,17 +251,17 @@ namespace Base_de_Datos
         #endregion
         private void opcionTabla(object sender, ToolStripItemClickedEventArgs e)
         {
-            switch(e.ClickedItem.AccessibleName)
+            switch (e.ClickedItem.AccessibleName)
             {
                 case "creaTabla":
                     creaTablas();
-                break;
+                    break;
                 case "modificaTabla":
                     modificaTablas();
-                break;
+                    break;
                 case "eliminaTabla":
                     eliminaTablas();
-                break;
+                    break;
             }
         }
 
@@ -269,7 +269,7 @@ namespace Base_de_Datos
         {
             Directorio d = new Directorio(false);
             Tabla tabla;
-            if(d.ShowDialog() == DialogResult.OK)
+            if (d.ShowDialog() == DialogResult.OK)
             {
                 tabla = new Tabla(d.nombreBD);
                 tabla.agregaTabla(directorioBD);
@@ -284,16 +284,16 @@ namespace Base_de_Datos
             Directorio d = new Directorio(false);
             if (d.ShowDialog() == DialogResult.OK)
             {
-                if(listBox1.Text != "" && d.nombreBD != null)
+                if (listBox1.Text != "" && d.nombreBD != null)
                 {
                     t = new Tabla(listBox1.Text);
                     t.modificaNombre(directorioBD, d.nombreBD);
                     cargaTablas(directorioBD);
                 }
-               
+
             }
 
-            
+
         }
         public void eliminaTablas()
         {
@@ -314,7 +314,7 @@ namespace Base_de_Datos
             aux = abreTabla(aux);
             cargaTabla(aux);
             integridadReferencial.Items.Clear();
-            if(aux != null && aux.tuplas.Count > 0)
+            if (aux != null && aux.tuplas.Count > 0)
             {
                 modificaAtributo.Enabled = false;
                 creaAtributo.Enabled = false;
@@ -337,17 +337,17 @@ namespace Base_de_Datos
 
         private void toolStrip3_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            switch(e.ClickedItem.AccessibleName)
+            switch (e.ClickedItem.AccessibleName)
             {
                 case "creaAtributo":
                     creaAtributos();
-                break;
+                    break;
                 case "modificaAtributo":
                     modificaAtributos();
-                break;
+                    break;
                 case "eliminaAtributo":
                     eliminarAtributos();
-                break;
+                    break;
             }
             Tabla aux = buscaTabla();
             aux = abreTabla(aux);
@@ -360,7 +360,7 @@ namespace Base_de_Datos
             cargaTabla(aux);
             aux = abreTabla(aux);
             cargaBD();
-            VentanaAtributo ventanaA = new VentanaAtributo(directorioBD, aux, tablas,"modifica");
+            VentanaAtributo ventanaA = new VentanaAtributo(directorioBD, aux, tablas, "modifica");
             if (listBox1.Text != "")
             {
                 if (ventanaA.ShowDialog() == DialogResult.OK)
@@ -389,7 +389,7 @@ namespace Base_de_Datos
         /// <returns></returns>
         public Tabla buscaTabla()
         {
-            foreach(Tabla t in tablas)
+            foreach (Tabla t in tablas)
             {
                 if (t.nombre == listBox1.Text)
                     return t;
@@ -403,25 +403,25 @@ namespace Base_de_Datos
             aux = abreTabla(aux);
             cargaBD();
             VentanaAtributo ventanaA = new VentanaAtributo(directorioBD, aux, tablas);
-            if(listBox1.Text != "")
+            if (listBox1.Text != "")
             {
                 if (ventanaA.ShowDialog() == DialogResult.OK)
                 {
-                    guardaTabla(ventanaA.dameTabla());  
+                    guardaTabla(ventanaA.dameTabla());
                 }
             }
             else
             {
                 MessageBox.Show("Seleccione una Tabla");
             }
-           
+
         }
         public void eliminarAtributos()
         {
             Tabla aux = buscaTabla();
             aux = abreTabla(aux);
             EliminarAtributo elimina = new EliminarAtributo(aux);
-            if(elimina.ShowDialog() == DialogResult.OK)
+            if (elimina.ShowDialog() == DialogResult.OK)
             {
                 aux = elimina.tabla;
                 guardaTabla(aux);
@@ -436,16 +436,16 @@ namespace Base_de_Datos
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream;
-            using ( stream = new FileStream(directorioBD + "\\" + t.nombre + t.extension, FileMode.Create, FileAccess.Write, FileShare.None))
+            using (stream = new FileStream(directorioBD + "\\" + t.nombre + t.extension, FileMode.Create, FileAccess.Write, FileShare.None))
             {
-                
+
                 formatter.Serialize(stream, (Tabla)t);
                 stream.Close();
             }
-                
-           
-            
-            
+
+
+
+
         }
         public Tabla abreTabla(Tabla t)
         {
@@ -458,21 +458,21 @@ namespace Base_de_Datos
                     t = (Tabla)formatter.Deserialize(stream);
                     stream.Close();
                 }
-                  
+
             }
             catch
             {
-                
+
             }
             return t;
-            
+
         }
         /// <summary>
         /// Carga en lista Tabla toda la base de datos 
         /// </summary>
         public void cargaBD()
         {
-            List<Tabla> aux = new List<Tabla>() ;
+            List<Tabla> aux = new List<Tabla>();
             foreach (Tabla t in tablas)
                 aux.Add(abreTabla(t));
 
@@ -490,7 +490,7 @@ namespace Base_de_Datos
                 grid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(204, 204, 255);//153,204,244);
             else
                 grid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-            
+
         }
 
 
@@ -503,29 +503,29 @@ namespace Base_de_Datos
         {
             Tabla aux = buscaTabla();
             aux = abreTabla(aux);
-            for(int i = 0; i < registro.Columns.Count; i++)
+            for (int i = 0; i < registro.Columns.Count; i++)
             {
-                if(registro.Columns[i].Name == aux.atributos[i].nombre)// valida si la columna pertenece al atributo
+                if (registro.Columns[i].Name == aux.atributos[i].nombre)// valida si la columna pertenece al atributo
                 {
-                    if(aux.atributos[i].indice == "Clave Primaria")
+                    if (aux.atributos[i].indice == "Clave Primaria")
                     {
-                        for(int j = 0; j < grid.Rows.Count-1; j++)
+                        for (int j = 0; j < grid.Rows.Count - 1; j++)
                         {
-                            if(registro.Rows[0].Cells[i].EditedFormattedValue.ToString() == grid.Rows[j].Cells[i].Value.ToString())
+                            if (registro.Rows[0].Cells[i].EditedFormattedValue.ToString() == grid.Rows[j].Cells[i].Value.ToString())
                             {
                                 if (j != row)
                                 {
                                     MessageBox.Show("La clave primaria ya existe");
                                     return false;
                                 }
-                               // MessageBox.Show("La clave primaria ya existe");
-                               // return false;
+                                // MessageBox.Show("La clave primaria ya existe");
+                                // return false;
                                 // else
                                 //   registro.Rows[0].Cells[j].ReadOnly = true;
 
                             }
                         }
-                      
+
                     }
                     if (aux.atributos[i].tipo == 'E' || aux.atributos[i].tipo == 'F')
                     {
@@ -536,7 +536,7 @@ namespace Base_de_Datos
                             return false;
                         }
                     }
-                    else if(aux.atributos[i].tipo == 'C' && registro.Rows[0].Cells[i].EditedFormattedValue.ToString() == string.Empty)
+                    else if (aux.atributos[i].tipo == 'C' && registro.Rows[0].Cells[i].EditedFormattedValue.ToString() == string.Empty)
                     {
                         MessageBox.Show(aux.atributos[i].nombre + " no debe ser una cadena vacia");
                         return false;
@@ -550,10 +550,10 @@ namespace Base_de_Datos
         public bool tuplaVacia()
         {
             int i;
-            
-            for(i = 0; i < registro.Columns.Count; i++)
+
+            for (i = 0; i < registro.Columns.Count; i++)
             {
-                if(registro.Rows[0].Cells[i].EditedFormattedValue == null)
+                if (registro.Rows[0].Cells[i].EditedFormattedValue == null)
                 {
                     return true;
                 }
@@ -564,23 +564,23 @@ namespace Base_de_Datos
 
         private void menuTupla(object sender, ToolStripItemClickedEventArgs e)
         {
-            switch(e.ClickedItem.AccessibleName)
+            switch (e.ClickedItem.AccessibleName)
             {
                 case "creaTupla":
                     insertaTupla();
-                break;
+                    break;
                 case "modificaTupla":
                     modificarTupla();
-                break;
+                    break;
                 case "eliminaTupla":
                     eliminarTupla();
-                break;
+                    break;
                 case "aplicaMod":
                     aplicarModificacion();
-                break;
-                
-                   
-                
+                    break;
+
+
+
             }
             guardaTupla();
         }
@@ -598,7 +598,7 @@ namespace Base_de_Datos
                 modificaTupla.Enabled = true;
                 registro.Rows.Clear();
             }
-            
+
         }
         /// <summary>
         /// Metodo para realizar modificaciones en una tupla 
@@ -606,8 +606,8 @@ namespace Base_de_Datos
         public void modificarTupla()
         {
             Tabla t = buscaTabla();
-            t = abreTabla(t);   
-            if(row < t.tuplas.Count)
+            t = abreTabla(t);
+            if (row < t.tuplas.Count)
             {
                 string reg = t.tuplas[row];
                 registro.Rows.Add(reg.Split(','));
@@ -615,13 +615,13 @@ namespace Base_de_Datos
                 creaTupla.Enabled = false;
                 eliminaTupla.Enabled = false;
                 modificaTupla.Enabled = false;
-              //  ModificaTupla mt = new ModificaTupla(registro, reg);
-              //  if (mt.ShowDialog() == DialogResult.OK)
-              //  {
+                //  ModificaTupla mt = new ModificaTupla(registro, reg);
+                //  if (mt.ShowDialog() == DialogResult.OK)
+                //  {
 
-              //  }
+                //  }
             }
-            
+
 
         }
         /// <summary>
@@ -631,15 +631,15 @@ namespace Base_de_Datos
         public void insertaTupla()
         {
             //1) Validar que todos los campos esten correctos
-            if(tuplaVacia())
+            if (tuplaVacia())
                 MessageBox.Show("Complete todos los campos de la tupla");
             else
-            { 
+            {
                 if (validaTupla() == true)
                 {
-                   dt = new DataTable();
-                   for (int i = 0; i < registro.Columns.Count; i++)
-                        dt.Columns.Add(registro.Columns[i].HeaderText,typeof(string));
+                    dt = new DataTable();
+                    for (int i = 0; i < registro.Columns.Count; i++)
+                        dt.Columns.Add(registro.Columns[i].HeaderText, typeof(string));
                     DataRow row = dt.NewRow();
                     for (int i = 0; i < registro.Columns.Count; i++)
                         row[i] = registro.Rows[0].Cells[i].EditedFormattedValue;
@@ -647,20 +647,20 @@ namespace Base_de_Datos
                     registro.Rows.Clear();
                 }
             }
-            
-   
+
+
         }
         public void eliminarTupla()
         {
             //buscar si la alguien esta usando su PK
-          //  for (int i = 0; i < tablas.Count; i++)
+            //  for (int i = 0; i < tablas.Count; i++)
             //    tablas[i] = abreTabla(tablas[i]);
 
-          
+
             try
             {
                 grid.Rows.Remove(grid.CurrentRow);
-                if(grid.Rows.Count > 0)
+                if (grid.Rows.Count > 0)
                 {
                     modificaAtributo.Enabled = false;
                     creaAtributo.Enabled = false;
@@ -675,7 +675,7 @@ namespace Base_de_Datos
             {
                 MessageBox.Show("La tupla seleccionada no se puede eliminar");
             }
-            
+
         }
         int celda;
         /// <summary>
@@ -693,13 +693,13 @@ namespace Base_de_Datos
             cargaBD();
             foreach (Atributo a in t.atributos)
             {
-                if(a.nombre == registro.Columns[e.ColumnIndex].HeaderText) //verificar si es el atributo de la columna actual
+                if (a.nombre == registro.Columns[e.ColumnIndex].HeaderText) //verificar si es el atributo de la columna actual
                 {
-                    if(a.foranea != "NULL") //Si existe clave foranea
+                    if (a.foranea != "NULL") //Si existe clave foranea
                     {
                         //buscar la tabla que tenga como atributo.nombre la a.foranea
                         referencial = buscaEnRelacion(a);
-                        if(referencial != null)
+                        if (referencial != null)
                         {
                             integridadReferencial.Enabled = true;
                             cargaPrimarias(referencial);
@@ -713,7 +713,7 @@ namespace Base_de_Datos
                             registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
                         }
                     }
-                    if(a.indice == "Clave Primaria" && aplicaMod.Enabled == true)
+                    if (a.indice == "Clave Primaria" && aplicaMod.Enabled == true)
                     {
                         registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = true;
                         break;
@@ -725,8 +725,8 @@ namespace Base_de_Datos
                     registro.Rows[0].Cells[e.ColumnIndex].ReadOnly = false;
                 }
             }
-           
-            
+
+
         }
         /// <summary>
         /// Busca una tabla en base a un atributo
@@ -738,17 +738,17 @@ namespace Base_de_Datos
         /// <returns></returns>
         public Tabla buscaEnRelacion(Atributo relacion)
         {
-            if(relacion != null)
-            foreach (Tabla aux in tablas)
-            {
-                foreach (Atributo aux2 in aux.atributos)
+            if (relacion != null)
+                foreach (Tabla aux in tablas)
                 {
-                    if (relacion.foranea == aux2.nombre && aux2.indice == "Clave Primaria")
+                    foreach (Atributo aux2 in aux.atributos)
                     {
-                        return aux;
+                        if (relacion.foranea == aux2.nombre && aux2.indice == "Clave Primaria")
+                        {
+                            return aux;
+                        }
                     }
                 }
-            }
             return null;
         }
         /// <summary>
@@ -758,16 +758,16 @@ namespace Base_de_Datos
         public void cargaPrimarias(Tabla t)
         {
             integridadReferencial.Items.Clear();
-            foreach(string aux in t.tuplas)
+            foreach (string aux in t.tuplas)
             {
                 integridadReferencial.Items.Add(aux);
             }
         }
         public Atributo encuentraRelacion(Atributo iR)
         {
-            foreach(Tabla aux in tablas)
+            foreach (Tabla aux in tablas)
             {
-                foreach(Atributo aux2 in aux.atributos)
+                foreach (Atributo aux2 in aux.atributos)
                 {
                     if (iR.foranea == aux2.nombre)
                         return aux2;
@@ -781,10 +781,10 @@ namespace Base_de_Datos
             Tabla actual = abreTabla(buscaTabla());
             actual.tuplas = new List<string>();
             string row;
-            for (int i = 0; i < grid.Rows.Count-1; i++)
+            for (int i = 0; i < grid.Rows.Count - 1; i++)
             {
                 row = "";
-                for(int j = 0; j < grid.Columns.Count; j++)
+                for (int j = 0; j < grid.Columns.Count; j++)
                 {
                     row += grid.Rows[i].Cells[j].EditedFormattedValue + ",";
                 }
@@ -792,8 +792,8 @@ namespace Base_de_Datos
                 actual.tuplas.Add(row);
             }
             guardaTabla(actual);
-             
-            
+
+
         }
 
         private void integridadReferencial_SelectedIndexChanged(object sender, EventArgs e)
@@ -814,7 +814,7 @@ namespace Base_de_Datos
         private void btnSQL_Click(object sender, EventArgs e)
         {
             FormConsulta formconsulta = new FormConsulta();
-            if(formconsulta.ShowDialog() == DialogResult.OK)
+            if (formconsulta.ShowDialog() == DialogResult.OK)
             {
                 //Aquí se genera la consulta 
             }
@@ -862,6 +862,8 @@ namespace Base_de_Datos
                 MessageBox.Show("Se debe escribir una consulta SQL");
             else
                 verificaConsulta();
+
+
         }
         /// <summary>
         /// Dada una consulta SQL, se obtiene las columnas definidas en la consulta
@@ -873,11 +875,11 @@ namespace Base_de_Datos
             int i;
             string cmp;
             string col = "";
-            for(i =  0; i < consulta.Length; i++)
+            for (i = 0; i < consulta.Length; i++)
             {
                 cmp = "";
                 if (i + 3 < consulta.Length)
-                    cmp = string.Concat(consulta[i], consulta[i + 1], consulta[i + 2] ,consulta[i + 3]);         
+                    cmp = string.Concat(consulta[i], consulta[i + 1], consulta[i + 2], consulta[i + 3]);
                 if (cmp == "FROM")
                 {
                     posFROM = i + 3 + 1;
@@ -885,19 +887,19 @@ namespace Base_de_Datos
                 }
                 else
                     col += consulta[i];
-        
+
             }
             return "";
         }
         public List<string> limpiaColumnas(List<string> columnas)
         {
             List<string> lista = new List<string>();
-            foreach(string col in columnas)
+            foreach (string col in columnas)
             {
                 lista.Add(col.Replace(" ", ""));
             }
             return lista;
-            
+
         }
         /// <summary>
         /// Se obtiene el nombre de la tabla en la consulta SQL
@@ -907,14 +909,14 @@ namespace Base_de_Datos
         public string obtenTabla(string consulta)
         {
             int i;
-            string tabla ="";
+            string tabla = "";
             string cmp;
-            for(i = posFROM; i < consulta.Length; i++)
+            for (i = posFROM; i < consulta.Length; i++)
             {
                 cmp = "";
                 if (i + 4 < consulta.Length)
                     cmp = string.Concat(consulta[i], consulta[i + 1], consulta[i + 2], consulta[i + 3], consulta[i + 4]);
-                if (cmp == "WHERE")
+                if (cmp == "WHERE" || cmp == "INNER")
                 {
                     posWHERE = i + 4;
                     return tabla;
@@ -922,7 +924,7 @@ namespace Base_de_Datos
                 else
                     tabla += consulta[i];
             }
-            return tabla;   
+            return tabla;
         }
         int posFROM = 0;
         int posWHERE = 0;
@@ -930,7 +932,7 @@ namespace Base_de_Datos
         {
 
             //1) Verificar que cuenta con SELECT, FROM, WHERE
-      
+
             string s = "SELECT";
             string f = "FROM";
             string w = "WHERE";
@@ -938,30 +940,30 @@ namespace Base_de_Datos
 
             string compara = "";
 
-            foreach(char c in txtConsulta.Text)
+            foreach (char c in txtConsulta.Text)
             {
                 compara += c;
                 if (compara.Length == s.Length)
                     break;
             }
-            if(compara == s)
+            if (compara == s)
             {
                 compara = txtConsulta.Text.Substring(compara.Length);
-                if(compara.Contains("FROM"))
+                if (compara.Contains("FROM"))
                 {
                     string col = obtenColumnas(compara);
-                    
+
                     columnas = col.Split(',').ToList();
                     columnas = limpiaColumnas(columnas);
                     string tabla = obtenTabla(compara);
                     tabla = tabla.Replace(" ", "");
                     if (listBox1.Items.Contains(tabla))
                     {
-                        if(col != string.Empty && col != " ")
+                        if (col != string.Empty && col != " ")
                         {
                             cargaBD();
                             //1) Contiene WHERE
-                            if(compara.Contains("WHERE"))
+                            if (compara.Contains("WHERE"))
                             {
                                 string condicion = obtenCondicion(compara);
                                 // Se verifica que las columnas correspondan a la Tabla de la base de datos
@@ -969,7 +971,7 @@ namespace Base_de_Datos
                                 {
                                     //MessageBox.Show("Se han seleccionado todos los atributos");
                                     Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
-                                    cargaTabla(t,condicion);
+                                    cargaTabla(t, condicion);
                                 }
                                 else
                                 {
@@ -984,9 +986,30 @@ namespace Base_de_Datos
                                         MessageBox.Show("Hay atributos que no pertenecen a la Tabla " + tabla);
                                     }
                                 }
+                            }
+                            else if (compara.Contains("INNER"))
+                            {
+                                //MessageBox.Show("INNER JOIN");
+                                List<string> tablasC = obtenTablasC(columnas, compara);
+                                string cond = obtenON(compara);
+                                List<string> temp = cond.Split(' ').ToList();
+                                List<string> lista = new List<string>();
+                                foreach (string str in temp)
+                                    if (str != string.Empty)
+                                        lista.Add(str);
+                                if (lista[0].Split('.').Last() == lista[2].Split('.').Last())
+                                {
 
+                                    creaConsulta(lista, tablasC, columnas);
 
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Los atributos para realizar INNER JOIN deben coincidir");
 
+                                }
+
+                                //validaColumnas(columnas);
                             }
                             else
                             {
@@ -1011,7 +1034,7 @@ namespace Base_de_Datos
                                     }
                                 }
                             }
-                            
+
                         }
                         else
                         {
@@ -1030,10 +1053,181 @@ namespace Base_de_Datos
             }
             else
             {
-                MessageBox.Show("Falta SELECT"); 
+                MessageBox.Show("Falta SELECT");
             }
 
         }
+
+        public void creaConsulta(List<string> lista, List<string> tablasC, List<string> columnas)
+        {
+            Tabla T = new Tabla("Consulta");
+            Tabla izquierdo = tablas.Find(x => x.nombre.Equals(columnas[0].Split('.').First()));
+            Tabla derecho = tablas.Find(x => x.nombre.Equals(columnas[1].Split('.').First()));
+            cargaIzquierdo(izquierdo);
+            cargaDerecho(derecho);
+            fusion(columnas, lista);
+
+
+        }
+        public void fusion(List<string> columnas, List<string> lista)
+        {
+            int i, j, k, l;
+            limpiaGrid();
+            //1) se agregan las columnas a grid
+            foreach (string s in columnas)
+            {
+                grid.Columns.Add(s.Split('.').Last(), s.Split('.').Last());
+            }
+            //2) Se recorren las 2 tablas
+            for (i = 0; i < izq.Rows.Count-1; i++)
+            {
+                for(j = 0; j < izq.Columns.Count; j++)
+                {
+                    for(k = 0; k < der.Rows.Count-1; k++)
+                    {
+                        for(l = 0; l < der.Columns.Count; l++)
+                        {
+                            if(izq.Columns[j].HeaderText == der.Columns[l].HeaderText)
+                            {
+
+                            }
+                        }
+                    }
+
+                }
+            }
+
+
+        }
+        /// <summary>
+        /// Carga la Tabla Izquierda para realizar INNER JOIN en un DatagridView oculto
+        /// </summary>
+        /// <param name="t">Tabla Izquierda</param>
+        public void cargaIzquierdo(Tabla t)
+        {
+            izq.Rows.Clear();
+            izq.Columns.Clear();
+            if (t != null)
+                foreach (Atributo atributo in t.atributos)
+                {
+                    if (atributo != null)
+                    {
+                        izq.Columns.Add(atributo.nombre, atributo.nombre);
+                    }
+                }
+            if (t != null)
+                foreach (string tupla in t.tuplas)
+                    izq.Rows.Add(tupla.Split(','));
+        }
+        /// <summary>
+        /// Carga la Tabla Derecha para realizar INNER JOIN en un DatagridView oculto
+        /// </summary>
+        /// <param name="t">Tabla Izquierda</param>
+        public void cargaDerecho(Tabla t)
+        {
+            der.Rows.Clear();
+            der.Columns.Clear();
+            if (t != null)
+                foreach (Atributo atributo in t.atributos)
+                {
+                    if (atributo != null)
+                    {
+                        der.Columns.Add(atributo.nombre, atributo.nombre);
+                    }
+                }
+            if (t != null)
+                foreach (string tupla in t.tuplas)
+                    der.Rows.Add(tupla.Split(','));
+        }
+
+        /// <summary>
+        /// Identifica la condicion establecida en ON de la consulta SQL
+        /// </summary>
+        /// <param name="consulta"></param>
+        /// <returns></returns>
+        public string obtenON(string consulta)
+        {
+            int inicio, fin;
+            inicio = consulta.LastIndexOf("ON");
+            string sql = consulta.Substring(inicio+2, consulta.Length- inicio - 2);
+            
+            return sql;
+        }
+
+        public List<string> obtenTablasC(List<string> columnas,string compara)
+        {
+            int TAM = columnas.Count;
+            int i = 0;
+            string nombre;
+            List<string> tablasC = new List<string>();
+            foreach(Tabla t in tablas)
+            {
+                foreach(string s in columnas)
+                {
+                    nombre = s.Split('.').First();
+                    if(t.nombre.Contains(nombre))
+                    {
+                        if(!tablasC.Contains(nombre))
+                        {
+                            tablasC.Add(nombre);
+                        }
+                    }
+                }
+            }
+            //Verificar si las tablas seleccionadas por FROM e INNER JOIN son las mismas que en tablasC
+            string izquierdo, derecho;// = compara.Split('I','N','N', 'E', 'R' ).First();
+            int inicio = compara.IndexOf("FROM");
+            int final = compara.IndexOf("INNER");
+            izquierdo=  compara.Substring(inicio+4,final-inicio-4);
+            inicio = compara.IndexOf("JOIN");
+            final = compara.IndexOf("ON");
+            derecho = compara.Substring(inicio + 4, final - inicio-4);
+            //MessageBox.Show(izquierdo);
+            izquierdo = izquierdo.Replace(" ", "");
+            derecho = derecho.Replace(" ", "");
+            if (tablasC.Contains(izquierdo) && tablasC.Contains(derecho))
+            {
+                //Se procede a verificar si los atributos si pertenecen a las respectivas tablas
+                validaColumnas(columnas);
+            }
+            else
+            {
+                MessageBox.Show("Error, Favor de verificar tablas"); 
+            }
+               
+           
+
+            return tablasC;
+        }
+        public int validaColumnas(List<string> columnas)
+        {
+            bool bien = false;
+            foreach(Tabla t in tablas)
+            {
+               foreach(string s in columnas)
+                {
+                    if (t.nombre.Equals(s.Split('.').First()))
+                    {
+                        foreach(Atributo a in t.atributos)
+                        {
+                            if(a.nombre.Equals(s.Split('.').Last()))
+                            {
+                                bien = true;
+                            }
+                        }
+                        if (bien == false)
+                        {
+                            MessageBox.Show("Hay atributos que no pertenecen a la Tabla seleccionada ");
+                            return -1;
+                        }
+                            
+                    }
+                }
+
+            }
+            return 1;
+        }
+
         /// <summary>
         /// Obtiene la condición en la consulta
         /// </summary>
@@ -1345,7 +1539,13 @@ namespace Base_de_Datos
         {
             int i, j;
             bool existe = false;
-            int clave = Convert.ToInt32(condicion[2]);
+            int clave;
+            if(condicion.Count == 3)
+                clave = Convert.ToInt32(condicion[2]);
+            else
+            {
+                return 0;
+            }
             for (i = 0; i < grid.Columns.Count; i++)
             {
                 if (grid.Columns[i].HeaderText.Contains(condicion[0]))
