@@ -926,8 +926,21 @@ namespace Base_de_Datos
             }
             return tabla;
         }
+
+
+        public Atributo buscaClavePrimaria(Tabla t)
+        {
+            foreach(Atributo a in t.atributos)
+            {
+                if (a.indice == "Clave Primaria")
+                    return a;
+            }
+            return null;
+        }
+
         int posFROM = 0;
         int posWHERE = 0;
+
         public void verificaConsulta()
         {
 
@@ -997,9 +1010,19 @@ namespace Base_de_Datos
                                 foreach (string str in temp)
                                     if (str != string.Empty)
                                         lista.Add(str);
-                                if (lista[0].Split('.').Last() == lista[2].Split('.').Last())
+                                List<string> atr = new List<string>();
+                                foreach (string str in columnas)
+                                    atr.Add(str.Split('.').Last());
+                                validaConsulta(lista, atr);
+                                /*
+                                Atributo tmp = new Atributo();
+                                tmp.nombre = lista[2].Split('.').Last();
+                                Tabla aux = buscaEnRelacion(tmp);*/
+                                //Atributo b = buscaClavePrimaria(aux);
+                               /*
+                                if (lista[0].Split('.').Last() == b.nombre)
                                 {
-
+                                    
                                     creaConsulta(lista, tablasC, columnas);
 
                                 }
@@ -1007,7 +1030,7 @@ namespace Base_de_Datos
                                 {
                                     MessageBox.Show("Los atributos para realizar INNER JOIN deben coincidir");
 
-                                }
+                                }*/
 
                                 //validaColumnas(columnas);
                             }
@@ -1024,7 +1047,7 @@ namespace Base_de_Datos
                                 {
                                     if (verificaAtributos(tabla, columnas))
                                     {
-                                        // MessageBox.Show("Todas los atributos existen");
+                                         MessageBox.Show("Todas los atributos existen");
                                         Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
                                         cargaTabla(t, columnas);
                                     }
@@ -1065,14 +1088,16 @@ namespace Base_de_Datos
             Tabla derecho = tablas.Find(x => x.nombre.Equals(columnas[1].Split('.').First()));
             cargaIzquierdo(izquierdo);
             cargaDerecho(derecho);
-            fusion(columnas, lista);
+  //          fusion(columnas, lista);
 
 
         }
-        public void fusion(List<string> columnas, List<string> lista)
+        public void fusion(List<string> columnas, List<string> lista, int posI, int posD)
         {
             int i, j, k, l;
+            string renglon = "";
             limpiaGrid();
+            List<string> pila = new List<string>();
             //1) se agregan las columnas a grid
             foreach (string s in columnas)
             {
@@ -1081,18 +1106,33 @@ namespace Base_de_Datos
             //2) Se recorren las 2 tablas
             for (i = 0; i < izq.Rows.Count-1; i++)
             {
-                for(j = 0; j < izq.Columns.Count; j++)
-                {
+
                     for(k = 0; k < der.Rows.Count-1; k++)
                     {
-                        for(l = 0; l < der.Columns.Count; l++)
-                        {
-                            if(izq.Columns[j].HeaderText == der.Columns[l].HeaderText)
-                            {
 
-                            }
+                            renglon = "";
+                            if(izq.Rows[i].Cells[posI].EditedFormattedValue.ToString() == der.Rows[k].Cells[posD].EditedFormattedValue.ToString())
+                            {
+                                int cont;
+                                for(cont = 0; cont < izq.Columns.Count; cont++)
+                                {
+                                    renglon += izq.Rows[i].Cells[cont].EditedFormattedValue + ",";
+                                }
+                                for (cont = 0; cont < der.Columns.Count; cont++)
+                                {
+                                    renglon += der.Rows[k].Cells[cont].EditedFormattedValue + ",";
+                                }
+                                renglon = renglon.Remove(renglon.Length-1);
+                                if (pila.Find(x => x.Equals(renglon)) == null)
+                                {
+                                    grid.Rows.Add(renglon.Split(','));
+                                    pila.Add(renglon);
+                                }
+                                 
+                                    
+                            
                         }
-                    }
+                    
 
                 }
             }
@@ -1150,10 +1190,136 @@ namespace Base_de_Datos
             int inicio, fin;
             inicio = consulta.LastIndexOf("ON");
             string sql = consulta.Substring(inicio+2, consulta.Length- inicio - 2);
-            
+
             return sql;
         }
+        /// <summary>
+        /// Se verifica en la condición de INNER JOIN si cumplen ambas claves donde:
+        /// 1. Debe estar una clave primaria
+        /// 2. La clave foranea debe relacionarse con la primaria
+        /// </summary>
+        /// <param name="consulta">Consulta SQL con INNER JOIN </param>
+        public void validaConsulta(List<string> l, List<string> tablasC)
+        {
+            string a, b;
+            string nombreA, nombreB;
+            a = l[0];
+            b = l[2];
+            string PK,FK;
+            string nForanea;
+            PK = FK =  nForanea = "";
+            int posI, posD;
 
+            //1 verificar con ambas claves cual es clave primaria
+            nombreA =  a.Split('.').First();
+            nombreB =  b.Split('.').First();
+            Tabla auxA = tablas.Find(x => x.nombre.Equals(nombreA));
+            Tabla auxB = tablas.Find(x => x.nombre.Equals(nombreB));
+            cargaIzquierdo(auxA);
+            cargaDerecho(auxB);
+            foreach (Atributo atr in auxA.atributos)
+            {
+                if(atr.nombre == a.Split('.').Last() && atr.indice == "Clave Primaria")
+                {
+                    PK = "A";
+                    break;
+                }
+                else if(atr.foranea == b.Split('.').Last())// A.foranea == B.primaria
+                {
+                    FK = "A";
+                    nForanea = atr.nombre;
+                    break;
+                }
+            }
+            foreach(Atributo atr in auxB.atributos)
+            {
+                if (atr.nombre == b.Split('.').Last() && atr.indice == "Clave Primaria")
+                {
+                    PK = "B";
+                    break;
+                }
+                else if (atr.foranea == a.Split('.').Last())// A.foranea == B.primaria
+                {
+                    FK = "B";
+                    nForanea = atr.nombre;
+                    break;
+                }
+            }
+            posI = encuentraPosIzquierda(a.Split('.').Last());
+            posD = encuentraPosDerecha(b.Split('.').Last());
+            int i;
+            List<string> col = new List<string>();
+            for (i = 0; i < izq.Columns.Count; i++)
+                col.Add(izq.Columns[i].HeaderText);
+            for (i = 0; i < der.Columns.Count; i++)
+                col.Add(der.Columns[i].HeaderText);
+            if(posI != -1 && posD != -1)
+            {
+                fusion(col, null, posI, posD);
+                cargaColumnas(tablasC);
+            }
+            else
+            {
+                limpiaGrid();
+                MessageBox.Show("Error en la consulta");
+            }
+            
+        }
+        public void cargaColumnas(List<string> col)
+        {
+            int i = 0;
+            List<string> existe = new List<string>();
+            for (i = 0; i < grid.Columns.Count; i++)
+            {
+                if (col.Contains(grid.Columns[i].HeaderText))
+                {
+                    if(existe.Count == 0 || existe.Find(x=>x.Equals(grid.Columns[i].HeaderText)) == null)
+                    {
+                        grid.Columns[i].Visible = true;
+                        existe.Add(grid.Columns[i].HeaderText);
+                    }
+                    else
+                    {
+                        grid.Columns[i].Visible = false;
+                    }
+
+                }
+                else
+                {
+                    grid.Columns[i].Visible = false;
+                }
+            }
+        }
+        /// <summary>
+        /// Recorre el DatagridView IZQ devolviendo la posición de su clave primaria/foranea
+        /// </summary>
+        /// <param name="columna">nombre a buscar</param>
+        /// <returns></returns>
+        public int encuentraPosIzquierda(string columna)
+        {
+            int i;
+            for(i = 0; i < izq.Columns.Count; i++)
+            {
+                if (izq.Columns[i].HeaderText == columna)
+                    return i;
+            }
+            return -1;
+        }
+        /// <summary>
+        /// Recorre el DatagridView DER devolviendo la posición de su clave primaria/foranea
+        /// </summary>
+        /// <param name="columna">nombre a buscar</param>
+        /// <returns></returns>
+        public int encuentraPosDerecha(string columna)
+        {
+            int i;
+            for (i = 0; i < der.Columns.Count; i++)
+            {
+                if (der.Columns[i].HeaderText == columna)
+                    return i;
+            }
+            return -1;
+        }
         public List<string> obtenTablasC(List<string> columnas,string compara)
         {
             int TAM = columnas.Count;
