@@ -186,30 +186,38 @@ namespace Base_de_Datos
 
         public void cargaTablas(string ubicacion)
         {
-            listBox1.Items.Clear();
-            tablas = new List<Tabla>();
-            List<string> tabla = new List<string>();
-            string aux;
-            tabla = Directory.GetFiles(ubicacion).ToList();
-            nBD.Text = "BD : " + ubicacion.Split('\\').Last().ToString();
-            directorioBD = ubicacion;
-            if (tabla.Count == 0)
+            try
             {
-                deshabilitaTablas();
-                creaTabla.Enabled = true;
-                deshabilitaAtributos();
-            }
-            else
-            {
-                habilitaTablas();
-                creaAtributo.Enabled = true;
-                foreach (string t in tabla)
+                listBox1.Items.Clear();
+                tablas = new List<Tabla>();
+                List<string> tabla = new List<string>();
+                string aux;
+                tabla = Directory.GetFiles(ubicacion).ToList();
+                nBD.Text = "BD : " + ubicacion.Split('\\').Last().ToString();
+                directorioBD = ubicacion;
+                if (tabla.Count == 0)
                 {
-                    aux = t.Split(Convert.ToChar('\\')).Last();
-                    listBox1.Items.Add(aux.Split('.').First());
-                    tablas.Add(new Tabla(aux.Split('.').First()));
+                    deshabilitaTablas();
+                    creaTabla.Enabled = true;
+                    deshabilitaAtributos();
+                }
+                else
+                {
+                    habilitaTablas();
+                    creaAtributo.Enabled = true;
+                    foreach (string t in tabla)
+                    {
+                        aux = t.Split(Convert.ToChar('\\')).Last();
+                        listBox1.Items.Add(aux.Split('.').First());
+                        tablas.Add(new Tabla(aux.Split('.').First()));
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al cargar la Base de Datos \n" + ex);
+            }
+            
         }
         private void Principal_Resize(object sender, EventArgs e)
         {
@@ -1013,7 +1021,10 @@ namespace Base_de_Datos
                                 List<string> atr = new List<string>();
                                 foreach (string str in columnas)
                                     atr.Add(str.Split('.').Last());
-                                validaConsulta(lista, atr);
+                                if (lista.Count == 3)
+                                    validaConsulta(lista, atr);
+                                else
+                                    MessageBox.Show("Error: Separa las palabras por espacios"); 
                                 /*
                                 Atributo tmp = new Atributo();
                                 tmp.nombre = lista[2].Split('.').Last();
@@ -1215,54 +1226,63 @@ namespace Base_de_Datos
             nombreB =  b.Split('.').First();
             Tabla auxA = tablas.Find(x => x.nombre.Equals(nombreA));
             Tabla auxB = tablas.Find(x => x.nombre.Equals(nombreB));
-            cargaIzquierdo(auxA);
-            cargaDerecho(auxB);
-            foreach (Atributo atr in auxA.atributos)
+            if(auxA!= null && auxB != null)
             {
-                if(atr.nombre == a.Split('.').Last() && atr.indice == "Clave Primaria")
+                cargaIzquierdo(auxA);
+                cargaDerecho(auxB);
+                foreach (Atributo atr in auxA.atributos)
                 {
-                    PK = "A";
-                    break;
+                    if (atr.nombre == a.Split('.').Last() && atr.indice == "Clave Primaria")
+                    {
+                        PK = "A";
+                        break;
+                    }
+                    else if (atr.foranea == b.Split('.').Last())// A.foranea == B.primaria
+                    {
+                        FK = "A";
+                        nForanea = atr.nombre;
+                        break;
+                    }
                 }
-                else if(atr.foranea == b.Split('.').Last())// A.foranea == B.primaria
+                foreach (Atributo atr in auxB.atributos)
                 {
-                    FK = "A";
-                    nForanea = atr.nombre;
-                    break;
+                    if (atr.nombre == b.Split('.').Last() && atr.indice == "Clave Primaria")
+                    {
+                        PK = "B";
+                        break;
+                    }
+                    else if (atr.foranea == a.Split('.').Last())// A.foranea == B.primaria
+                    {
+                        FK = "B";
+                        nForanea = atr.nombre;
+                        break;
+                    }
                 }
-            }
-            foreach(Atributo atr in auxB.atributos)
-            {
-                if (atr.nombre == b.Split('.').Last() && atr.indice == "Clave Primaria")
+                posI = encuentraPosIzquierda(a.Split('.').Last());
+                posD = encuentraPosDerecha(b.Split('.').Last());
+                int i;
+                List<string> col = new List<string>();
+                for (i = 0; i < izq.Columns.Count; i++)
+                    col.Add(izq.Columns[i].HeaderText);
+                for (i = 0; i < der.Columns.Count; i++)
+                    col.Add(der.Columns[i].HeaderText);
+                if (posI != -1 && posD != -1)
                 {
-                    PK = "B";
-                    break;
+                    fusion(col, null, posI, posD);
+                    cargaColumnas(tablasC);
                 }
-                else if (atr.foranea == a.Split('.').Last())// A.foranea == B.primaria
+                else
                 {
-                    FK = "B";
-                    nForanea = atr.nombre;
-                    break;
+                    limpiaGrid();
+                    MessageBox.Show("Error en la consulta");
                 }
-            }
-            posI = encuentraPosIzquierda(a.Split('.').Last());
-            posD = encuentraPosDerecha(b.Split('.').Last());
-            int i;
-            List<string> col = new List<string>();
-            for (i = 0; i < izq.Columns.Count; i++)
-                col.Add(izq.Columns[i].HeaderText);
-            for (i = 0; i < der.Columns.Count; i++)
-                col.Add(der.Columns[i].HeaderText);
-            if(posI != -1 && posD != -1)
-            {
-                fusion(col, null, posI, posD);
-                cargaColumnas(tablasC);
             }
             else
             {
                 limpiaGrid();
-                MessageBox.Show("Error en la consulta");
+                MessageBox.Show("Error de sintaxis en los nombres de las Tablas");
             }
+           
             
         }
         public void cargaColumnas(List<string> col)
@@ -1288,6 +1308,11 @@ namespace Base_de_Datos
                 {
                     grid.Columns[i].Visible = false;
                 }
+            }
+            if(grid.Rows.Count <= 1)
+            {
+                limpiaGrid();
+                MessageBox.Show("No hay datos de coincidencia en INNER JOIN");
             }
         }
         /// <summary>
@@ -1358,7 +1383,7 @@ namespace Base_de_Datos
             }
             else
             {
-                MessageBox.Show("Error, Favor de verificar tablas"); 
+               /// MessageBox.Show("Error, Favor de verificar tablas"); 
             }
                
            
