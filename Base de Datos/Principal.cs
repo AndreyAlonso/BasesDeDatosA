@@ -1863,6 +1863,96 @@ namespace Base_de_Datos
             }
             
         }
+
+        private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            validaIntegridadReferencial(e.RowIndex);
+        }
+
+        private void grid_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            validaIntegridadReferencial(e.RowIndex);
+        }
+        /// <summary>
+        /// Se recorre toda la base de datos y se valida si ya hay una relacion entre los registros para evitar eliminación y modificación
+        /// en cascada
+        /// </summary>
+        /// <param name="celda"> Renglon seleccionado en grid</param>
+        public void validaIntegridadReferencial(int celda)
+        {
+            cargaBD();
+            int clave = -1;
+            int i;
+            string nColumna = "";
+            bool existe = false;
+            Tabla t = tablas.Find(x => x.nombre.Equals(listBox1.Text));
+            Tabla aux;
+            if (t != null)
+            {
+                foreach (Atributo a in t.atributos)
+                {
+                    for (i = 0; i < grid.Columns.Count; i++)
+                    {
+                        if (a.indice == "Clave Primaria" && a.nombre == grid.Columns[i].HeaderText)
+                        {
+                            clave = Convert.ToInt32(grid.Rows[celda].Cells[i].Value);
+                            nColumna = a.nombre;
+                            break;
+                        }
+                    }
+                }
+                // Se recorren todas las tablas
+
+                foreach (string s in listBox1.Items)
+                {
+                    if (s != t.nombre)
+                    {
+                        aux = tablas.Find(x => x.nombre.Equals(s));
+                        if (aux != null)
+                        {
+                            cargaIzquierdo(aux);
+                            Atributo atri = aux.atributos.Find(x => x.foranea == nColumna);
+                            if (atri != null)
+                            {
+                                for (i = 0; i < izq.Rows.Count - 1; i++)
+                                {
+                                    for (int j = 0; j < izq.Columns.Count; j++)
+                                    {
+                                        if (izq.Columns[j].HeaderText == nColumna && izq.Rows[i].Cells[j].Value.ToString() == clave.ToString())
+                                        {
+                                            modificaTupla.Enabled = false;
+                                            eliminaTupla.Enabled = false;
+                                            existe = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+
+
+                        }
+
+                    }
+                }
+                if (existe == true)
+                {
+                    modificaTupla.Enabled = false;
+                    eliminaTupla.Enabled = false;
+                }
+                else
+                {
+                    modificaTupla.Enabled = true;
+                    eliminaTupla.Enabled = true;
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Error al cargar tabla");
+            }
+        }
+
         /// <summary>
         /// Carga los datos de la tabla en el datagrid
         /// </summary>
