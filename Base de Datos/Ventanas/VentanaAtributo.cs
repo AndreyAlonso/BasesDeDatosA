@@ -64,8 +64,36 @@ namespace Base_de_Datos.Ventanas
             label6.Visible = true;
             foreach (Atributo a in tab.atributos)
                 comboBox1.Items.Add(a.nombre);
+            validaIntegridadReferencial(tab);
         }
 
+        /// <summary>
+        /// Recorre las tablas y verifica si un atributo es foraneo de un atributo que podemos llegar a modificar
+        /// entonces se omite de la lista
+        /// </summary>
+        public void validaIntegridadReferencial(Tabla tab)
+        {
+            string elimina = "";
+           foreach(Tabla t in tablas)
+            {
+                if(t != tab)
+                {
+                    foreach (Atributo a in t.atributos)
+                    {
+                        if (tab.atributos.Find(x => x.nombre.Equals(a.foranea)) != null)
+                        {
+                            elimina = a.foranea;
+                            break;
+                        }
+                    }
+                }
+                
+            }
+           if(elimina != string.Empty)
+            {
+                comboBox1.Items.Remove(elimina);
+            }
+        }
         private void mueveVentana(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)
