@@ -800,6 +800,7 @@ namespace Base_de_Datos
                 actual.tuplas.Add(row);
             }
             guardaTabla(actual);
+            cargaTabla(actual);
 
 
         }
@@ -1880,77 +1881,90 @@ namespace Base_de_Datos
         /// <param name="celda"> Renglon seleccionado en grid</param>
         public void validaIntegridadReferencial(int celda)
         {
-            cargaBD();
-            int clave = -1;
-            int i;
-            string nColumna = "";
-            bool existe = false;
-            Tabla t = tablas.Find(x => x.nombre.Equals(listBox1.Text));
-            Tabla aux;
-            if (t != null)
+            try
             {
-                foreach (Atributo a in t.atributos)
+                cargaBD();
+                int clave = -1;
+                int i;
+                string nColumna = "";
+                bool existe = false;
+                Tabla t = tablas.Find(x => x.nombre.Equals(listBox1.Text));
+                Tabla aux;
+                if (t != null)
                 {
-                    for (i = 0; i < grid.Columns.Count; i++)
+                    foreach (Atributo a in t.atributos)
                     {
-                        if (a.indice == "Clave Primaria" && a.nombre == grid.Columns[i].HeaderText)
+                        for (i = 0; i < grid.Columns.Count; i++)
                         {
-                            clave = Convert.ToInt32(grid.Rows[celda].Cells[i].Value);
-                            nColumna = a.nombre;
-                            break;
+                            if (a.indice == "Clave Primaria" && a.nombre == grid.Columns[i].HeaderText)
+                            {
+                                clave = Convert.ToInt32(grid.Rows[celda].Cells[i].Value);
+                                nColumna = a.nombre;
+                                break;
+                            }
                         }
                     }
-                }
-                // Se recorren todas las tablas
+                    // Se recorren todas las tablas
 
-                foreach (string s in listBox1.Items)
-                {
-                    if (s != t.nombre)
+                    foreach (string s in listBox1.Items)
                     {
-                        aux = tablas.Find(x => x.nombre.Equals(s));
-                        if (aux != null)
+                        if (s != t.nombre)
                         {
-                            cargaIzquierdo(aux);
-                            Atributo atri = aux.atributos.Find(x => x.foranea == nColumna);
-                            if (atri != null)
+                            aux = tablas.Find(x => x.nombre.Equals(s));
+                            if (aux != null)
                             {
-                                for (i = 0; i < izq.Rows.Count - 1; i++)
+                                cargaIzquierdo(aux);
+                                Atributo atri = aux.atributos.Find(x => x.foranea == nColumna);
+                                if (atri != null)
                                 {
-                                    for (int j = 0; j < izq.Columns.Count; j++)
+                                    for (i = 0; i < izq.Rows.Count - 1; i++)
                                     {
-                                        if (izq.Columns[j].HeaderText == nColumna && izq.Rows[i].Cells[j].Value.ToString() == clave.ToString())
+                                        for (int j = 0; j < izq.Columns.Count; j++)
                                         {
-                                            modificaTupla.Enabled = false;
-                                            eliminaTupla.Enabled = false;
-                                            existe = true;
-                                            break;
+                                            if (izq.Columns[j].HeaderText == nColumna && izq.Rows[i].Cells[j].Value.ToString() == clave.ToString())
+                                            {
+                                                modificaTupla.Enabled = false;
+                                                eliminaTupla.Enabled = false;
+                                                existe = true;
+                                                break;
+                                            }
                                         }
                                     }
                                 }
+
+
+
                             }
 
-
-
                         }
-
                     }
-                }
-                if (existe == true)
-                {
-                    modificaTupla.Enabled = false;
-                    eliminaTupla.Enabled = false;
+                    if (existe == true)
+                    {
+                        modificaTupla.Enabled = false;
+                        eliminaTupla.Enabled = false;
+                    }
+                    else
+                    {
+                        modificaTupla.Enabled = true;
+                        eliminaTupla.Enabled = true;
+                    }
+
                 }
                 else
                 {
-                    modificaTupla.Enabled = true;
-                    eliminaTupla.Enabled = true;
+                    MessageBox.Show("Error al cargar tabla");
                 }
-                
             }
-            else
+            catch
             {
-                MessageBox.Show("Error al cargar tabla");
+
             }
+            
+        }
+
+        private void grid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            validaIntegridadReferencial(e.RowIndex);
         }
 
         /// <summary>
@@ -1964,45 +1978,85 @@ namespace Base_de_Datos
             registro.Rows.Clear();
             registro.Columns.Clear();
             if(t != null)
-            foreach(Atributo atributo in t.atributos)
             {
-               if(atributo != null)
-               {
-                    grid.Columns.Add(atributo.nombre, atributo.nombre);
-                    registro.Columns.Add(atributo.nombre, atributo.nombre);
-               }
-                
-               
-            }
+                foreach (Atributo atributo in t.atributos)
+                {
+                    if (atributo != null)
+                    {
+                        grid.Columns.Add(atributo.nombre, atributo.nombre);
+                        registro.Columns.Add(atributo.nombre, atributo.nombre);
+                    }
+
+
+                }
+                //Carga en el datagrid
+                foreach (string tupla in t.tuplas)
+                    grid.Rows.Add(tupla.Split(','));
+                //Tiene atributos
+                if(t.atributos.Count > 0 )
+                {
+                    creaAtributo.Enabled = true;
+                    modificaAtributo.Enabled = true;
+                    eliminaAtributo.Enabled = true;
+                }
+                //No tiene atributos
+                if(t.atributos.Count == 0)
+                {
+                    creaAtributo.Enabled = true;
+                    modificaAtributo.Enabled = false;
+                    eliminaAtributo.Enabled = false;
+                }
+                //Tiene tuplas
+                if(t.tuplas.Count > 0)
+                {
+                    creaTupla.Enabled = true;
+                    modificaTupla.Enabled = true;
+                    eliminaTupla.Enabled = true;
+                    eliminaAtributo.Enabled = false;
+                    modificaAtributo.Enabled = false;
+                }
+                //No tiene tuplas
+                if(t.tuplas.Count == 0)
+                {
+                    creaTupla.Enabled = true;
+                    modificaTupla.Enabled = false;
+                    eliminaTupla.Enabled = false;
+                }
+            }/*
+
             if (t != null && t.tuplas.Count == 0)
             {
                 eliminaTupla.Enabled = false;
                 modificaTupla.Enabled = false;
+                eliminaAtributo.Enabled = false;
+                modificaAtributo.Enabled = false;
             }
             else
             {
                 eliminaTupla.Enabled = true;
                 modificaTupla.Enabled = true;
+                eliminaAtributo.Enabled = true;
+                modificaAtributo.Enabled = true;
             }
             if(t != null)
                 foreach (string tupla in t.tuplas)
                     grid.Rows.Add(tupla.Split(','));
                 
-            if(t!= null && t.atributos.Count > 0)
+            if(t!= null && t.atributos.Count > 0 && t.tuplas.Count == 0)
             {
                 modificaAtributo.Enabled = true;
                 eliminaAtributo.Enabled = true;
                 creaTupla.Enabled = true;    
             }
-            else
+            else if(t != null && t.atributos.Count > 0 && t.tuplas.Count > 0)
             {
-                creaTupla.Enabled = false;
                 eliminaTupla.Enabled = false;
                 modificaTupla.Enabled = false;
 
                 modificaAtributo.Enabled = false;
                 eliminaAtributo.Enabled = false;
             }
+            */
         }
         #endregion
 
