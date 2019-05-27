@@ -332,6 +332,8 @@ namespace Base_de_Datos
                 modificaAtributo.Enabled = true;
                 creaAtributo.Enabled = true;
             }
+            modificaTupla.Enabled = false;
+            eliminaTupla.Enabled = false;
         }
 
         public void nuevoProyecto()
@@ -1012,40 +1014,69 @@ namespace Base_de_Datos
                             }
                             else if (compara.Contains("INNER"))
                             {
-                                //MessageBox.Show("INNER JOIN");
-                                List<string> tablasC = obtenTablasC(columnas, compara);
-                                string cond = obtenON(compara);
-                                List<string> temp = cond.Split(' ').ToList();
-                                List<string> lista = new List<string>();
-                                foreach (string str in temp)
-                                    if (str != string.Empty)
-                                        lista.Add(str);
-                                List<string> atr = new List<string>();
-                                foreach (string str in columnas)
-                                    atr.Add(str.Split('.').Last());
-                                if (lista.Count == 3)
-                                    validaConsulta(lista, atr);
-                                else
-                                    MessageBox.Show("Error: Separa las palabras por espacios"); 
-                                /*
-                                Atributo tmp = new Atributo();
-                                tmp.nombre = lista[2].Split('.').Last();
-                                Tabla aux = buscaEnRelacion(tmp);*/
-                                //Atributo b = buscaClavePrimaria(aux);
-                               /*
-                                if (lista[0].Split('.').Last() == b.nombre)
+                                if(!compara.Contains("*"))
                                 {
-                                    
-                                    creaConsulta(lista, tablasC, columnas);
+                                    //MessageBox.Show("INNER JOIN");
+                                    List<string> tablasC = obtenTablasC(columnas, compara);
+                                    string cond = obtenON(compara);
+                                    List<string> temp = cond.Split(' ').ToList();
+                                    List<string> lista = new List<string>();
+                                    foreach (string str in temp)
+                                        if (str != string.Empty)
+                                            lista.Add(str);
+                                    List<string> atr = new List<string>();
+                                    foreach (string str in columnas)
+                                        atr.Add(str.Split('.').Last());
+                                    if (lista.Count == 3)
+                                    {
+                                        bool entra = true;
+                                        foreach (string cad in columnas)
+                                        {
+                                           
+                                            Tabla b = tablas.Find(x => x.nombre.Equals(cad.Split('.').First()));
+                                            if(b!= null)
+                                            {
+                                                Atributo c = b.atributos.Find(x => x.nombre.Equals(cad.Split('.').Last()));
+                                                if(c == null)
+                                                {
+                                                    MessageBox.Show("Atributo " + cad.Split('.').Last() + " no coincide en tabla "+ cad.Split('.').First());
+                                                    entra = false;
+                                                    break;
+                                                }
 
+                                            }
+                                        }  
+                                        if(entra)
+                                            validaConsulta(lista, atr);
+                                    }
+                                    else
+                                        MessageBox.Show("Error: Separa las palabras por espacios");
+                                    /*
+                                    Atributo tmp = new Atributo();
+                                    tmp.nombre = lista[2].Split('.').Last();
+                                    Tabla aux = buscaEnRelacion(tmp);*/
+                                    //Atributo b = buscaClavePrimaria(aux);
+                                    /*
+                                     if (lista[0].Split('.').Last() == b.nombre)
+                                     {
+
+                                         creaConsulta(lista, tablasC, columnas);
+
+                                     }
+                                     else
+                                     {
+                                         MessageBox.Show("Los atributos para realizar INNER JOIN deben coincidir");
+
+                                     }*/
+
+                                    //validaColumnas(columnas);
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Los atributos para realizar INNER JOIN deben coincidir");
+                                    limpiaGrid();
+                                    MessageBox.Show("La consulta INNER JOIN no puede contener *");
+                                }
 
-                                }*/
-
-                                //validaColumnas(columnas);
                             }
                             else
                             {
@@ -1311,7 +1342,7 @@ namespace Base_de_Datos
                     grid.Columns[i].Visible = false;
                 }
             }
-            if(grid.Rows.Count <= 1)
+            if(grid.Rows.Count <= 1 && grid.Columns.Count < 1 )
             {
                 limpiaGrid();
                 MessageBox.Show("No hay datos de coincidencia en INNER JOIN");
@@ -1922,7 +1953,7 @@ namespace Base_de_Datos
                                     {
                                         for (int j = 0; j < izq.Columns.Count; j++)
                                         {
-                                            if (izq.Columns[j].HeaderText == nColumna && izq.Rows[i].Cells[j].Value.ToString() == clave.ToString())
+                                            if (izq.Columns[j].HeaderText == atri.nombre && izq.Rows[i].Cells[j].Value.ToString() == clave.ToString())
                                             {
                                                 modificaTupla.Enabled = false;
                                                 eliminaTupla.Enabled = false;
