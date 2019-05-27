@@ -428,7 +428,8 @@ namespace Base_de_Datos
         {
             Tabla aux = buscaTabla();
             aux = abreTabla(aux);
-            EliminarAtributo elimina = new EliminarAtributo(aux);
+            cargaBD();
+            EliminarAtributo elimina = new EliminarAtributo(aux, tablas);
             if (elimina.ShowDialog() == DialogResult.OK)
             {
                 aux = elimina.tabla;
@@ -1966,6 +1967,8 @@ namespace Base_de_Datos
         {
             validaIntegridadReferencial(e.RowIndex);
         }
+
+
 
         /// <summary>
         /// Carga los datos de la tabla en el datagrid

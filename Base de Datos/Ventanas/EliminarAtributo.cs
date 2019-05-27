@@ -14,10 +14,12 @@ namespace Base_de_Datos.Ventanas
     {
         private int posx, posy;
         public Tabla tabla;
-        public EliminarAtributo(Tabla tabla)
+        private List<Tabla> tablas;
+        public EliminarAtributo(Tabla tabla, List<Tabla> tablas)
         {
             InitializeComponent();
             this.tabla = tabla;
+            this.tablas = tablas;
             cargaAtributos();
         }
         private void mueveVentana(object sender, MouseEventArgs e)
@@ -61,7 +63,36 @@ namespace Base_de_Datos.Ventanas
             {
                 listBox1.Items.Add(atri.nombre);
             }
+            validaIntegridadReferencial(tabla);
         }
+        /// <summary>
+        /// Recorre las tablas y verifica si un atributo es foraneo de un atributo que podemos llegar a modificar
+        /// entonces se omite de la lista
+        /// </summary>
+        public void validaIntegridadReferencial(Tabla tab)
+        {
+            string elimina = "";
+            foreach (Tabla t in tablas)
+            {
+                if (t != tab)
+                {
+                    foreach (Atributo a in t.atributos)
+                    {
+                        if (tab.atributos.Find(x => x.nombre.Equals(a.foranea)) != null)
+                        {
+                            elimina = a.foranea;
+                            break;
+                        }
+                    }
+                }
+
+            }
+            if (elimina != string.Empty)
+            {
+                listBox1.Items.Remove(elimina);
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
 
