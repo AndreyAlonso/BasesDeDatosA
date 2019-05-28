@@ -123,8 +123,11 @@ namespace Base_de_Datos.Ventanas
         /// <param name="e"></param>
         private void agregaAtributo(object sender, EventArgs e)
         {
+            comboTipo.Enabled = true;
+            textBox2.Enabled = true;
             try
             {
+                
                 Atributo actual = tabla.atributos.Find(x => x.nombre.Equals(comboBox1.Text));
                 int contador = 0;
                 if (button2.Text == "Agregar")
@@ -353,6 +356,8 @@ namespace Base_de_Datos.Ventanas
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            textBox2.Enabled = true;
+            comboTipo.Enabled = true;
             try
             {
                 foreach (Atributo a in tabla.atributos)
@@ -417,6 +422,35 @@ namespace Base_de_Datos.Ventanas
                 
             }
             */
+        }
+
+        private void comboPrimarias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Atributo atri;
+                foreach(Tabla tab in tablas)
+                {
+                    atri = tab.atributos.Find(x => x.nombre.Equals(comboPrimarias.Text));
+                    if(atri != null)
+                    {
+                        if(atri.indice == "Clave Primaria")
+                        {
+                            textBox2.Text = atri.tam.ToString();
+                            comboTipo.Text = atri.tipo.ToString();
+                            textBox2.Enabled = false;
+                            comboTipo.Enabled = false;
+
+                        }
+                    }                
+                }
+               
+               
+            }
+            catch
+            {
+            
+            }
         }
 
         /// <summary>

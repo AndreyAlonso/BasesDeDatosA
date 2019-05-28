@@ -181,10 +181,11 @@
             // 
             this.comboPrimarias.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboPrimarias.FormattingEnabled = true;
-            this.comboPrimarias.Location = new System.Drawing.Point(380, 106);
+            this.comboPrimarias.Location = new System.Drawing.Point(385, 106);
             this.comboPrimarias.Name = "comboPrimarias";
             this.comboPrimarias.Size = new System.Drawing.Size(122, 25);
             this.comboPrimarias.TabIndex = 15;
+            this.comboPrimarias.SelectedIndexChanged += new System.EventHandler(this.comboPrimarias_SelectedIndexChanged);
             // 
             // pictureBox1
             // 
