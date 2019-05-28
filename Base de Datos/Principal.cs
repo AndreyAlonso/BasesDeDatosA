@@ -971,7 +971,7 @@ namespace Base_de_Datos
             string s = "SELECT";
             string f = "FROM";
             string w = "WHERE";
-            List<string> columnas;
+            List<string> columnas = new List<string>();
 
             string compara = "";
 
@@ -1101,7 +1101,7 @@ namespace Base_de_Datos
                                 {
                                     if (verificaAtributos(tabla, columnas))
                                     {
-                                         MessageBox.Show("Todas los atributos existen");
+                                       //  MessageBox.Show("Todas los atributos existen");
                                         Tabla t = tablas.Find(x => x.nombre.Equals(tabla));
                                         cargaTabla(t, columnas);
                                     }
@@ -1132,9 +1132,26 @@ namespace Base_de_Datos
             {
                 MessageBox.Show("Falta SELECT");
             }
-
+            if(grid.Columns.Count > 0 )
+            {
+                ordenaConsulta(columnas);
+            }
         }
+        /// <summary>
+        /// Ordenamiento en el datagrid para mostar las columnas dada la consulta
+        /// </summary>
+        /// <param name="columnas">Columnas de la consulta</param>
+        public void ordenaConsulta(List<string> columnas)
+        {
+            int i = 0;
+            if(!columnas.Contains("*") )
+            {
+                for (i = 0; i < columnas.Count; i++)
+                    grid.Columns[columnas[i].Split('.').Last()].DisplayIndex = i;
 
+            }
+            
+        }
         public void creaConsulta(List<string> lista, List<string> tablasC, List<string> columnas)
         {
             Tabla T = new Tabla("Consulta");
@@ -1554,12 +1571,13 @@ namespace Base_de_Datos
                 else
                 {
                     grid.Columns[i].Visible = false;
+                  
                 }
             }
             //Se verifica que existe la clave de la condicion en los atributos
             foreach (Atributo a in t.atributos)
             {
-                if (cond[0] != string.Empty && a.nombre == cond[0])
+                if (cond.Count > 0 && cond[0] != string.Empty && a.nombre == cond[0])
                 {
                     existe = true;
                     break;
@@ -1576,9 +1594,6 @@ namespace Base_de_Datos
             }
 
         }
-
-
-
         /// <summary>
         /// Realiza la consulta en base al WHERE 
         /// </summary>
