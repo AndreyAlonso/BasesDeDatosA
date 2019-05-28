@@ -63,7 +63,7 @@ namespace Base_de_Datos.Ventanas
             comboBox1.Visible = true;
             label6.Visible = true;
             foreach (Atributo a in tab.atributos)
-                comboBox1.Items.Add(a.nombre);
+                if (a != null) { comboBox1.Items.Add(a.nombre); }
             validaIntegridadReferencial(tab);
         }
 
@@ -73,26 +73,30 @@ namespace Base_de_Datos.Ventanas
         /// </summary>
         public void validaIntegridadReferencial(Tabla tab)
         {
-            string elimina = "";
-           foreach(Tabla t in tablas)
+            if(tab != null)
             {
-                if(t != tab)
+                string elimina = "";
+                foreach (Tabla t in tablas)
                 {
-                    foreach (Atributo a in t.atributos)
+                    if (t != tab)
                     {
-                        if (tab.atributos.Find(x => x.nombre.Equals(a.foranea)) != null)
+                        foreach (Atributo a in t.atributos)
                         {
-                            elimina = a.foranea;
-                            break;
+                            if (tab.atributos.Find(x => x.nombre.Equals(a.foranea)) != null)
+                            {
+                                elimina = a.foranea;
+                                break;
+                            }
                         }
                     }
+
                 }
-                
+                if (elimina != string.Empty)
+                {
+                    comboBox1.Items.Remove(elimina);
+                }
             }
-           if(elimina != string.Empty)
-            {
-                comboBox1.Items.Remove(elimina);
-            }
+            
         }
         private void mueveVentana(object sender, MouseEventArgs e)
         {

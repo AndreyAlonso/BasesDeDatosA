@@ -579,21 +579,22 @@ namespace Base_de_Datos
             {
                 case "creaTupla":
                     insertaTupla();
+                    guardaTupla();
                     break;
                 case "modificaTupla":
                     modificarTupla();
+                  //  guardaTupla();
                     break;
                 case "eliminaTupla":
                     eliminarTupla();
+                    guardaTupla();
                     break;
                 case "aplicaMod":
                     aplicarModificacion();
+                    guardaTupla();
                     break;
-
-
-
             }
-            guardaTupla();
+            //guardaTupla();
         }
         public void aplicarModificacion()
         {
@@ -618,6 +619,8 @@ namespace Base_de_Datos
         {
             Tabla t = buscaTabla();
             t = abreTabla(t);
+            cargaBD();
+            t = tablas.Find(x=>x.nombre.Equals(listBox1.Text));
             if (row < t.tuplas.Count)
             {
                 string reg = t.tuplas[row];
