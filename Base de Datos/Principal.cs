@@ -377,8 +377,15 @@ namespace Base_de_Datos
                 {
                     //aux.atributos[ventanaA.pos] = ventanaA.aModificado;
                     //aux = abreTabla(aux);
-                    aux.atributos[ventanaA.pos] = ventanaA.aModificado;
-                    guardaTabla(ventanaA.dameTabla());
+                   
+                    if(ventanaA.aModificado != null)
+                    {
+                        aux.atributos = ventanaA.atributos;
+                        //aux.atributos[ventanaA.pos] = ventanaA.aModificado;
+                        guardaTabla(ventanaA.dameTabla());
+                        cargaTabla(aux);
+                    }
+                   
                 }
             }
             else
