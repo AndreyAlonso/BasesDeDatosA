@@ -548,11 +548,24 @@ namespace Base_de_Datos
                     if (aux.atributos[i].tipo == 'E' || aux.atributos[i].tipo == 'F')
                     {
                         int ejem;
-                        if (!int.TryParse(registro.Rows[0].Cells[i].EditedFormattedValue.ToString(), out ejem))
+                        float ejem2;
+                        if(aux.atributos[i].tipo == 'E')
                         {
-                            MessageBox.Show(aux.atributos[i].nombre + " debe contener un valor numerico ");
-                            return false;
+                            if (!int.TryParse(registro.Rows[0].Cells[i].EditedFormattedValue.ToString(), out ejem) )
+                            {
+                                MessageBox.Show(aux.atributos[i].nombre + " debe contener un valor numerico ");
+                                return false;
+                            }
                         }
+                        else if(aux.atributos[i].tipo == 'F')
+                        {
+                            if (!float.TryParse(registro.Rows[0].Cells[i].EditedFormattedValue.ToString(), out ejem2))
+                            {
+                                MessageBox.Show(aux.atributos[i].nombre + " debe contener un valor numerico ");
+                                return false;
+                            }
+                        }
+                           
                     }
                     else if (aux.atributos[i].tipo == 'C' && registro.Rows[0].Cells[i].EditedFormattedValue.ToString() == string.Empty)
                     {
@@ -598,6 +611,7 @@ namespace Base_de_Datos
                     break;
                 case "aplicaMod":
                     aplicarModificacion();
+                    listBox1.Enabled = true;
                     guardaTupla();
                     break;
             }
@@ -626,6 +640,7 @@ namespace Base_de_Datos
         {
             Tabla t = buscaTabla();
             t = abreTabla(t);
+            listBox1.Enabled = false;
             cargaBD();
             t = tablas.Find(x=>x.nombre.Equals(listBox1.Text));
             if (row < t.tuplas.Count)
