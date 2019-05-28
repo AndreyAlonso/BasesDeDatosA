@@ -43,7 +43,7 @@ namespace Base_de_Datos.Ventanas
         }
         public VentanaAtributo(string bd, Tabla tab, List<Tabla> tablas, string s)
         {
-
+            try { 
             InitializeComponent();
             comboTipo.Items.Add("E");
             comboTipo.Items.Add("F");
@@ -66,6 +66,8 @@ namespace Base_de_Datos.Ventanas
             foreach (Atributo a in tab.atributos)
                 if (a != null) { comboBox1.Items.Add(a.nombre); }
             validaIntegridadReferencial(tab);
+            }
+            catch { }
         }
 
         /// <summary>
@@ -193,6 +195,7 @@ namespace Base_de_Datos.Ventanas
                             atributos = tabla.atributos;
                             textBox1.Clear();
                             textBox2.Clear();
+                            comboTipo_SelectedIndexChanged(this, null);
                         }
 
                     }
@@ -211,25 +214,29 @@ namespace Base_de_Datos.Ventanas
                         // Si no tiene clave Primaria
                         if (contador == 0)
                         {
-                            aModificado = new Atributo();
-                            aModificado.nombre = textBox1.Text;
-                            aModificado.tipo = Convert.ToChar(comboTipo.Text);
-                            aModificado.tam = Convert.ToInt32(textBox2.Text);
-                            aModificado.indice = comboClave.Text;
-                            if (comboPrimarias.Enabled == true)
-                                aModificado.foranea = comboPrimarias.Text;
-                            else
-                                aModificado.foranea = "NULL";
-                            // Atributo a = tabla.atributos.Find(x => x.nombre.Equals(aModificado.nombre));
-                            if (actual != null)
-                            {
-                                //     tabla.atributos.Remove(actual);
-                                //     tabla.atributos.Add(aModificado);
-                            }
+                          //  if(comboBox1.Text == "E")
+                          //  {
+                                aModificado = new Atributo();
+                                aModificado.nombre = textBox1.Text;
+                                aModificado.tipo = Convert.ToChar(comboTipo.Text);
+                                aModificado.tam = Convert.ToInt32(textBox2.Text);
+                                aModificado.indice = comboClave.Text;
+                                if (comboPrimarias.Enabled == true)
+                                    aModificado.foranea = comboPrimarias.Text;
+                                else
+                                    aModificado.foranea = "NULL";
+                                // Atributo a = tabla.atributos.Find(x => x.nombre.Equals(aModificado.nombre));
+                              /*  if (actual != null)
+                                {
+                                         tabla.atributos.Remove(actual);
+                                         tabla.atributos.Add(aModificado);
+                                }
 
 
-                            textBox1.Clear();
-                            textBox2.Clear();
+                                textBox1.Clear();
+                                textBox2.Clear();*/
+                          //  }
+                            
                         }
                         // Ya existe clave primaria y se piensa agregar otra
                         else if (contador > 0 && comboClave.Text == "Clave Primaria" && label6.Visible == true)
