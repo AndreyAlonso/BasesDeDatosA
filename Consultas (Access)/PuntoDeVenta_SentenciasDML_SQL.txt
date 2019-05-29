@@ -13,7 +13,7 @@ SELECT * FROM Productos
 
 SELECT Nombre, Existencias FROM Productos
 
-SELECT * FROM  Tabla WHERE (Condici�n)
+SELECT * FROM  Tabla WHERE (Condición)
 
 SELECT * FROM Empleados WHERE FechaIngreso >=  '01/01/2000 '
 
@@ -22,12 +22,12 @@ SELECT Nombre, Existencias FROM Productos WHERE Existencias > 160
 SELECT Nombre, Existencias FROM Productos WHERE CostoVenta = 9.50
 
 
-Imprimir el nombre completo de aquellos empleados que hayan ingresado en la d�cada de los 90
+Imprimir el nombre completo de aquellos empleados que hayan ingresado en la década de los 90
 
 SELECT Nombre, Apellido_Paterno, Apellido_Materno FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
 
 
-Imprimir el nombre completo y la fecha de ingreso  de aquellos empleados que hayan ingresado en la d�cada de los 90
+Imprimir el nombre completo y la fecha de ingreso  de aquellos empleados que hayan ingresado en la década de los 90
 
 SELECT Nombre, Apellido_Paterno, Apellido_Materno,FechaIngreso FROM Empleados WHERE FechaIngreso >= '01/01/1990' AND FechaIngreso <= '31/12/1999'
 
@@ -143,7 +143,7 @@ SELECT p.Nombre, v.IdProducto FROM Productos p INNER JOIN DetalleVenta v ON p.Id
 
 /********************************************************* D A T E P A R T ***********************************************/
 1) Imprimir el Nombre, Sueldo y FechaIngreso de los empleados
-	SELECT Nombre, Sueldo, DATEPART("yyyy",FechaIngreso) AS A�o FROM Empleados
+	SELECT Nombre, Sueldo, DATEPART("yyyy",FechaIngreso) AS Año FROM Empleados
 
 /********************************************************* B E T W E E N *************************************************/
 1) Imprimir el nombre y sueldo de los empleados que ganan entre 500 y 2500

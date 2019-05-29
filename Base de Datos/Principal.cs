@@ -1,4 +1,10 @@
-﻿using System;
+﻿/****************************************************************************************************************************************
+ * Proyecto:        SISTEMA MANEJADOR DE BASES DE DATOS
+ * Autor:           Héctor Andrey Hernández Alonso
+ * Actualización:   29/05/2019
+ * Materia:         Bases de Datos A
+ ****************************************************************************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,12 +25,12 @@ namespace Base_de_Datos
 {
     public partial class Principal : Form
     {
-        private bool max;
-        private int posx, posy;
-        private string directorioBD;
-        private List<Tabla> tablas;
-        DataTable dt;
-        int row;
+        private bool max;               
+        private int posx, posy;         // posicion en x y y para mover la ventana
+        private string directorioBD;    // ubicación del proyecto
+        private List<Tabla> tablas;     // lista de tablas de la base de datos
+        DataTable dt;                   // tabla auxiliar para inserción de registros
+        int row;                        // posición del renglon al dar clic en grid
         public Principal()
         {
             InitializeComponent();
@@ -47,6 +53,11 @@ namespace Base_de_Datos
 
         }
         #region PROPIEDADES VENTANA
+        /// <summary>
+        /// Movimiento de ventana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void label1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)
@@ -61,6 +72,12 @@ namespace Base_de_Datos
             }
         }
 
+        /// <summary>
+        /// Configuración Bases de Datos
+        /// Se permite crear, modificar, eliminar y abrir una base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             switch (e.ClickedItem.AccessibleName)
@@ -80,7 +97,11 @@ namespace Base_de_Datos
             }
         }
 
-
+        /// <summary>
+        /// Evento encargado de posicionar la ventana a las coordenadas del mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mueveVentana(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)
@@ -94,7 +115,11 @@ namespace Base_de_Datos
                 Top = Top + (e.Y - posy);
             }
         }
-
+        /// <summary>
+        /// Metodo encargado de finalizar el proyecto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void salir(object sender, EventArgs e)
         {
             Dispose();
@@ -102,6 +127,9 @@ namespace Base_de_Datos
         }
         #endregion
         #region Abrir/Cerrar Base de Datos
+        /// <summary>
+        /// Se obtiene un nombre dado por el usuario y se crea la base de datos con ese nuevo nombre
+        /// </summary>
         public void creaBD()
         {
             nBD.Text = "BD :";
@@ -128,6 +156,9 @@ namespace Base_de_Datos
                 modificaBD.Enabled = false;
             }
         }
+        /// <summary>
+        /// Muestra el directorio para así poder elegir el directorio para editar la  base de datos
+        /// </summary>
         public void abreBD()
         {
             nBD.Text = "BD :";
@@ -135,12 +166,10 @@ namespace Base_de_Datos
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 listBox1.Items.Clear();
-
                 cargaTablas(folderBrowserDialog1.SelectedPath);
                 directorioBD = folderBrowserDialog1.SelectedPath;
                 modificaBD.Enabled = true;
                 eliminaBD.Enabled = true;
-
             }
             else
             {
@@ -149,6 +178,10 @@ namespace Base_de_Datos
             }
 
         }
+        /// <summary>
+        /// Se obtiene el directorio de la base de datos y se cambia el nombre
+        /// sin perder la información contenida
+        /// </summary>
         public void renombraBD()
         {
             string nuevo;
@@ -166,10 +199,13 @@ namespace Base_de_Datos
                 cargaTablas(dirActual + nuevo);
             }
         }
+        /// <summary>
+        /// Se procede a eliminar la base de datos en la cual se está trabajando
+        /// </summary>
         public void eliminarBD()
         {
             Directorio mensaje = new Directorio(1);
-            if (mensaje.ShowDialog() == DialogResult.OK)
+            if (mensaje.ShowDialog() == DialogResult.OK) //Aviso de que toda la información se perdera
             {
                 Directory.Delete(directorioBD, true);
                 nuevoProyecto();
@@ -177,6 +213,9 @@ namespace Base_de_Datos
         }
         #endregion
         #region TABLAS
+        /// <summary>
+        /// Descativa todos los botones referentes al menu tabla
+        /// </summary>
         public void deshabilitaTablas()
         {
             creaTabla.Enabled = false;
@@ -219,6 +258,11 @@ namespace Base_de_Datos
             }
             
         }
+        /// <summary>
+        /// Actualizacion al cambiar el tamaño de ventana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Principal_Resize(object sender, EventArgs e)
         {
             pictureBox1.Width = ClientSize.Width + 10;
@@ -231,7 +275,11 @@ namespace Base_de_Datos
             maximiza.Location = new Point(pictureBox3.Location.X - 47, maximiza.Location.Y);
 
         }
-
+        /// <summary>
+        /// Boton de maximizar, la ventana se iguala al tamaño de ventana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void maximizar(object sender, EventArgs e)
         {
             if (max == false)
@@ -273,6 +321,9 @@ namespace Base_de_Datos
             }
         }
 
+        /// <summary>
+        /// Creacion de una nueva tabla para la base de datos
+        /// </summary>
         public void creaTablas()
         {
             Directorio d = new Directorio(false);
@@ -286,6 +337,9 @@ namespace Base_de_Datos
             }
 
         }
+        /// <summary>
+        /// Metodo con la posibilidad de renombrar una tabla
+        /// </summary>
         public void modificaTablas()
         {
             Tabla t = new Tabla(listBox1.Text);
@@ -303,6 +357,9 @@ namespace Base_de_Datos
 
 
         }
+        /// <summary>
+        /// Eliminación de una tabla de la base de datos
+        /// </summary>
         public void eliminaTablas()
         {
             Tabla t = new Tabla(listBox1.Text);
@@ -313,7 +370,11 @@ namespace Base_de_Datos
             grid.Rows.Clear();
             grid.Columns.Clear();
         }
-
+        /// <summary>
+        /// Evento encargado de validar los botones dependiendo de la tabla seleccionada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void seleccionaTabla(object sender, EventArgs e)
         {
             grid.Rows.Clear();
@@ -326,16 +387,24 @@ namespace Base_de_Datos
             {
                 modificaAtributo.Enabled = false;
                 creaAtributo.Enabled = false;
+                modificaTabla.Enabled = false;
+                eliminaTabla.Enabled = false;
             }
             else
             {
                 modificaAtributo.Enabled = true;
                 creaAtributo.Enabled = true;
+                modificaTabla.Enabled = true;
+                eliminaTabla.Enabled = true;
+
             }
             modificaTupla.Enabled = false;
             eliminaTupla.Enabled = false;
         }
 
+        /// <summary>
+        /// Crea un nuevo proyecto inicializando los componentes 
+        /// </summary>
         public void nuevoProyecto()
         {
             deshabilitaTablas();
@@ -345,6 +414,12 @@ namespace Base_de_Datos
             nBD.Text = "BD : ";
         }
 
+        /// <summary>
+        /// Menu Atributo
+        /// Crear, Modificar y eliminar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStrip3_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             switch (e.ClickedItem.AccessibleName)
@@ -364,6 +439,10 @@ namespace Base_de_Datos
             cargaTabla(aux);
         }
 
+        /// <summary>
+        /// Modificación de metadatos del atributo. 
+        /// Si las tablas ya contienen registros entonces no se puede modificar atributos
+        /// </summary>
         public void modificaAtributos()
         {
             Tabla aux = buscaTabla();
@@ -394,6 +473,9 @@ namespace Base_de_Datos
             }
         }
         #region  ATRIBUTOS
+        /// <summary>
+        /// Desactiva los botones utilizados para menu de atributos
+        /// </summary>
         public void deshabilitaAtributos()
         {
             creaAtributo.Enabled = false;
@@ -413,6 +495,9 @@ namespace Base_de_Datos
             }
             return null;
         }
+        /// <summary>
+        /// Asignación de metadatos al atributo creado
+        /// </summary>
         public void creaAtributos()
         {
             Tabla aux = buscaTabla();
@@ -433,6 +518,9 @@ namespace Base_de_Datos
             }
 
         }
+        /// <summary>
+        /// Si la tabla no tiene registros, se puede eliminar atributos
+        /// </summary>
         public void eliminarAtributos()
         {
             Tabla aux = buscaTabla();
@@ -465,6 +553,11 @@ namespace Base_de_Datos
 
 
         }
+        /// <summary>
+        /// Lee el contenido del directorio hasta encontrar la tabla que coincida con el nombre
+        /// </summary>
+        /// <param name="t">Tabla a buscar</param>
+        /// <returns></returns>
         public Tabla abreTabla(Tabla t)
         {
             try
@@ -510,7 +603,7 @@ namespace Base_de_Datos
                 grid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
 
         }
-
+        bool activa = false;
 
         /// <summary>
         /// Verifica que los datos escritos en la tabla "registro"
@@ -521,8 +614,9 @@ namespace Base_de_Datos
         {
             Tabla aux = buscaTabla();
             aux = abreTabla(aux);
+            
             for (int i = 0; i < registro.Columns.Count; i++)
-            {
+            { 
                 if (registro.Columns[i].Name == aux.atributos[i].nombre)// valida si la columna pertenece al atributo
                 {
                     if (aux.atributos[i].indice == "Clave Primaria")
@@ -531,11 +625,20 @@ namespace Base_de_Datos
                         {
                             if (registro.Rows[0].Cells[i].EditedFormattedValue.ToString() == grid.Rows[j].Cells[i].Value.ToString())
                             {
-                                if (j != row)
+                                if (creaTupla.Enabled == false)
+                                {
+                                    if (j != row)
+                                    {
+                                        MessageBox.Show("La clave primaria ya existe");
+                                        return false;
+                                    }
+                                }
+                                else
                                 {
                                     MessageBox.Show("La clave primaria ya existe");
                                     return false;
                                 }
+                               
                                 // MessageBox.Show("La clave primaria ya existe");
                                 // return false;
                                 // else
@@ -577,7 +680,10 @@ namespace Base_de_Datos
             }
             return true;
         }
-
+        /// <summary>
+        /// Verificación si la tupla no tiene datos insertados antes de hacer una actualización
+        /// </summary>
+        /// <returns></returns>
         public bool tuplaVacia()
         {
             int i;
@@ -615,8 +721,12 @@ namespace Base_de_Datos
                     guardaTupla();
                     break;
             }
+            activa = false;
             //guardaTupla();
         }
+        /// <summary>
+        /// Se sobreescriben los datos de la tupla
+        /// </summary>
         public void aplicarModificacion()
         {
             if (tuplaVacia())
@@ -686,6 +796,9 @@ namespace Base_de_Datos
 
 
         }
+        /// <summary>
+        /// Se obtiene la posición del renglon en grid y se elimnina de grid y de la tabla
+        /// </summary>
         public void eliminarTupla()
         {
             //buscar si la alguien esta usando su PK
@@ -811,7 +924,9 @@ namespace Base_de_Datos
             }
             return null;
         }
-
+        /// <summary>
+        /// Se guarda todo el contenido de grid en la tabla establecida por listBox1
+        /// </summary>
         public void guardaTupla()
         {
             Tabla actual = abreTabla(buscaTabla());
@@ -838,23 +953,20 @@ namespace Base_de_Datos
             registro.Rows[0].Cells[celda].Value = integridadReferencial.Text.Split(',').First();
         }
 
+        /// <summary>
+        /// Evento encargado de obtener la posición del renglon solicitado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void grid_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             row = e.RowIndex;
+            activa = true;
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnSQL_Click(object sender, EventArgs e)
-        {
-            FormConsulta formconsulta = new FormConsulta();
-            if (formconsulta.ShowDialog() == DialogResult.OK)
-            {
-                //Aquí se genera la consulta 
-            }
         }
 
         string[] palabrasReservadas = { "SELECT", "FROM", "WHERE", "INNER JOIN", "ON" };
@@ -892,15 +1004,17 @@ namespace Base_de_Datos
 
             }*/
         }
-
+        /// <summary>
+        /// Realización de consulta SQL
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConsulta_Click(object sender, EventArgs e)
         {
             if (txtConsulta.Text == string.Empty)
                 MessageBox.Show("Se debe escribir una consulta SQL");
             else
                 verificaConsulta();
-
-
         }
         /// <summary>
         /// Dada una consulta SQL, se obtiene las columnas definidas en la consulta
@@ -924,10 +1038,14 @@ namespace Base_de_Datos
                 }
                 else
                     col += consulta[i];
-
             }
             return "";
         }
+        /// <summary>
+        /// En caso de que los atributos tengan espacios vacios, se procede a eliminar dichos espacios
+        /// </summary>
+        /// <param name="columnas"></param>
+        /// <returns></returns>
         public List<string> limpiaColumnas(List<string> columnas)
         {
             List<string> lista = new List<string>();
@@ -964,7 +1082,11 @@ namespace Base_de_Datos
             return tabla;
         }
 
-
+        /// <summary>
+        /// Corrimiento de los atributos de una tabla hasta encontrar la clave primaria
+        /// </summary>
+        /// <param name="t">Tabla actual</param>
+        /// <returns></returns>
         public Atributo buscaClavePrimaria(Tabla t)
         {
             foreach(Atributo a in t.atributos)
@@ -978,6 +1100,9 @@ namespace Base_de_Datos
         int posFROM = 0;
         int posWHERE = 0;
 
+        /// <summary>
+        /// Se verifica toda la consulta SQL dependiendo si se utilizo INNER JOIN  o no
+        /// </summary>
         public void verificaConsulta()
         {
 
@@ -1159,14 +1284,27 @@ namespace Base_de_Datos
         public void ordenaConsulta(List<string> columnas)
         {
             int i = 0;
-            if(!columnas.Contains("*") )
+            try
             {
-                for (i = 0; i < columnas.Count; i++)
-                    grid.Columns[columnas[i].Split('.').Last()].DisplayIndex = i;
+                if (!columnas.Contains("*"))
+                {
+                    for (i = 0; i < columnas.Count; i++)
+                        grid.Columns[columnas[i].Split('.').Last()].DisplayIndex = i;
 
+                }
             }
+            catch { limpiaGrid(); }
+           
             
         }
+        /// <summary>
+        /// Separacion de las tablas con sus atributos para una mejor manipulación
+        /// Al ser dos tablas, cada una se envia a un datagrid diferente y se fusionan
+        /// en grid
+        /// </summary>
+        /// <param name="lista"></param>
+        /// <param name="tablasC"></param>
+        /// <param name="columnas"></param>
         public void creaConsulta(List<string> lista, List<string> tablasC, List<string> columnas)
         {
             Tabla T = new Tabla("Consulta");
@@ -1178,6 +1316,14 @@ namespace Base_de_Datos
 
 
         }
+        /// <summary>
+        /// Se recorren datagrid izq y der
+        /// dada las columnas solo se muestran los atributos solicitados por el usuario
+        /// </summary>
+        /// <param name="columnas">Columnas a mostrar en grid</param>
+        /// <param name="lista"></param>
+        /// <param name="posI"></param>
+        /// <param name="posD"></param>
         public void fusion(List<string> columnas, List<string> lista, int posI, int posD)
         {
             int i, j, k, l;
@@ -1360,6 +1506,10 @@ namespace Base_de_Datos
            
             
         }
+        /// <summary>
+        /// Se leen todas las columnas que pertenecen a la consulta, si no esta en la consulta se desactiva su vista
+        /// </summary>
+        /// <param name="col">Atributos a mostrar</param>
         public void cargaColumnas(List<string> col)
         {
             int i = 0;
@@ -1465,6 +1615,11 @@ namespace Base_de_Datos
 
             return tablasC;
         }
+        /// <summary>
+        /// Verificación si un atributo pertenece a la tabla dada por la consulta con INNER JOIN
+        /// </summary>
+        /// <param name="columnas"></param>
+        /// <returns></returns>
         public int validaColumnas(List<string> columnas)
         {
             bool bien = false;
@@ -2033,10 +2188,20 @@ namespace Base_de_Datos
             }
             
         }
-
+        /// <summary>
+        /// Evento cuando se da click 
+        /// se accede a metodo validaIntegridadReferencial
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void grid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             validaIntegridadReferencial(e.RowIndex);
+        }
+
+        private void creaAtributo_Click(object sender, EventArgs e)
+        {
+
         }
 
 
